@@ -10,13 +10,13 @@ namespace Projet_Mines_Official
     {
         public int Id { get; set; }
         public double Superficie { get; set; }
-        public double Abscisse { get; set; }
-        public double Ordonnee { get; set; }
+        public string Abscisse { get; set; }
+        public string Ordonnee { get; set; }
         public char Dir_Est_ouest { get; set; }
-        public char dir_nord_sud { get; set; }
-        public double dis_e_o { get; set; }
-        public double dis_n_s { get; set; }
-        public int zone { get; set; }
+        public char Dir_nord_sud { get; set; }
+        public string Dis_e_o { get; set; }
+        public string Dis_n_s { get; set; }
+        public int Zone { get; set; }
         //les relations
         public List<Permis> Les_Permis { get; set; }
         public List<Borne> Bornes { get; set; }
