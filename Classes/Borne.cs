@@ -9,7 +9,7 @@ namespace Projet_Mines_Official
     public class Borne
     {
         public int Id { get; set; }
-        public double Borne_X { get; set; }
-        public double Borne_Y { get; set; }
+        public string Borne_X { get; set; }
+        public string Borne_Y { get; set; }
     }
 }

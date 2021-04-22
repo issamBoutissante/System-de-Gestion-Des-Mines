@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        Title="Permis_Recherche" Height="450" Width="800">
+        Title="Permis_Recherche" Height="1950" Width="800">
     <ScrollViewer >
 
         <StackPanel Height="Auto">
@@ -36,13 +36,13 @@
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="  10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Date Dépot</TextBlock>
-                <DatePicker Grid.ColumnSpan="2"
+                <DatePicker x:Name="Date_Depot" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="1" Height="30" BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
             Numéro Demande</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0"/>
                 <Button Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#4EDFF3" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0"/>
@@ -78,63 +78,63 @@
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Nom Demandeur</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Nom_Demandeur" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
             Status Demandeur</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Status_Demandeur" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
                 Raison Social</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Raison_Social" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="2">
                   Nom Société</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Nom_Societe" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="3">
             Numéro CNSS</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Numero_CNSS" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="3" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="3">
             Domicile de Demandeur</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Domicile_Demandeur" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="3" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 3-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="4">
             Registre de Commerce</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Registre_Commerce" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="4" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="4">
             Taxe Prof</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Taxe_Prof" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="4" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="5">
             Nom Site</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Nom_Site" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="5" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="5">
             Effective</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Effective" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
                 <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
@@ -184,102 +184,102 @@
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Inscription Conservation</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Inscription_Conservation" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
               Dir Est Ouest</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Dir_e_o" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
                 Superficie</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Superficie" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="2">
                 Dir Nord Sud</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="dir_n_s" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="3">
                  Chevauchement</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Chevauchement" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="3" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="3">
                  Dis Est Ouest</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Dis_e_o" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="3" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 3-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="4">
             Zone</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Zone" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="4" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="4">
             Dis Nord Sud</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Dis_n_s" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="4" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="5">
             Carte</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Carte" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="5" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="5">
             Province</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Province" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 5-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="6">
             Commune</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Commune" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="6" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="6">
             Region</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Region" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="6" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="7">
             Caidat</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Caidat" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="7" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="7">
             Point pévot</TextBlock>
-                <ComboBox Grid.ColumnSpan="2"
+                <ComboBox x:Name="Point_Pevot" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="7" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="8">
             Abscisse</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Abscisse" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="8" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="8">
             Ordonné</TextBlock>
-                <TextBox Grid.ColumnSpan="2"
+                <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="8" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <Button Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#4EDFF3" Grid.Row="9" Content="Enregistrer" Margin="0,0,10,0"/>
