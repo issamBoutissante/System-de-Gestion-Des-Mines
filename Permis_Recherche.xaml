@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="Permis_Recherche" Height="450" Width="800">
     <ScrollViewer >
-
         <StackPanel Height="Auto">
             <!--Les informations de Demande-->
             <Grid Height="300">
@@ -148,7 +147,6 @@
 
 
             </Grid>
-
             <!-- Les informations d-Area -->
             <Grid  Height="420">
                 <Grid.ColumnDefinitions>
@@ -287,8 +285,5 @@
 
             </Grid>
         </StackPanel>
-
-
-
     </ScrollViewer>
 </Window>
