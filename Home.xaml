@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        Title="Home" Height="650" Width="800">
+        Title="Home" Height="550" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -33,13 +33,35 @@
 
         <TextBox  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20"/>
         <Image Source="./Images/search.png" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  />
-        <ComboBox Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,20,0" >
+        <!--<ComboBox Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,20,0" >
             <ComboBoxItem IsSelected="True">Ajouter</ComboBoxItem>
             <ComboBoxItem >Permis Recherche</ComboBoxItem>
             <ComboBoxItem>Permis Recherche renouvelé</ComboBoxItem>
             <ComboBoxItem >Licence d'explotation</ComboBoxItem>
             <ComboBoxItem>Licence d'explotation renouvelé</ComboBoxItem>
-        </ComboBox>
+        </ComboBox>-->
+        <Menu Grid.Column="7"  Grid.Row="1" BorderThickness="0"  Width="155" Height="25" Foreground="White" Background="#37B7FF"  Grid.ColumnSpan="2" Margin="0,5,20,0">
+
+            <MenuItem Header="Ajout"   FontFamily="Arial" FontWeight="Bold" Width="155" Height="25" >
+                <MenuItem.Style>
+                    <Style TargetType="MenuItem">
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="IsSubmenuOpen" Value="True" />
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </MenuItem.Style>
+                <MenuItem Header="Permis Recherche" Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                </MenuItem>
+                <MenuItem Header="Permis Recherche renouvelé"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                </MenuItem>
+                <MenuItem Header="Licence d'explotation"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                </MenuItem>
+                <MenuItem Header="Licence d'explotation renouvelé"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial" >
+                </MenuItem>
+            </MenuItem>
+        </Menu>
         <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#37B7FF" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
