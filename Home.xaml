@@ -24,7 +24,7 @@
             <RowDefinition Height="50" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#37B7FF"/>
+        <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
         <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
             Royaume du Maroc Ministre de l'Energien, des Mines</TextBlock>
         <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
@@ -40,7 +40,7 @@
             <ComboBoxItem >Licence d'explotation</ComboBoxItem>
             <ComboBoxItem>Licence d'explotation renouvelé</ComboBoxItem>
         </ComboBox>-->
-        <Menu Grid.Column="7"  Grid.Row="1" BorderThickness="0"  Width="155" Height="25" Foreground="White" Background="#37B7FF"  Grid.ColumnSpan="2" Margin="0,5,20,0">
+        <Menu Grid.Column="7"  Grid.Row="1" BorderThickness="0"  Width="155" Height="25" Foreground="White" Background="#0861AD" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,20,0">
 
             <MenuItem Header="Ajout"   FontFamily="Arial" FontWeight="Bold" Width="155" Height="25" >
                 <MenuItem.Style>
@@ -62,42 +62,42 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#37B7FF" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Demande" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#37B7FF" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Demande" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="PR" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#37B7FF" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="PR" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="PRR" Grid.Column="3" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#37B7FF" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="PRR" Grid.Column="3" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="LE" Grid.Column="4" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#37B7FF" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
+        <Button Content="LE" Grid.Column="4" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="LER" Grid.Column="5" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#37B7FF" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
+        <Button Content="LER" Grid.Column="5" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
