@@ -139,9 +139,9 @@
                 <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
                        Grid.Column="0" Grid.Row="6" Height="30" BorderThickness="1" Background="#FF9030" Foreground="White"
                         Margin="10,0,0,0"/>
-                <Button Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
+                <Button x:Name="GenererBultainVersement" Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
                        Grid.Column="3" Grid.Row="6" Height="30"   BorderThickness="1" Background="#FF9030" Foreground="White"
-                        Margin="10,0,0,0" />
+                        Margin="10,0,0,0" Click="GenererBultainVersement_Click" />
                 <Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#FF9030" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Titulaire_Info_Click"/>
 

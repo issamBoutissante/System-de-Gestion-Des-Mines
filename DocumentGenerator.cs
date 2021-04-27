@@ -3,7 +3,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows;
 using Word = Microsoft.Office.Interop.Word;
-namespace word
+namespace Projet_Mines_Official
 {
     class DocumentGenerator
     {

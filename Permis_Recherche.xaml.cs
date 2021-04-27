@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
-
+using System.Windows.Controls;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Projet_Mines_Official
 {
@@ -24,6 +25,8 @@ namespace Projet_Mines_Official
         }
         void UpdateTitulaireInfo(Permis permis)
         {
+            if(permis==null)
+                System.Windows.MessageBox.Show("null reference");
             permis.Titulaire = new Titulaire()
             {
                 Nom_Demandeur = Nom_Demandeur.Text,
@@ -63,7 +66,13 @@ namespace Projet_Mines_Official
         private void Enregistrer_DemmandeInfo_Click(object sender, RoutedEventArgs e)
         {
             //si le permis deja exist on vas le modifier si non on va l'ajouter
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis=null;
+            try
+            {
+                permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
+            }
+            catch { }
             if (permis == null)
             {
                 permis = new Permis();
@@ -78,13 +87,15 @@ namespace Projet_Mines_Official
         }
         private void Enregistrer_Titulaire_Info_Click(object sender, RoutedEventArgs e)
         {
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
             UpdateTitulaireInfo(permis);
             projetMinesDBContext.SaveChanges();
         }
         private void Enregistrer_Area_Info_Click(object sender, RoutedEventArgs e)
         {
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
             UpdateAreaInfo(permis);
             projetMinesDBContext.SaveChanges();
         }
@@ -100,6 +111,24 @@ namespace Projet_Mines_Official
             //        }
             //    }
             //}
+        }
+
+        private void GenererBultainVersement_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentGenerator.CreateWordDocument(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR.docx",
+                $@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx",
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>",Domicile_Demandeur.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+                );
         }
     }
 }
