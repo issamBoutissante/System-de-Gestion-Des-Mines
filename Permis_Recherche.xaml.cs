@@ -14,6 +14,7 @@ namespace Projet_Mines_Official
             InitializeComponent();
             RemplirPointPevot();
         }
+      
         void RemplirPointPevot()
         {
             projetMinesDBContext.Point_Pivots.ToList().ForEach(point => Point_Pevot.Items.Add(point.Nom_Point_Pevot));

@@ -19,9 +19,21 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class Home : Window
     {
+        ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
+        List<Permis> permis;
         public Home()
         {
             InitializeComponent();
+        }
+        void RemplirDataGrid()
+        {
+            permis= this.projetMinesDBContext.Les_Permis.ToList();
+            DataGridPermis.ItemsSource = permis;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            RemplirDataGrid();
         }
     }
 }
