@@ -1,22 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+using Word = Microsoft.Office.Interop.Word;
 
 namespace Projet_Mines_Official
 {
-    /// <summary>
-    /// Interaction logic for Permis_Recherche.xaml
-    /// </summary>
     public partial class Permis_Recherche : Window
     {
         ProjetMinesDBContext projetMinesDBContext=new ProjetMinesDBContext();
@@ -25,25 +14,10 @@ namespace Projet_Mines_Official
             InitializeComponent();
             RemplirPointPevot();
         }
+      
         void RemplirPointPevot()
         {
             projetMinesDBContext.Point_Pivots.ToList().ForEach(point => Point_Pevot.Items.Add(point.Nom_Point_Pevot));
-        }
-        private void Enregistrer_DemmandeInfo_Click(object sender, RoutedEventArgs e)
-        {
-            //si le permis deja exist on vas le modifier si non on va l'ajouter
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
-            if (permis == null)
-            {
-                permis = new Permis();
-                UpdateDemmandeInfo(permis);
-                projetMinesDBContext.Les_Permis.Add(permis);
-                //permis.Etat_Permis = projetMinesDBContext.Etats_Permis.Find(0);
-                //permis.Type_Permis = projetMinesDBContext.Types_Permis.Find(0);
-            }
-            else
-                UpdateDemmandeInfo(permis);
-            projetMinesDBContext.SaveChanges();
         }
         void UpdateDemmandeInfo(Permis permis)
         {
@@ -52,6 +26,8 @@ namespace Projet_Mines_Official
         }
         void UpdateTitulaireInfo(Permis permis)
         {
+            if(permis==null)
+                System.Windows.MessageBox.Show("null reference");
             permis.Titulaire = new Titulaire()
             {
                 Nom_Demandeur = Nom_Demandeur.Text,
@@ -65,6 +41,7 @@ namespace Projet_Mines_Official
                 Nom_Site = Nom_Site.Text,
                 Effictif = int.Parse(Effective.Text),
             };
+           
         }
         void UpdateAreaInfo(Permis permis)
         {
@@ -83,27 +60,76 @@ namespace Projet_Mines_Official
                 },
             };
         }
-        private void Enregistrer_Titulaire_Info_Click(object sender, RoutedEventArgs e)
+        private void VerifierDonne()
         {
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
+
+        }
+        private void Enregistrer_DemmandeInfo_Click(object sender, RoutedEventArgs e)
+        {
+            //si le permis deja exist on vas le modifier si non on va l'ajouter
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis=null;
+            try
+            {
+                permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
+            }
+            catch { }
             if (permis == null)
             {
-                MessageBox.Show("Cette Demmande N'existe Pas Essayer de Donne le numero de Demmande");
-                return;
+                permis = new Permis();
+                UpdateDemmandeInfo(permis);
+                projetMinesDBContext.Les_Permis.Add(permis);
+                //permis.Etat_Permis = projetMinesDBContext.Etats_Permis.Find(0);
+                //permis.Type_Permis = projetMinesDBContext.Types_Permis.Find(0);
             }
+            else
+                UpdateDemmandeInfo(permis);
+            projetMinesDBContext.SaveChanges();
+        }
+        private void Enregistrer_Titulaire_Info_Click(object sender, RoutedEventArgs e)
+        {
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
             UpdateTitulaireInfo(permis);
             projetMinesDBContext.SaveChanges();
         }
         private void Enregistrer_Area_Info_Click(object sender, RoutedEventArgs e)
         {
-            Permis permis = projetMinesDBContext.Les_Permis.Find(int.Parse(Numero_Demande.Text));
-            if (permis == null)
-            {
-                MessageBox.Show("Cette Demmande N'existe Pas Essayer de Donne le numero de Demmande");
-                return;
-            }
+            int numDemmande = int.Parse(Numero_Demande.Text);
+            Permis permis = projetMinesDBContext.Les_Permis.Where(p=>p.Num_Demmande==numDemmande).Single();
             UpdateAreaInfo(permis);
             projetMinesDBContext.SaveChanges();
+        }
+        private void ConvertToEcxel()
+        {
+            //using (SaveFileDialog sfd = new SaveFileDialog() { Filter = "Excel Workbook|*.xlsx" })
+            //{
+            //    if (sfd.ShowDialog() == Di)
+            //    {
+            //        using(XLWorkbook w=new XLWorkbook())
+            //        {
+            //            work
+            //        }
+            //    }
+            //}
+        }
+
+        private void GenererBultainVersement_Click(object sender, RoutedEventArgs e)
+        {
+            DocumentGenerator.CreateWordDocument(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR.docx",
+                $@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx",
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>",Domicile_Demandeur.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+                );
         }
     }
 }
