@@ -33,16 +33,11 @@
 
         <TextBox  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20"/>
         <Image Source="./Images/search.png" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  />
-        <!--<ComboBox Grid.Column="7" Grid.Row="1" Grid.ColumnSpan="2" Margin="0,5,20,0" >
-            <ComboBoxItem IsSelected="True">Ajouter</ComboBoxItem>
-            <ComboBoxItem >Permis Recherche</ComboBoxItem>
-            <ComboBoxItem>Permis Recherche renouvelé</ComboBoxItem>
-            <ComboBoxItem >Licence d'explotation</ComboBoxItem>
-            <ComboBoxItem>Licence d'explotation renouvelé</ComboBoxItem>
-        </ComboBox>-->
-        <Menu Grid.Column="7"  Grid.Row="1" BorderThickness="0"  Width="155" Height="25" Foreground="White" Background="#0861AD" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="0,5,20,0">
+        
+        <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#EAA221" HorizontalAlignment="Center"  Margin="5,5,0,0" Width="125">
 
-            <MenuItem Header="Ajout"   FontFamily="Arial" FontWeight="Bold" Width="155" Height="25" >
+            <MenuItem Header="Ajouter"   FontFamily="Arial" FontWeight="Bold"  Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" HorizontalContentAlignment="Center" Padding="35,4,5,0" FontSize="14" >
+
                 <MenuItem.Style>
                     <Style TargetType="MenuItem">
                         <Style.Triggers>
@@ -52,13 +47,13 @@
                         </Style.Triggers>
                     </Style>
                 </MenuItem.Style>
-                <MenuItem Header="Permis Recherche" Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                <MenuItem Header="PR" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="WhiteSmoke" Padding="10,0,80,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="Permis Recherche renouvelé"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                <MenuItem Header="PRR"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="WhiteSmoke" Padding="10,0,80,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="Licence d'explotation"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial">
+                <MenuItem Header="LE"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="WhiteSmoke" Padding="10,0,80,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="Licence d'explotation renouvelé"  Foreground="#37B7FF"  FontWeight="Bold" FontSize="10" FontFamily="Arial" >
+                <MenuItem Header="LER"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="WhiteSmoke" Padding="10,0,80,0" FontFamily="Arial" >
                 </MenuItem>
             </MenuItem>
         </Menu>
