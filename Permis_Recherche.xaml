@@ -137,12 +137,7 @@
                 <TextBox x:Name="Effective" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
-                <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
-                       Grid.Column="0" Grid.Row="6" Height="30" BorderThickness="1" Background="#FF9030" Foreground="White"
-                        Margin="10,0,0,0"/>
-                <Button x:Name="GenererBultainVersement" Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
-                       Grid.Column="3" Grid.Row="6" Height="30"   BorderThickness="1" Background="#FF9030" Foreground="White"
-                        Margin="10,0,0,0" Click="GenererBultainVersement_Click" />
+              
                 <Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Titulaire_Info_Click"/>
 
@@ -397,6 +392,171 @@
 
                 <Button x:Name="Valider_demande" Grid.ColumnSpan="2"
                        Grid.Column="5"  Background="#EAA221" Grid.Row="13" Content="Valider demande" Margin="0,0,10,0"/>
+            </Grid>
+            <!-- Suivi Decision -->
+            <Grid  Height="420">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
+                       Grid.Column="3" Grid.Row="0">
+                 Suivi Decision</TextBlock>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="0" Grid.Row="1">
+            Date Decision</TextBlock>
+                <DatePicker x:Name="Date_Decision" Grid.ColumnSpan="2"
+                       Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1"/>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="5" Grid.Row="1">
+            Numero Permis</TextBlock>
+                <TextBox x:Name="Numero_Permis" Grid.ColumnSpan="2"
+                       Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="0" Grid.Row="2">
+                Date Institision</TextBlock>
+                <DatePicker x:Name="Date_Institision" Grid.ColumnSpan="2"
+                       Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1"/>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="5" Grid.Row="2">
+                  Date Echeance</TextBlock>
+                <DatePicker x:Name="Date_Echeance" Grid.ColumnSpan="2"
+                       Grid.Column="7" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                <!--Décision de permis de recherche-->
+                <Rectangle Grid.Column="0"  Grid.Row="4" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
+                <TextBlock Grid.Column="0"  Grid.Row="4" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
+                    Décision de permis de recherche
+                </TextBlock>
+                <Button x:Name="Generer_Decision" 
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="4" Content="Générer" Margin="0,10,25,10" />
+                <!--Décision signé-->
+                <TextBlock Grid.Column="0"  Grid.Row="5" Grid.ColumnSpan="7" FontSize="16" FontWeight="Bold" Margin="20,15,0,0" TextWrapping="Wrap">
+                    Décision signé
+                </TextBlock>
+                <CheckBox Grid.Column="1"  Grid.Row="5"  Margin="35,0,20,0"/>
+                <!--Lettre de transmission-->
+                <Rectangle Grid.Column="0"  Grid.Row="6" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
+                <TextBlock Grid.Column="0"  Grid.Row="6" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
+                    	Lettre de transmission de la décision du permis de recherche au titulaire
+                </TextBlock>
+                <Button x:Name="Generer_Lettre_Transmission" 
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="6" Content="Générer" Margin="0,10,25,10" />
+
+                <!-- Bordereau d’envoi -->
+                <Rectangle Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
+                <TextBlock Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
+                  Bordereau d’envoi de la décision du permis de recherche
+                </TextBlock>
+                <Button x:Name="Generer_Bordereau_envoi" 
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="7" Content="Générer" Margin="0,10,25,10" />
+
+            </Grid>
+            <!-- Programme de Travaux -->
+            <Grid  Height="200">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
+                       Grid.Column="3" Grid.Row="0">
+                 Programme de Travaux</TextBlock>
+                
+                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
+                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    	Programme de travaux
+                </TextBlock>
+                <Button x:Name="Mise_demeur_TP" 
+                       Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" />
+                <TextBlock Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    	reste : 29 j
+                </TextBlock>
+                <CheckBox Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="0" Grid.Row="2">
+            Investisement réaliser</TextBlock>
+                <TextBox x:Name="investisement_realise" Grid.ColumnSpan="2"
+                       Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+
+            </Grid>
+            <!-- Déclaration d’ouverture des travaux -->
+            <Grid  Height="200">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
+                       Grid.Column="3" Grid.Row="0">
+                 Déclaration d’ouverture des travaux</TextBlock>
+
+                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
+                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    	Déclaration d’ouverture des travaux
+                </TextBlock>
+                <Button x:Name="Mise_demeur_OuvertureTravaux" 
+                       Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" />
+                <TextBlock Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    	reste : 29 j
+                </TextBlock>
+                <CheckBox Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
+                <TextBlock 
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
+                       Grid.Column="0" Grid.Row="2">
+            Occupation temporaire</TextBlock>
+                <TextBox x:Name="occupation_temporaire" Grid.ColumnSpan="2"
+                       Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+
             </Grid>
         </StackPanel>
     </ScrollViewer>
