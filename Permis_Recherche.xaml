@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        Title="Permis_Recherche" Height="1950" Width="1010">
+        Title="Permis_Recherche" Height="550" Width="1010">
     <ScrollViewer >
         <StackPanel Height="Auto">
+            
             <!--Les informations de Demande-->
-            <Grid Height="300">
+            <Grid Height="200">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -44,7 +45,7 @@
                 <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0"/>
                 <Button x:Name="Enregistrer_DemmandeInfo" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#FF9030" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_DemmandeInfo_Click"/>
+                       Grid.Column="7"  Background="#EAA221" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_DemmandeInfo_Click"/>
             </Grid>
             <!-- Les informations de Titulaire -->
             <Grid  Height="420">
@@ -136,19 +137,14 @@
                 <TextBox x:Name="Effective" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
-                <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
-                       Grid.Column="0" Grid.Row="6" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0"/>
-                <Button Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
-                       Grid.Column="3" Grid.Row="6" Height="30"   BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0" />
+              
                 <Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Titulaire_Info_Click"/>
 
 
             </Grid>
             <!-- Les informations d-Area -->
-            <Grid  Height="520">
+            <Grid  Height="620">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -162,7 +158,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
@@ -286,8 +281,13 @@
                 <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="9" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#FF9030" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Area_Info_Click"/>
-
+                       Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Area_Info_Click"/>
+                <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
+                       Grid.Column="0" Grid.Row="10" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
+                        Margin="10,0,0,0"/>
+                <Button Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
+                       Grid.Column="3" Grid.Row="10" Height="30"   BorderThickness="1" Background="#EAA221" Foreground="White"
+                        Margin="10,0,0,0" />
 
             </Grid>
         </StackPanel>
