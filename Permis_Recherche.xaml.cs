@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -12,7 +13,22 @@ namespace Projet_Mines_Official
         public Permis_Recherche()
         {
             InitializeComponent();
-            RemplirPointPevot();
+            //            RemplirPointPevot();
+
+            RemplirElementDossier();
+        }
+        void RemplirElementDossier()
+        {
+            List<Element_Dossier> list = new List<Element_Dossier>()
+            {
+                new Element_Dossier(){id=1,isExist=true,nom_dossier=" personnel de l'entreprise chargés de la conduite et du suivi des travaux ou éventuellement. Les contrats le liant aux personnes " +
+                "physiques ou morales agréées visées à l'article 58 de la loi n°33-13."},
+                 new Element_Dossier(){id=1,isExist=false,nom_dossier=" personnel de l'entreprise chargés de la conduite et du suivi des travaux ou éventuellement. Les contrats le liant aux personnes " +
+                "physiques ou morales agréées visées à l'article 58 de la loi n°33-13."},
+                  new Element_Dossier(){id=1,isExist=false,nom_dossier=" personnel de l'entreprise chargés de la conduite et du suivi des travaux ou éventuellement. Les contrats le liant aux personnes " +
+                "physiques ou morales agréées visées à l'article 58 de la loi n°33-13."},
+            };
+            InfoVerification.ItemsSource = list;
         }
       
         void RemplirPointPevot()
