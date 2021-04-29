@@ -24,6 +24,7 @@ namespace Projet_Mines_Official
         public Home()
         {
             InitializeComponent();
+
         }
         void RemplirDataGrid()
         {
@@ -33,6 +34,7 @@ namespace Projet_Mines_Official
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            MessageBox.Show(projetMinesDBContext.Les_Permis.ToList().Count.ToString());
             RemplirDataGrid();
         }
     }

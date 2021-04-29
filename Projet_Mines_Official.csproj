@@ -114,6 +114,7 @@
     <Compile Include="Classes\Region.cs" />
     <Compile Include="Classes\Titulaire.cs" />
     <Compile Include="Classes\Type_Permis.cs" />
+    <Compile Include="Remplir la base de donne.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentGenerator.cs" />

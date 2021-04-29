@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        Title="Permis_Recherche" Height="650" Width="1010">
+        Title="Permis_Recherche" Height="2650" Width="1010">
     <ScrollViewer >
         <StackPanel Height="Auto">
             
