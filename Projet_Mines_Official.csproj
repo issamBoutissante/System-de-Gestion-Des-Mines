@@ -121,11 +121,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DocumentGenerator.cs" />
-    <Compile Include="Modal.xaml.cs">
-      <DependentUpon>Modal.xaml</DependentUpon>
+    <Compile Include="ModalError.xaml.cs">
+      <DependentUpon>ModalError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model.xaml.cs">
-      <DependentUpon>Model.xaml</DependentUpon>
+    <Compile Include="ModalInfo.xaml.cs">
+      <DependentUpon>ModalInfo.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProjetMinesDBContext.cs" />
   </ItemGroup>
@@ -181,11 +181,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Modal.xaml">
+    <Page Include="ModalError.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Model.xaml">
+    <Page Include="ModalInfo.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

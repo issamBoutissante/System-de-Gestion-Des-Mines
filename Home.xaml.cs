@@ -38,7 +38,7 @@ namespace Projet_Mines_Official
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Modal md = new Modal();
+            ModalInfo md = new ModalInfo();
             md.ShowDialog();
         }
     }

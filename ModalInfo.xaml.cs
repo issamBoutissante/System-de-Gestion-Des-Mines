@@ -15,11 +15,11 @@ using System.Windows.Shapes;
 namespace Projet_Mines_Official
 {
     /// <summary>
-    /// Interaction logic for Model.xaml
+    /// Interaction logic for ModalInfo.xaml
     /// </summary>
-    public partial class Model : Window
+    public partial class ModalInfo : Window
     {
-        public Model()
+        public ModalInfo()
         {
             InitializeComponent();
         }
