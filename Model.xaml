@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        WindowStartupLocation="CenterScreen" 
-        Title="" Height="200" Width="500">
+          WindowStartupLocation="CenterScreen" 
+        WindowStyle="None" 
+        Title="" Height="180" Width="350">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -15,20 +16,16 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="20"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Row="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
-        <Rectangle Grid.Row="4" Grid.ColumnSpan="9" Fill="#0861AD"/>
-        <TextBlock  Grid.Row="1" Grid.ColumnSpan="3" Grid.RowSpan="2" FontSize="20" 
+        
+        <TextBlock  Grid.Row="0" Grid.ColumnSpan="3" Grid.RowSpan="2" FontSize="16" 
          Text="Are you sure you want me to create a model?"
-         TextWrapping="Wrap" Margin="20" FontFamily="Arial" 
-                    FontWeight="Bold" Foreground="#888888"/>
-        <Button  Grid.Row="3" Grid.Column="2" Content="OK" Width="80" Background="#0861AD"/>
-        <Button  Grid.Row="3" Grid.Column="3" Content="Cancel" Background="#C9C7C8" Width="80"/>
+         TextWrapping="Wrap" TextAlignment="Justify" Margin="20,25,0,0" FontFamily="Arial" 
+                    FontWeight="Bold" Foreground="#0861AD"/>
+        <Button  Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" FontSize="16"  Content="OK" Width="100" Background="#EAA221"/>
+       
 
 
     </Grid>

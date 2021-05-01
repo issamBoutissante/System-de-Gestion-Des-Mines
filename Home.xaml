@@ -36,9 +36,9 @@
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
         <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
          <TextBox  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20"/>
-        <Image Source="./Images/search.png" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  />
-        
-        <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#EAA221" HorizontalAlignment="Center"  Margin="5,5,0,0" Width="125">
+        <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
+
+        <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#FF9030" HorizontalAlignment="Center"  Margin="5,5,0,0" Width="125">
 
             <MenuItem Header="Ajouter"   FontFamily="Arial" FontWeight="Bold"  Background="{x:Null}" HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" HorizontalContentAlignment="Center" Padding="35,4,5,0" FontSize="14" >
 
@@ -61,7 +61,7 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="Button_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>

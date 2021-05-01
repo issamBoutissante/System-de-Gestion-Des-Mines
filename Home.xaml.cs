@@ -35,5 +35,11 @@ namespace Projet_Mines_Official
         {
             RemplirDataGrid();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Modal md = new Modal();
+            md.ShowDialog();
+        }
     }
 }
