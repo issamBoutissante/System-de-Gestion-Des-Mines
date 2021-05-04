@@ -161,7 +161,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Rapports\Bordereau_envoi_PR.docx" />
     <None Include="Rapports\Bulletin de versement PR.docx" />
+    <None Include="Rapports\Decision_PR.docx" />
+    <None Include="Rapports\lettre_transmission_PR.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
