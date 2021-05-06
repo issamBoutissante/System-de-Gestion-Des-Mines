@@ -4,11 +4,38 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
+         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="Permis_Recherche" Height="3650" Width="1010">
-    <ScrollViewer>
+        Title="" Height="650" Width="1010">
+    <ScrollViewer >
         <StackPanel x:Name="MainPage" Height="Auto">
-            
+            <!--Header Logo-->
+            <Grid Height="100">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
+                <fa:ImageAwesome Icon="Bell"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
+                <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
+            Royaume du Maroc Ministre de l'Energien, des Mines</TextBlock>
+                <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
+                <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
+            المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
+                <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
+
+            </Grid>
             <!--Les informations de Demande-->
             <Grid Height="200">
                 <Grid.ColumnDefinitions>
