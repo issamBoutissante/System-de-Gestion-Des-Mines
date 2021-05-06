@@ -7,7 +7,7 @@ namespace Projet_Mines_Official
 {
     class DocumentGenerator
     {
-        //Find and Replace Method
+        //this method will find and replace the input words
         internal static void FindAndReplace(Word.Application wordApp, object ToFindText, object replaceWithText)
         {
             object matchCase = true;
@@ -36,7 +36,7 @@ namespace Projet_Mines_Official
                 ref matchControl);
         }
 
-        //Creeate the Doc Method
+        //this method will create a new copy of the passed document word 
         internal static void CreateWordDocument(object filename, object SaveAs, Action<Word.Application> FindAndReplace)
         {
             Word.Application wordApp = new Word.Application();
@@ -61,10 +61,10 @@ namespace Projet_Mines_Official
             }
             else
             {
-                MessageBox.Show("File not Found!");
+                MessageBox.Show("Document pas trouve!");
             }
 
-            //Save as
+            //Save the document
             myWordDoc.SaveAs2(ref SaveAs, ref missing, ref missing, ref missing,
                             ref missing, ref missing, ref missing,
                             ref missing, ref missing, ref missing,
@@ -73,7 +73,7 @@ namespace Projet_Mines_Official
 
             myWordDoc.Close();
             wordApp.Quit();
-            MessageBox.Show("File Created!");
+            MessageBox.Show("Document A ete cree!");
         }
     }
 }

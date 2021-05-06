@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Projet_Mines_Official
 {
@@ -19,16 +9,17 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class Home : Window
     {
-        ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
-        List<Permis> permis;
+        ProjetMinesDBContext projetMinesDBContext ;
+        Permis_Recherche Permis_Recherche ;
         public Home()
         {
             InitializeComponent();
-
+            projetMinesDBContext = new ProjetMinesDBContext();
+            Permis_Recherche = new Permis_Recherche(projetMinesDBContext);
         }
         void RemplirDataGrid()
         {
-            permis= this.projetMinesDBContext.Les_Permis.ToList();
+            List<Permis> permis= this.projetMinesDBContext.Les_Permis.ToList();
             DataGridPermis.ItemsSource = permis;
         }
 
@@ -36,6 +27,13 @@ namespace Projet_Mines_Official
         {
             Remplir_la_base_de_donne.Remplir();
             RemplirDataGrid();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Permis_Recherche.DataContext = (Permis)DataGridPermis.SelectedItem;
+            Permis_Recherche.Show();
+            this.Close();
         }
     }
 }

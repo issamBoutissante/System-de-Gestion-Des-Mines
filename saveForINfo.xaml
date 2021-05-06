@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="saveForINfo" Height="450" Width="800">
     <Grid>
-        pièce 1
+        <!--pièce 1
         
                 <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,5,20,0"/>
                 <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="7" FontSize="13"  Margin="25,5,0,0" TextWrapping="Wrap">-  Les diplômes, titres et références professionnelles du 
@@ -93,8 +93,7 @@
                 <TextBlock Grid.Column="0"  Grid.Row="12" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
                 - Une pièce attestant de la qualité de mandataire de la personne morale au cas où la demande est formulée par un mandataire.</TextBlock>
                 <CheckBox Grid.Column="8"  Grid.Row="12"  Margin="0,5,20,0"/>
-                <Button x:Name="Rejet_demande" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="13" Content="Rejet demande" Margin="0,0,10,0"/>
+            -->
 
     </Grid>
 </Window>
