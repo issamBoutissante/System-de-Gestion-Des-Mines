@@ -133,6 +133,9 @@
     <Compile Include="Classes\Region.cs" />
     <Compile Include="Classes\Titulaire.cs" />
     <Compile Include="Classes\Type_Permis.cs" />
+    <Compile Include="documentsWord.xaml.cs">
+      <DependentUpon>documentsWord.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ElementsLooper.cs" />
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="Remplir la base de donne.cs" />
@@ -197,6 +200,10 @@
     <Resource Include="Images\search.png" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="documentsWord.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Home.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

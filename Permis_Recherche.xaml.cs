@@ -145,5 +145,12 @@ namespace Projet_Mines_Official
                 Child = new TextBlock() { Text = Chevauchement.Text, VerticalAlignment = VerticalAlignment.Center }
             });
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+            dw.Show();
+            this.Close();
+        }
     }
 }
