@@ -239,5 +239,11 @@ namespace Projet_Mines_Official
         {
             Home.Show();
         }
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+            dw.Show();
+            this.Close();
+        }
     }
 }
