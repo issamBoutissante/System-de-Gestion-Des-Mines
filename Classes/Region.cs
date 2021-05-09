@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Projet_Mines_Official
 {
     public class Region
     {
-        public int Id { get; set; }
+        public Region()
+        {
+            this.Provinces = new HashSet<Province>();
+            //Associate Default Values
+            this.Nom_Region = "";
+        }
+        public int RegionId { get; set; }
         public string Nom_Region { get; set; }
-        public List<Province> Provinces { get; set; }
+        public virtual ICollection<Province> Provinces { get; set; }
     }
 }

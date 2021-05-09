@@ -1,15 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Projet_Mines_Official
 {
     public class Carte
     {
-        public int Id { get; set; }
+        public Carte()
+        {
+            this.Areas = new HashSet<Area>();
+            //Associate Default Values
+            this.Nom_carte = "";
+        }
+        public int CarteId { get; set; }
         public string Nom_carte { get; set; }
-        public List<Area> Areas { get; set; }
+        public virtual ICollection<Area> Areas { get; set; }
     }
 }

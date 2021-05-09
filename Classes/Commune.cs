@@ -1,16 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Projet_Mines_Official
 {
     public class Commune
     {
-        public int Id { get; set; }
+        public Commune()
+        {
+            this.Areas = new HashSet<Area>();
+            //Associate Default Values
+            this.Nom_Commune = "";
+            this.CaidatId = 1;
+        }
+        public int CommuneId { get; set; }
         public string Nom_Commune { get; set; }
-        public Caidat Caidat { get; set; }
-        public List<Area> Areas { get; set; }
+
+        public int? CaidatId { get; set; }
+        [ForeignKey("CaidatId")]
+        public virtual Caidat Caidat { get; set; }
+
+        public virtual ICollection<Area> Areas { get; set; }
     }
 }

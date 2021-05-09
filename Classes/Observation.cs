@@ -1,15 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Projet_Mines_Official
 {
+    // on va pas utilise ce class pour le moment
     public class Observation
     {
-        public int Id { get; set; }
+        public Observation()
+        {
+            //Associate Default Values
+            this.Acte = "";
+            this.Date_Acte = DateTime.Now.Date;
+        }
+        public int? ObservationId { get; set; }
         public string Acte { get; set; }
         [Column(TypeName = "Date")]
         public DateTime Date_Acte { get; set; }

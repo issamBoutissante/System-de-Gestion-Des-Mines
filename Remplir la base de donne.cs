@@ -126,44 +126,38 @@ namespace Projet_Mines_Official
         }
         public static void RemplirPermis()
         {
-            List<Permis> permis = new List<Permis>()
-            {
-                new Permis()
-                {
-                    Date_Depot=DateTime.Now.Date,
-                    Etat_Permis=projetMinesDBContext.Etats_Permis.Find(1),
-                    Type_Permis=projetMinesDBContext.Types_Permis.Find(1),
-                    Num_Permis=1234,
-                    Titulaire=new Titulaire()
-                    {
-                        Nom_Societe="Mon_societe"
-                    }
-                },
-                  new Permis()
-                {
-                    Date_Depot=DateTime.Now.Date,
-                    Etat_Permis=projetMinesDBContext.Etats_Permis.Find(1),
-                    Type_Permis=projetMinesDBContext.Types_Permis.Find(1),
-                    Num_Permis=1235,
-                    Titulaire=new Titulaire()
-                    {
-                        Nom_Societe="Une Autre Societe_societe"
-                    }
-                }
-            };
+
+
+            Permis permis = new Permis();
             if (projetMinesDBContext.Les_Permis.ToList().Count == 0)
-                projetMinesDBContext.Les_Permis.AddRange(permis);
+            projetMinesDBContext.Les_Permis.Add(permis);
         }
         public static void Remplir()
         {
             RemplirTypePermis();
+            projetMinesDBContext.SaveChanges();
+
             RemplirRegion();
+            projetMinesDBContext.SaveChanges();
+
             RemplirProvince();
+            projetMinesDBContext.SaveChanges();
+
             RemplirCaidat();
+            projetMinesDBContext.SaveChanges();
+
             RemplirCommune();
+            projetMinesDBContext.SaveChanges();
+
             RemplirCarte();
+            projetMinesDBContext.SaveChanges();
+
             RemplirPointPivot();
+            projetMinesDBContext.SaveChanges();
+
             RemplirEtat_Permis();
+            projetMinesDBContext.SaveChanges();
+
             RemplirPermis();
             projetMinesDBContext.SaveChanges();
         }

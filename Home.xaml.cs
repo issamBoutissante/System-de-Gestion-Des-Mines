@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace Projet_Mines_Official
 {
@@ -9,18 +10,14 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class Home : Window
     {
-        ProjetMinesDBContext projetMinesDBContext ;
-        Permis_Recherche Permis_Recherche ;
+        ProjetMinesDBContext projetMinesDBContext =new ProjetMinesDBContext();
         public Home()
         {
             InitializeComponent();
-            projetMinesDBContext = new ProjetMinesDBContext();
-            Permis_Recherche = new Permis_Recherche(projetMinesDBContext);
         }
         void RemplirDataGrid()
         {
-            List<Permis> permis= this.projetMinesDBContext.Les_Permis.ToList();
-            DataGridPermis.ItemsSource = permis;
+            DataGridPermis.ItemsSource=this.projetMinesDBContext.Les_Permis.ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -28,12 +25,23 @@ namespace Projet_Mines_Official
             Remplir_la_base_de_donne.Remplir();
             RemplirDataGrid();
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            Permis_Recherche.DataContext = (Permis)DataGridPermis.SelectedItem;
-            Permis_Recherche.Show();
-            this.Close();
+            MenuItem menuItem = (MenuItem)sender;
+            switch (menuItem.Header)
+            {
+                case "PR":
+                    new Permis_Recherche(this, true).Show();
+                    this.Hide();
+                    break;
+            }
+        }
+
+        private void Afficher_Click(object sender, RoutedEventArgs e)
+        {
+            Permis permis = (Permis)DataGridPermis.SelectedItem;
+            new Permis_Recherche(this, false) {PermisId=permis.PermisId }.Show();
+            this.Hide();
         }
     }
 }
