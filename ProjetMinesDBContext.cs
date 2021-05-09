@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using Projet_Mines_Official;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Projet_Mines_Official
 {
@@ -14,7 +15,6 @@ namespace Projet_Mines_Official
         public DbSet<Titulaire> Titulaires { get; set; }
         public DbSet<Etat_Permis> Etats_Permis { get; set; }
         public DbSet<Type_Permis> Types_Permis { get; set; }
-        public DbSet<Observation> Observations { get; set; }
         public DbSet<Element_Dossier> Elements_Dossiers { get; set; }
         public DbSet<Area> Areas { get; set; }
         public DbSet<Borne> bornes { get; set; }
@@ -24,5 +24,11 @@ namespace Projet_Mines_Official
         public DbSet<Caidat> Caidats { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Region> Regions { get; set; }
+        //public DbSet<Observation> Observations { get; set; }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

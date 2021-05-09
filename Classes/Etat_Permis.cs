@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Projet_Mines_Official
 {
     public class Etat_Permis
     {
-        public int Id { get; set; }
+        public Etat_Permis()
+        {
+            this.Les_Permis = new HashSet<Permis>();
+            //Associate Default Values
+            this.Etat = "";
+        }
+        public int Etat_PermisId { get; set; }
         public string Etat { get; set; }
-        //les relations
-        public List<Permis> Les_Permis { get; set; }
+
+        public virtual ICollection<Permis> Les_Permis { get; set; }
     }
 }

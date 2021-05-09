@@ -7,7 +7,7 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
          WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="" Height="650" Width="1010">
+        Title="" Height="3650" Width="1010" Closing="Window_Closing">
     <ScrollViewer >
         <StackPanel x:Name="MainPage" Height="Auto">
             <!--Header Logo-->
@@ -71,8 +71,8 @@
             Numéro Demande</TextBlock>
                 <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" Text="{Binding Num_Demmande,Mode=TwoWay}"/>
-                <!--<Button x:Name="Enregistrer_DemmandeInfo" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_DemmandeInfo_Click"/>-->
+                <Button x:Name="Enregistrer_DemmandeInfo" Grid.ColumnSpan="2"
+                       Grid.Column="7"  Background="#EAA221" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_DemmandeInfo_Click"/>
             </Grid>
             <!-- Les informations de Titulaire -->
             <Grid  Height="420">
@@ -165,8 +165,8 @@
                        Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
               
-                <!--<Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Titulaire_Info_Click"/>-->
+                <Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
+                       Grid.Column="7"  Background="#EAA221" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Titulaire_Info_Click"/>
 
 
             </Grid>
@@ -275,39 +275,58 @@
                        Grid.Column="0" Grid.Row="6">
             Carte</TextBlock>
                 <ComboBox x:Name="Carte" Grid.ColumnSpan="2"
-                       Grid.Column="2" Grid.Row="6" Height="30" BorderThickness="1"/>
+                       Grid.Column="2" Grid.Row="6" Height="30" BorderThickness="1"
+                          DisplayMemberPath="Nom_carte"
+                          SelectedValuePath="Nom_carte"
+                          SelectedIndex="0"/>
+
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="6">
             Province</TextBlock>
                 <ComboBox x:Name="Province" Grid.ColumnSpan="2"
-                       Grid.Column="7" Grid.Row="6" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                       Grid.Column="7" Grid.Row="6" Margin="0,0,10,0" Height="30" BorderThickness="1"
+                          DisplayMemberPath="Nom_Province"
+                          SelectedValuePath="Nom_Province"
+                          SelectedIndex="0"/>
                 <!--line 5-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="7">
             Commune</TextBlock>
                 <ComboBox x:Name="Commune" Grid.ColumnSpan="2"
-                       Grid.Column="2" Grid.Row="7" Height="30" BorderThickness="1"/>
+                       Grid.Column="2" Grid.Row="7" Height="30" BorderThickness="1"
+                          DisplayMemberPath="Nom_Commune"
+                          SelectedValuePath="Nom_Commune"
+                          SelectedIndex="0"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="7">
             Region</TextBlock>
                 <ComboBox x:Name="Region" Grid.ColumnSpan="2"
-                       Grid.Column="7" Grid.Row="7" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                       Grid.Column="7" Grid.Row="7" Margin="0,0,10,0" Height="30" BorderThickness="1"
+                          SelectedValuePath="Nom_Region"
+                          DisplayMemberPath="Nom_Region"
+                          SelectedIndex="0"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="8">
             Caidat</TextBlock>
                 <ComboBox x:Name="Caidat" Grid.ColumnSpan="2"
-                       Grid.Column="2" Grid.Row="8" Height="30" BorderThickness="1"/>
+                       Grid.Column="2" Grid.Row="8" Height="30" BorderThickness="1"
+                          DisplayMemberPath="Nom_Caidat"
+                          SelectedValuePath="Nom_Caidat"
+                          SelectedIndex="0"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="8">
             Point pévot</TextBlock>
                 <ComboBox x:Name="Point_Pevot" Grid.ColumnSpan="2"
-                       Grid.Column="7" Grid.Row="8" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                       Grid.Column="7" Grid.Row="8" Margin="0,0,10,0" Height="30" BorderThickness="1"
+                          DisplayMemberPath="Nom_Point_Pevot"
+                          SelectedValuePath="Nom_Point_Pevot"
+                          SelectedIndex="0"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
@@ -321,8 +340,8 @@
             Ordonné</TextBlock>
                 <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="9" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--<Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Area_Info_Click"/>-->
+                <Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
+                       Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0" Click="Enregistrer_Area_Info_Click"/>
                 <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
                        Grid.Column="0" Grid.Row="10" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
                         Margin="10,0,0,0"/>
@@ -509,7 +528,7 @@
                 </TextBlock>
                 <Button x:Name="Mise_demeur_TP" 
                        Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" />
-                <TextBlock Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                <TextBlock x:Name="RestJourProgramme" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	reste : 29 j
                 </TextBlock>
                 <CheckBox Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
@@ -552,7 +571,7 @@
                 </TextBlock>
                 <Button x:Name="Mise_demeur_OuvertureTravaux" 
                        Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" />
-                <TextBlock Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                <TextBlock x:Name="RestJourDeclarationTravaux" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	reste : 29 j
                 </TextBlock>
                 <CheckBox Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
