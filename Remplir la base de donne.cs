@@ -128,7 +128,12 @@ namespace Projet_Mines_Official
         {
 
 
-            Permis permis = new Permis();
+            Permis permis = new Permis()
+            {
+                Area=new Area(),
+                Titulaire=new Titulaire()
+            };
+            permis.Les_Element_Dossier = projetMinesDBContext.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
             if (projetMinesDBContext.Les_Permis.ToList().Count == 0)
             projetMinesDBContext.Les_Permis.Add(permis);
         }
@@ -156,6 +161,9 @@ namespace Projet_Mines_Official
             projetMinesDBContext.SaveChanges();
 
             RemplirEtat_Permis();
+            projetMinesDBContext.SaveChanges();
+
+            RemplirElementDossierPR();
             projetMinesDBContext.SaveChanges();
 
             RemplirPermis();

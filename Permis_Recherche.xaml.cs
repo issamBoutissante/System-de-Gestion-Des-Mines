@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using System.Linq;
 using Word = Microsoft.Office.Interop.Word;
+using System.Windows.Media;
 
 namespace Projet_Mines_Official
 {
@@ -12,201 +11,142 @@ namespace Projet_Mines_Official
     {
         ProjetMinesDBContext projetMinesDBContext=new ProjetMinesDBContext();
         public Permis Permis { get; set; }
-        public int PermisId { get; set; }
         Window Home;
-        public Permis_Recherche(Window window,bool isNewPermis)
+        public Permis_Recherche(Window window,bool isNewPermis,int PermisId=0)
         {
             InitializeComponent();
             this.Height = 700;
             Home = window;
-            this.Permis = projetMinesDBContext.Les_Permis.Find(1);
+            if (isNewPermis)
+            {
+                this.Permis = new Permis()
+                {
+                    Area = new Area(),
+                    Titulaire = new Titulaire()
+                };
+                this.projetMinesDBContext.Les_Permis.Add(this.Permis);
+            }else
+                this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             InitializeControls(isNewPermis);
+            this.DataContext = this.Permis;
         }
-        private void FillComboBoxes(bool isNewPermis)
+        #region Fill data 
+        private void FillComboboxes(bool isNewPermis)
         {
             Carte.ItemsSource = projetMinesDBContext.Cartes.ToList();
-            Region.ItemsSource = projetMinesDBContext.Regions.ToList();
-            Province.ItemsSource = projetMinesDBContext.Provinces.ToList();
+            Carte.SelectedValuePath = "CarteId";
+            Carte.DisplayMemberPath = "Nom_carte";
             Point_Pevot.ItemsSource = projetMinesDBContext.Point_Pivots.ToList();
-            Commune.ItemsSource = projetMinesDBContext.Communes.ToList();
+            Point_Pevot.SelectedValuePath = "Point_PivotId";
+            Point_Pevot.DisplayMemberPath = "Nom_Point_Pevot";
+            Region.ItemsSource = projetMinesDBContext.Regions.ToList();
+            Region.SelectedValuePath = "RegionId";
+            Region.DisplayMemberPath = "Nom_Region";
+            //Province.SetBinding(ComboBox.ItemsSourceProperty,"";
+            Province.ItemsSource = projetMinesDBContext.Provinces.ToList();
+            Province.SelectedValuePath = "ProvinceId";
+            Province.DisplayMemberPath = "Nom_Province";
             Caidat.ItemsSource = projetMinesDBContext.Caidats.ToList();
-            if (isNewPermis) return;
-            Carte.SelectedValue = this.Permis.Area.Carte.Nom_carte;
-            Region.SelectedValue = this.Permis.Area.Commune.Caidat.Province.Region.Nom_Region;
-            Province.SelectedValue = this.Permis.Area.Commune.Caidat.Province.Nom_Province;
-            Point_Pevot.SelectedValue = this.Permis.Area.Point_Pivot.Nom_Point_Pevot;
-            Commune.SelectedValue = this.Permis.Area.Commune.Nom_Commune;
-            Caidat.SelectedValue = this.Permis.Area.Commune.Caidat.Nom_Caidat;
+            Caidat.SelectedValuePath = "CaidatId";
+            Caidat.DisplayMemberPath = "Nom_Caidat";
+            Commune.ItemsSource = projetMinesDBContext.Communes.ToList();
+            Commune.SelectedValuePath = "CommuneId";
+            Commune.DisplayMemberPath = "Nom_Commune";
+            //Carte.SetBinding(ComboBox.SelectedValueProperty, "Area.Carte.CarteId");
+            //Region.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.Region.RegionId");
+            //Province.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.ProvinceId");
+            //Point_Pevot.SetBinding(ComboBox.SelectedValueProperty, "Area.Point_Pivot.Point_PevotId");
+            //Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CommuneId");
+            //Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.CaidatId");
+
         }
-        private void FillDatePickers(bool isNewPermis)
+        private void BindDatePickers(bool isNewPermis)
+        {
+           
+            Date_Depot.SetBinding(DatePicker.SelectedDateProperty, "Date_Depot");
+            Date_Decision.SetBinding(DatePicker.SelectedDateProperty, "Date_Decision");
+            Date_Echeance.SetBinding(DatePicker.SelectedDateProperty, "Echeance");
+            Date_Institision.SetBinding(DatePicker.SelectedDateProperty, "Date_Institition");
+        }
+        private void FillElementDossiers(bool isNewPermis)
         {
             if (isNewPermis)
             {
-                Date_Depot.SelectedDate = DateTime.Now.Date;
-                Date_Decision.SelectedDate = DateTime.Now.Date;
-                Date_Echeance.SelectedDate = DateTime.Now.Date;
-                Date_Institision.SelectedDate = DateTime.Now.Date;
+                this.Permis.Les_Element_Dossier = projetMinesDBContext.Elements_Dossiers.Where(el => el.Type_PermisId == 1).ToList();
+                InfoVerification.ItemsSource = this.Permis.Les_Element_Dossier;
                 return;
             }
-            Date_Depot.SelectedDate = this.Permis.Date_Depot;
-            Date_Decision.SelectedDate = this.Permis.Date_Decision;
-            Date_Echeance.SelectedDate = this.Permis.Echeance;
-            Date_Institision.SelectedDate = this.Permis.Date_Institition;
+            InfoVerification.ItemsSource = this.Permis.Les_Element_Dossier;
         }
         private void InitializeControls(bool isNewPermis)
         {
-            FillComboBoxes(isNewPermis);
-            FillDatePickers(isNewPermis);
+            FillComboboxes(isNewPermis);
+            BindDatePickers(isNewPermis);
+            FillElementDossiers(isNewPermis);
             if (isNewPermis)
             {
                 RestJourProgramme.Text = "Rest : 180";
-                RestJourProgramme.Text = "Rest : 360";
+                RestJourDeclarationTravaux.Text = "Rest : 360";
                 return;
             }
-            FillTextBoxesWithExistingData();
+            BindTextBoxes();
         }
-        private void FillTextBoxesWithExistingData()
+        private void BindTextBoxes()
         {
+            //Set Binding For
             //Titulaire Information
-            Numero_Demande.Text = this.Permis.Num_Demmande.ToString();
-            Nom_Demandeur.Text = this.Permis.Titulaire.Nom_Demandeur;
-            Status_Demandeur.Text = this.Permis.Titulaire.status_Demandeur;
-            Raison_Social.Text = this.Permis.Titulaire.Raison_Social;
-            Nom_Societe.Text = this.Permis.Titulaire.Nom_Societe;
-            Numero_CNSS.Text = this.Permis.Titulaire.Numero_Cnss;
-            Domicile_Demandeur.Text = this.Permis.Titulaire.Election_Domicile;
-            Registre_Commerce.Text = this.Permis.Titulaire.Registre_Commerce;
-            Taxe_Prof.Text = this.Permis.Titulaire.Taxe_Prof;
-            Nom_Site.Text = this.Permis.Titulaire.Nom_Site;
-            Effective.Text = this.Permis.Titulaire.Effictif;
+            Numero_Demande.SetBinding(TextBox.TextProperty, "Num_Demmande");
+            Nom_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Demandeur");
+            Status_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.status_Demandeur");
+            Raison_Social.SetBinding(TextBox.TextProperty,"Titulaire.Raison_Social");
+            Nom_Societe.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Societe");
+            Numero_CNSS.SetBinding(TextBox.TextProperty, "Titulaire.Numero_Cnss");
+            Domicile_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Election_Domicile");
+            Registre_Commerce.SetBinding(TextBox.TextProperty, "Titulaire.Registre_Commerce");
+            Taxe_Prof.SetBinding(TextBox.TextProperty, "Titulaire.Taxe_Prof");
+            Nom_Site.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Site");
+            Effective.SetBinding(TextBox.TextProperty, "Titulaire.Effictif");
             //Area Information
-            Inscription_Conservation.IsChecked = this.Permis.Inscription_Conservation;
-            Dir_e_o.Text = this.Permis.Area.Dis_e_o;
-            Superficie.Text = this.Permis.Area.Superficie.ToString();
-            dir_n_s.Text = this.Permis.Area.Dis_n_s;
-            Dis_n_s.Text = this.Permis.Area.Dis_n_s;
-            Dis_e_o.Text = this.Permis.Area.Dis_e_o;
-            foreach(Permis permis in this.Permis.Chevauchements)
+            Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
+            Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
+            Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
+            dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
+            Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
+            Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
+            foreach(Permis chev in this.Permis.Chevauchements)
             {
-                Chevauchements.Children.Add(new Border()
-                {
-                    Child = new TextBlock() { Text = permis.Num_Permis.ToString(), VerticalAlignment = VerticalAlignment.Center }
-                });
+                Chevauchements.Children.Add(GetChevauchementElement((int)chev.Num_Permis));
             }
-            Zone.Text = this.Permis.Area.Zone;
-            Abscisse.Text = this.Permis.Area.Abscisse.ToString();
-            Ordonne.Text = this.Permis.Area.Ordonnee.ToString();
+            Zone.SetBinding(TextBox.TextProperty,"Area.Zone");
+            Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
+            Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
             //suivi decision information
-            Numero_Permis.Text = this.Permis.Num_Permis.ToString();
-            investisement_realise.Text = this.Permis.Investisement_Realise.ToString();
-            occupation_temporaire.Text = this.Permis.Occupation_Temporaire;
+            Numero_Permis.SetBinding(TextBox.TextProperty, "Num_Permis");
+            investisement_realise.SetBinding(TextBox.TextProperty, "Investisement_Realise");
+            occupation_temporaire.SetBinding(TextBox.TextProperty, "Occupation_Temporaire");
+
+            //
             double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
             RestJourProgramme.Text = $"Rest : {180-daysPassed}";
-            RestJourProgramme.Text = $"Rest : {360-daysPassed}";
-        }
-        #region This is the second method that i will use in the next version
-        private void UpdateWhenLeave()
-        {
-            new ElementsLooper().GetElements(MainPage,typeof(TextBox),(dynamic obj)=>
-            {
-                TextBox textBox = ((TextBox)obj);
-                textBox.MouseLeave += (object sender, MouseEventArgs e) =>
-                {
-                    MessageBox.Show(((Permis)this.DataContext).Num_Demmande.ToString());
-                    this.projetMinesDBContext.SaveChanges();
-                };
-            }
-            );
-            new ElementsLooper().GetElements(MainPage, typeof(ComboBox), (dynamic obj) =>
-            {
-                ComboBox comboBox = ((ComboBox)obj);
-                comboBox.MouseLeave += (object sender, MouseEventArgs e) =>
-                {
-                    this.projetMinesDBContext.SaveChanges();
-                };
-            }
-           );
+            RestJourDeclarationTravaux.Text = $"Rest : {360-daysPassed}";
         }
         #endregion
-        #region this is the first method i use but i'm trying a new method with binding
-        void UpdateDemmandeInfo(Permis permis)
+        #region update data
+        private void UpdateChevauchements()
         {
-            if (permis == null)
-                MessageBox.Show("null reference");
-            permis.Num_Demmande = int.Parse(Numero_Demande.Text);
-            permis.Date_Depot = (DateTime)Date_Depot.SelectedDate;
+            this.Permis.Chevauchements.Clear();
+            ElementsLooper.GetElements(Chevauchements, typeof(Button), (dynamic obj) =>
+              {
+                  Button b = (Button)obj;
+                  int numero = Convert.ToInt32(b.Content);
+                  this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Where(p=>p.Num_Permis==numero).Single());
+              });
         }
-        void UpdateTitulaireInfo(Permis permis)
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (permis == null)
-                MessageBox.Show("null reference");
-            if (permis.Titulaire == null)
-                permis.Titulaire = new Titulaire();
-            permis.Titulaire.Nom_Demandeur = Nom_Demandeur.Text;
-            permis.Titulaire.status_Demandeur = Status_Demandeur.Text;
-            permis.Titulaire.Raison_Social = Raison_Social.Text;
-            permis.Titulaire.Nom_Societe = Nom_Societe.Text;
-            permis.Titulaire.Numero_Cnss = Numero_CNSS.Text;
-            permis.Titulaire.Election_Domicile = Domicile_Demandeur.Text;
-            permis.Titulaire.Registre_Commerce = Registre_Commerce.Text;
-            permis.Titulaire.Taxe_Prof = Taxe_Prof.Text;
-            permis.Titulaire.Nom_Site = Nom_Site.Text;
-            permis.Titulaire.Effictif = Effective.Text;
-
-        }
-        void UpdateAreaInfo(Permis permis)
-        {
-            permis.Inscription_Conservation = (bool)Inscription_Conservation.IsChecked;
-
-            permis.Chevauchements = new List<Permis>();
-            permis.Area = new Area()
-            {
-                Dir_Est_ouest = Dir_e_o.Text[0],
-                Dir_nord_sud = dir_n_s.Text[0],
-                Dis_e_o = Dis_e_o.Text,
-                Abscisse = Abscisse.Text,
-                Ordonnee = Ordonne.Text,
-                Point_Pivot = new Point_Pivot()
-                {
-                    Nom_Point_Pevot = Point_Pevot.SelectedItem.ToString()
-                },
-            };
-        }
-        private void Enregistrer_DemmandeInfo_Click(object sender, RoutedEventArgs e)
-        {
-            //si le permis deja exist on vas le modifier si non on va l'ajouter
-            int numDemmande = int.Parse(Numero_Demande.Text);
-            Permis permis = null;
-            try
-            {
-                permis = projetMinesDBContext.Les_Permis.Where(p => p.Num_Demmande == numDemmande).Single();
-            }
-            catch { }
-            if (permis == null)
-            {
-                permis = new Permis();
-                UpdateDemmandeInfo(permis);
-                projetMinesDBContext.Les_Permis.Add(permis);
-                //permis.Etat_Permis = projetMinesDBContext.Etats_Permis.Find(0);
-                //permis.Type_Permis = projetMinesDBContext.Types_Permis.Find(0);
-            }
-            else
-                UpdateDemmandeInfo(permis);
-            projetMinesDBContext.SaveChanges();
-        }
-        private void Enregistrer_Titulaire_Info_Click(object sender, RoutedEventArgs e)
-        {
-            int numDemmande = int.Parse(Numero_Demande.Text);
-            Permis permis = projetMinesDBContext.Les_Permis.Where(p => p.Num_Demmande == numDemmande).Single();
-            UpdateTitulaireInfo(permis);
-            projetMinesDBContext.SaveChanges();
-        }
-        private void Enregistrer_Area_Info_Click(object sender, RoutedEventArgs e)
-        {
-            int numDemmande = int.Parse(Numero_Demande.Text);
-            Permis permis = projetMinesDBContext.Les_Permis.Where(p => p.Num_Demmande == numDemmande).Single();
-            UpdateAreaInfo(permis);
-            projetMinesDBContext.SaveChanges();
+            UpdateChevauchements();
+            this.projetMinesDBContext.SaveChanges();
+            Home.Show();
         }
         #endregion
         private void GenererBultainVersement_Click(object sender, RoutedEventArgs e)
@@ -226,22 +166,35 @@ namespace Projet_Mines_Official
                 }
                 );
         }
-
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
         {
-            Chevauchements.Children.Add(new Border()
+            Chevauchements.Children.Add(GetChevauchementElement(Convert.ToInt32(Chevauchement.Text))); 
+        }
+        private Button GetChevauchementElement(int NumPermis)
+        {
+            Button btn = new Button()
             {
-                Child = new TextBlock() { Text = Chevauchement.Text, VerticalAlignment = VerticalAlignment.Center }
-            });
+                Content = NumPermis.ToString(),
+                VerticalAlignment = VerticalAlignment.Center,
+                Background = Brushes.White,
+                BorderBrush=Brushes.Black,
+                BorderThickness=new Thickness(1),
+                Margin=new Thickness(10,0,0,0),
+                Foreground=Brushes.Gray
+            };
+            btn.Click += Btn_Click;
+            return btn;
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Btn_Click(object sender, RoutedEventArgs e)
         {
-            Home.Show();
+            Chevauchements.Children.Remove((Button)sender);
         }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
+            dw.documentsContainer.Document=
             dw.Show();
             this.Close();
         }

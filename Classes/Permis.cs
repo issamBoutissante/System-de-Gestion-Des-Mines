@@ -30,8 +30,6 @@ namespace Projet_Mines_Official
             this.Date_Rapot = DateTime.Now.Date;
             this.Etat_PermisId = 1;
             this.Type_PermisId = 1;
-            Area = new Area();
-            Titulaire = new Titulaire();
         }
         public int PermisId { get; set; }
         public int? Num_Demmande { get; set; }

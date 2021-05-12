@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using Projet_Mines_Official;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Projet_Mines_Official

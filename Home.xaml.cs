@@ -40,8 +40,8 @@ namespace Projet_Mines_Official
         private void Afficher_Click(object sender, RoutedEventArgs e)
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
-            new Permis_Recherche(this, false) {PermisId=permis.PermisId }.Show();
-            this.Hide();
+            new Permis_Recherche(this, false,permis.PermisId).Show();
+            //this.Hide();
         }
     }
 }
