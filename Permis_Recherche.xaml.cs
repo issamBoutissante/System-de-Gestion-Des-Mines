@@ -4,6 +4,9 @@ using System.Windows.Controls;
 using System.Linq;
 using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media;
+using System.Windows.Documents;
+using System.IO;
+using System.Windows.Markup;
 
 namespace Projet_Mines_Official
 {
@@ -29,6 +32,11 @@ namespace Projet_Mines_Official
                 this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             InitializeControls(isNewPermis);
             this.DataContext = this.Permis;
+            InitializeAutoCompleteCombo();
+        }
+        private void InitializeAutoCompleteCombo()
+        {
+            ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis ).ToList();
         }
         #region Fill data 
         private void FillComboboxes(bool isNewPermis)
@@ -149,26 +157,9 @@ namespace Projet_Mines_Official
             Home.Show();
         }
         #endregion
-        private void GenererBultainVersement_Click(object sender, RoutedEventArgs e)
-        {
-            DocumentGenerator.CreateWordDocument(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR.docx",
-                $@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx",
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>",Domicile_Demandeur.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-                );
-        }
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
         {
-            Chevauchements.Children.Add(GetChevauchementElement(Convert.ToInt32(Chevauchement.Text))); 
+            Chevauchements.Children.Add(GetChevauchementElement(Convert.ToInt32(ChevauchementCombo.Text))); 
         }
         private Button GetChevauchementElement(int NumPermis)
         {
@@ -193,10 +184,27 @@ namespace Projet_Mines_Official
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            documentsWord dw = new documentsWord();
-            dw.documentsContainer.Document=
-            dw.Show();
-            this.Close();
+            DocumentGenerator.CreateWordDocument(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR.docx",
+                $@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx",
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+                );
+            //XpsDocument xpsDocument = new XpsDocument($@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx", FileAccess.Read);
+            //documentsWord dw = new documentsWord();
+            //dw.documentsContainer.Document = xpsDocument.GetFixedDocumentSequence();
+            //IDocumentPaginatorSource Document = (IDocumentPaginatorSource)XamlReader.Load(File.Create($@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx"));
+            //documentsWord dw = new documentsWord();
+            //dw.documentsContainer.Document = Document;
+            //dw.Show();
         }
     }
 }

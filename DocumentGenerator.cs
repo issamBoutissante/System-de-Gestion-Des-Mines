@@ -55,7 +55,7 @@ namespace Projet_Mines_Official
                                         ref missing, ref missing, ref missing,
                                         ref missing, ref missing, ref missing, ref missing);
                 myWordDoc.Activate();
-
+                
                 //find and replace
                 FindAndReplace(wordApp);
             }

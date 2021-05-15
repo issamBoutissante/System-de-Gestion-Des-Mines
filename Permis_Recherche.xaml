@@ -4,8 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
-         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
-         WindowStartupLocation="CenterScreen" 
+         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
+        WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
         Title="" Height="3650" Width="1010" Closing="Window_Closing">
     <ScrollViewer >
@@ -231,7 +231,8 @@
                         <TextBlock  FontFamily="Arial" FontSize="14"  Foreground="White"> Chevauchement</TextBlock>
                     </GroupBox.Header>
                     <StackPanel Orientation="Horizontal" Height="Auto" Width="Auto">
-                        <TextBox x:Name="Chevauchement" Width="154"  Height="30"  BorderThickness="1"/>
+                        <controls:AutoCompleteBox x:Name="ChevauchementCombo" Width="154"  Height="30"  BorderThickness="1" FilterMode="Contains"/>
+                        <!--<TextBox x:Name="Chevauchement" Width="154"  Height="30"  BorderThickness="1"/>-->
                         <Button x:Name="addChevauchement"  Background="#0861AD" Width="40"  Height="20"  Content="+" FontSize="14" Margin="5,0,0,0" Padding="0,0,0,2" Click="addChevauchement_Click"/>
                         <StackPanel x:Name="Chevauchements" Orientation="Horizontal">
                             <StackPanel.Resources>
