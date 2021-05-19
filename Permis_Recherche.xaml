@@ -7,7 +7,7 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
          WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="" Height="3650" Width="1010" Closing="Window_Closing">
+        Title="" Height="630" Width="800" Closing="Window_Closing">
     <ScrollViewer >
         <StackPanel x:Name="MainPage" Height="Auto">
             <!--Header Logo-->
