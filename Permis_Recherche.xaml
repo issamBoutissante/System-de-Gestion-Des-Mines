@@ -7,7 +7,7 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="" Height="3650" Width="1010" Closing="Window_Closing">
+        Title="" Height="630" Width="800" Closing="Window_Closing">
     <ScrollViewer >
         <StackPanel x:Name="MainPage" Height="Auto">
             <!--Header Logo-->
@@ -379,8 +379,8 @@
                                                 <ColumnDefinition Width="6*"/>
                                                 <ColumnDefinition Width="*"/>
                                             </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding nom_dossier}" FontSize="13"  Margin="25,5,0,0" TextWrapping="Wrap">-  Les diplômes, titres et références professionnelles du</TextBlock>
-                                            <CheckBox Grid.Column="1" IsChecked="{Binding isExist}"    Margin="0,5,20,0"/>
+                                            <TextBlock Grid.Column="0" Text="{Binding Element_Dossier.nom_dossier}" FontSize="13"  Margin="25,5,0,0" TextWrapping="Wrap">-  Les diplômes, titres et références professionnelles du</TextBlock>
+                                            <CheckBox Grid.Column="1" IsChecked="{Binding isExist,Mode=TwoWay}"    Margin="0,5,20,0"/>
                                         </Grid>
                                     </Border>
                                 </DataTemplate>

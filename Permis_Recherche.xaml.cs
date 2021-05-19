@@ -4,9 +4,6 @@ using System.Windows.Controls;
 using System.Linq;
 using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media;
-using System.Windows.Documents;
-using System.IO;
-using System.Windows.Markup;
 
 namespace Projet_Mines_Official
 {
@@ -18,16 +15,12 @@ namespace Projet_Mines_Official
         public Permis_Recherche(Window window,bool isNewPermis,int PermisId=0)
         {
             InitializeComponent();
-            this.Height = 700;
             Home = window;
             if (isNewPermis)
             {
-                this.Permis = new Permis()
-                {
-                    Area = new Area(),
-                    Titulaire = new Titulaire()
-                };
+                this.Permis = new Permis(new Area(), new Titulaire());
                 this.projetMinesDBContext.Les_Permis.Add(this.Permis);
+                this.projetMinesDBContext.SaveChanges();
             }else
                 this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             InitializeControls(isNewPermis);
@@ -80,11 +73,13 @@ namespace Projet_Mines_Official
         {
             if (isNewPermis)
             {
-                this.Permis.Les_Element_Dossier = projetMinesDBContext.Elements_Dossiers.Where(el => el.Type_PermisId == 1).ToList();
-                InfoVerification.ItemsSource = this.Permis.Les_Element_Dossier;
-                return;
+                InitilializerLesDossierPermis.InitilizerDossiers(this.Permis, TypePermis.PR);
             }
-            InfoVerification.ItemsSource = this.Permis.Les_Element_Dossier;
+                MessageBox.Show(this.Permis.Permis_ElementDossiers.ToList().Count().ToString());
+                
+             this.Permis.Permis_ElementDossiers.ToList().ForEach(e => MessageBox.Show($"{e.Element_DossierId} - {e.Element_Dossier.nom_dossier}"));
+                //this.Permis.Permis_ElementDossiers.ToList().ForEach(e => MessageBox.Show($"{e.Element_DossierId} - {e.Element_Dossier.Element_DossierId} - {e.Element_Dossier.nom_dossier}"));
+            InfoVerification.ItemsSource = this.Permis.Permis_ElementDossiers;
         }
         private void InitializeControls(bool isNewPermis)
         {

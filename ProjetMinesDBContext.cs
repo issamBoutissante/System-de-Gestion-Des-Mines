@@ -18,6 +18,7 @@ namespace Projet_Mines_Official
         public DbSet<Caidat> Caidats { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Permis_ElementDossier> Permis_ElementDossiers { get; set; }
         //public DbSet<Observation> Observations { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
