@@ -107,19 +107,19 @@ namespace Projet_Mines_Official
         {
             List<Element_Dossier> element_Dossiers = new List<Element_Dossier>()
             {
-                new Element_Dossier(){isExist=false,nom_dossier=" - personnel de l'entreprise chargés de la conduite et du suivi des travaux ou éventuellement. Les contrats le liant aux personnes " +
+                new Element_Dossier(){nom_dossier=" - personnel de l'entreprise chargés de la conduite et du suivi des travaux ou éventuellement. Les contrats le liant aux personnes " +
                 "physiques ou morales agréées visées à l'article 58 de la loi n°33-13."},
-                new Element_Dossier(){isExist=false,nom_dossier=" -  Les moyens humains et techniques envisagés pour l'exécution des travaux ."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - Une fiche indiquant le statut de la personne morale et le capital social."},
-                new Element_Dossier(){isExist=false,nom_dossier=" -  La liste et la valeur du matériel détenu par le demandeur, ou que celui-ci envisage d'acquérir et le financement correspondant."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - les garanties et cautions dont bénéficie l’entreprise, le cas éventuel ."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - Les pièces administratives délivrées par les autorités compétentes et justifiant que le demandeur est en règle au regard de ses obligations fiscales et cotisations sociales ."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - Programme de travaux provisoire indiquant la nature de l’importance des travaux programmés, les méthodes de recherche projetées ainsi le montant des dépenses prévues."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - L’original de la fiche du point pivot ."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - La définition de la position du centre du périmètre sollicité en coordonnées Lambert par rapport au point pivot ."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - 3 cartes régulières au 1/100 000 ou 1/50 000 sur lesquelles figure la position le périmètre demandé."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - L’original du récépissé du versement de la rémunération des services rendus au titre de l’institution du permis de recherche."},
-                new Element_Dossier(){isExist=false,nom_dossier=" - Une pièce attestant de la qualité de mandataire de la personne morale au cas où la demande est formulée par un mandataire."},
+                new Element_Dossier(){nom_dossier=" -  Les moyens humains et techniques envisagés pour l'exécution des travaux ."},
+                new Element_Dossier(){nom_dossier=" - Une fiche indiquant le statut de la personne morale et le capital social."},
+                new Element_Dossier(){nom_dossier=" -  La liste et la valeur du matériel détenu par le demandeur, ou que celui-ci envisage d'acquérir et le financement correspondant."},
+                new Element_Dossier(){nom_dossier=" - les garanties et cautions dont bénéficie l’entreprise, le cas éventuel ."},
+                new Element_Dossier(){nom_dossier=" - Les pièces administratives délivrées par les autorités compétentes et justifiant que le demandeur est en règle au regard de ses obligations fiscales et cotisations sociales ."},
+                new Element_Dossier(){nom_dossier=" - Programme de travaux provisoire indiquant la nature de l’importance des travaux programmés, les méthodes de recherche projetées ainsi le montant des dépenses prévues."},
+                new Element_Dossier(){nom_dossier=" - L’original de la fiche du point pivot ."},
+                new Element_Dossier(){nom_dossier=" - La définition de la position du centre du périmètre sollicité en coordonnées Lambert par rapport au point pivot ."},
+                new Element_Dossier(){nom_dossier=" - 3 cartes régulières au 1/100 000 ou 1/50 000 sur lesquelles figure la position le périmètre demandé."},
+                new Element_Dossier(){nom_dossier=" - L’original du récépissé du versement de la rémunération des services rendus au titre de l’institution du permis de recherche."},
+                new Element_Dossier(){nom_dossier=" - Une pièce attestant de la qualité de mandataire de la personne morale au cas où la demande est formulée par un mandataire."},
             };
             if (projetMinesDBContext.Elements_Dossiers.ToList().Count == 0)
                 projetMinesDBContext.Elements_Dossiers.AddRange(element_Dossiers);
@@ -128,9 +128,15 @@ namespace Projet_Mines_Official
         {
 
 
-            Permis permis = new Permis();
+            Permis permis = new Permis(new Area(), new Titulaire());
+            //permis.Permis_ElementDossiers = projetMinesDBContext.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
             if (projetMinesDBContext.Les_Permis.ToList().Count == 0)
-            projetMinesDBContext.Les_Permis.Add(permis);
+            {
+                projetMinesDBContext.Les_Permis.Add(permis);
+                projetMinesDBContext.SaveChanges();
+                InitilializerLesDossierPermis.InitilizerDossiers(permis, TypePermis.PR);
+            }
+
         }
         public static void Remplir()
         {
@@ -156,6 +162,9 @@ namespace Projet_Mines_Official
             projetMinesDBContext.SaveChanges();
 
             RemplirEtat_Permis();
+            projetMinesDBContext.SaveChanges();
+
+            RemplirElementDossierPR();
             projetMinesDBContext.SaveChanges();
 
             RemplirPermis();

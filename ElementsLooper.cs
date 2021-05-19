@@ -11,7 +11,7 @@ namespace Projet_Mines_Official
         /// </summary>
         /// <param name="element"></param>
         /// <returns>Returns true if the element is FrameworkElement and false if it's not</returns>
-        internal bool TryParseFrameworkElement(dynamic element)
+        internal static bool TryParseFrameworkElement(dynamic element)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace Projet_Mines_Official
         /// </summary>
         /// <param name="element"></param>
         /// <returns>Returns True if The Element has childs and false if it hasn't</returns>
-        internal bool HasChilds(FrameworkElement element)
+        internal static bool HasChilds(FrameworkElement element)
         {
             foreach (var e in LogicalTreeHelper.GetChildren(element))
             {
@@ -43,7 +43,7 @@ namespace Projet_Mines_Official
         /// <param name="typeOfElement">The type of the Element to Get</param>
         /// <param name="ExecuteInTextBox">This function will be executed for each Textbox found and Will Receive the current TextBox Found as a parameter</param>
         /// <Note PayAttention="this function may block your program (Call it in asynchronously)"></Note>
-        internal void GetElements(FrameworkElement ParentElement,Type typeOfElement, Action<dynamic> ExecuteInTextBox)
+        internal static void GetElements(FrameworkElement ParentElement,Type typeOfElement, Action<dynamic> ExecuteInTextBox)
         {
             foreach (var ChildElement in LogicalTreeHelper.GetChildren(ParentElement))
             {

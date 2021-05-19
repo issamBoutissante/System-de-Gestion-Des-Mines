@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using Projet_Mines_Official;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Projet_Mines_Official
@@ -24,6 +18,7 @@ namespace Projet_Mines_Official
         public DbSet<Caidat> Caidats { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Region> Regions { get; set; }
+        public DbSet<Permis_ElementDossier> Permis_ElementDossiers { get; set; }
         //public DbSet<Observation> Observations { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

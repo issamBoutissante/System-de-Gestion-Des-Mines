@@ -35,7 +35,7 @@
         <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
         <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
-         <TextBox  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20"/>
+         <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20" KeyUp="Search_KeyUp"/>
         <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
 
         <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#EAA221" HorizontalAlignment="Center"  Margin="5,5,0,0" Width="125">
@@ -61,7 +61,14 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <ComboBox Name="SearchBy" SelectedIndex="0" Grid.Column="0" Grid.Row="2" Margin="10 0 0 0">
+            <TextBlock Text="Numero Demmande"/>
+            <TextBlock Text="Numero Permis"/>
+            <TextBlock Text="Nom Societe"/>
+            <TextBlock Text="Etat"/>
+            <TextBlock Text="Type"/>
+        </ComboBox>
+        <!--<Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
@@ -102,7 +109,7 @@
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
-        </Button>
+        </Button>-->
         <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">

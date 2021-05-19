@@ -7,11 +7,11 @@ namespace Projet_Mines_Official
 {
     public class Permis
     {
-        public Permis()
+        public Permis(Area area,Titulaire titulaire)
         {
             this.Chevauchements = new HashSet<Permis>();
             this.Licence_Permis = new HashSet<Permis>();
-            this.Les_Element_Dossier = new HashSet<Element_Dossier>();
+            this.Permis_ElementDossiers = new HashSet<Permis_ElementDossier>();
             //this.Observations = new HashSet<Observation>();
             //Associate Default Values
             this.Num_Demmande = 0;
@@ -28,10 +28,14 @@ namespace Projet_Mines_Official
             this.Date_Decision = DateTime.Now.Date;
             this.Date_Enquete = DateTime.Now.Date;
             this.Date_Rapot = DateTime.Now.Date;
-            this.Etat_PermisId = 1;
-            this.Type_PermisId = 1;
-            Area = new Area();
-            Titulaire = new Titulaire();
+            this.Etat_PermisId = (int)EtatPermis.Demmande;
+            this.Type_PermisId = (int)TypePermis.PR;
+            this.Area = area;
+            this.Titulaire = titulaire;
+        }
+        public Permis()
+        {
+
         }
         public int PermisId { get; set; }
         public int? Num_Demmande { get; set; }
@@ -83,7 +87,7 @@ namespace Projet_Mines_Official
         [ForeignKey("TitulaireId")]
         public virtual Titulaire Titulaire { get; set; }
 
-        public virtual ICollection<Element_Dossier> Les_Element_Dossier { get; set; }
+        public virtual ICollection<Permis_ElementDossier> Permis_ElementDossiers { get; set; }
         //nous avons dit qu'on va le remplace par Historique
         //public virtual ICollection<Observation> Observations { get; set; }
     }
