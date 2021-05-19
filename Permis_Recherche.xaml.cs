@@ -75,9 +75,6 @@ namespace Projet_Mines_Official
             {
                 InitilializerLesDossierPermis.InitilizerDossiers(this.Permis, TypePermis.PR);
             }
-                MessageBox.Show(this.Permis.Permis_ElementDossiers.ToList().Count().ToString());
-                
-             this.Permis.Permis_ElementDossiers.ToList().ForEach(e => MessageBox.Show($"{e.Element_DossierId} - {e.Element_Dossier.nom_dossier}"));
                 //this.Permis.Permis_ElementDossiers.ToList().ForEach(e => MessageBox.Show($"{e.Element_DossierId} - {e.Element_Dossier.Element_DossierId} - {e.Element_Dossier.nom_dossier}"));
             InfoVerification.ItemsSource = this.Permis.Permis_ElementDossiers;
         }
