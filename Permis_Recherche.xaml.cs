@@ -11,11 +11,11 @@ namespace Projet_Mines_Official
     {
         ProjetMinesDBContext projetMinesDBContext=new ProjetMinesDBContext();
         public Permis Permis { get; set; }
-        Window Home;
-        public Permis_Recherche(Window window,bool isNewPermis,int PermisId=0)
+        Home Home;
+        public Permis_Recherche(Home home,bool isNewPermis,int PermisId=0)
         {
             InitializeComponent();
-            Home = window;
+            Home = home;
             if (isNewPermis)
             {
                 this.Permis = new Permis(new Area(), new Titulaire());
@@ -23,8 +23,8 @@ namespace Projet_Mines_Official
                 this.projetMinesDBContext.SaveChanges();
             }else
                 this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
-            InitializeControls(isNewPermis);
             this.DataContext = this.Permis;
+            InitializeControls(isNewPermis);
             InitializeAutoCompleteCombo();
         }
         private void InitializeAutoCompleteCombo()
@@ -89,9 +89,9 @@ namespace Projet_Mines_Official
                 RestJourDeclarationTravaux.Text = "Rest : 360";
                 return;
             }
-            BindTextBoxes();
+            BindTextBoxes(isNewPermis);
         }
-        private void BindTextBoxes()
+        private void BindTextBoxes(bool isNewPermis)
         {
             //Set Binding For
             //Titulaire Information
@@ -126,6 +126,7 @@ namespace Projet_Mines_Official
             occupation_temporaire.SetBinding(TextBox.TextProperty, "Occupation_Temporaire");
 
             //
+            if (isNewPermis) return;
             double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
             RestJourProgramme.Text = $"Rest : {180-daysPassed}";
             RestJourDeclarationTravaux.Text = $"Rest : {360-daysPassed}";
@@ -139,13 +140,15 @@ namespace Projet_Mines_Official
               {
                   Button b = (Button)obj;
                   int numero = Convert.ToInt32(b.Content);
-                  this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Where(p=>p.Num_Permis==numero).Single());
+                  this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Single(p=>p.Num_Permis==numero));
               });
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UpdateChevauchements();
+
             this.projetMinesDBContext.SaveChanges();
+            Home.RemplirDataGrid();
             Home.Show();
         }
         #endregion
@@ -176,27 +179,20 @@ namespace Projet_Mines_Official
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            DocumentGenerator.CreateWordDocument(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR.docx",
-                $@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx",
+            documentsWord dw = new documentsWord();
+            DocumentGenerator.GenerateDocument(RapportPath.Decision_PR.Value,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                    //DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
+                    //DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
-                );
-            //XpsDocument xpsDocument = new XpsDocument($@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx", FileAccess.Read);
-            //documentsWord dw = new documentsWord();
-            //dw.documentsContainer.Document = xpsDocument.GetFixedDocumentSequence();
-            //IDocumentPaginatorSource Document = (IDocumentPaginatorSource)XamlReader.Load(File.Create($@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Rapports\Bulletin de versement PR {Nom_Societe.Text}.docx"));
-            //documentsWord dw = new documentsWord();
-            //dw.documentsContainer.Document = Document;
-            //dw.Show();
+                ,dw.documentsContainer,()=> { dw.Show(); });
         }
     }
 }
