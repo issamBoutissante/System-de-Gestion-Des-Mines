@@ -223,7 +223,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+<<<<<<< HEAD
+    <!-- <Page Include="Loading.xaml">-->
+=======
     <!--<Page Include="Loading.xaml">-->
+>>>>>>> e39df6c037b6f3a0db4724edfc2d4f1a1dd5d630
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

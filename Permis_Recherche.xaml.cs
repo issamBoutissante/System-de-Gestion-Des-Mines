@@ -180,17 +180,19 @@ namespace Projet_Mines_Official
         private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
+            string registreComm = Registre_Commerce.Text.ToString();
             DocumentGenerator.GenerateDocument(RapportPath.Bulletin_Versement_PR.Value,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                    //DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
+                    //DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", registreComm);
+                    MessageBox.Show("Be Happy");
+                    //DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
+                    //DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
         }
