@@ -27,7 +27,7 @@ namespace Projet_Mines_Official
         }
         internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer = null,Action OpenDocumentWindow=null)
         {
-            Loading loading = new Loading();
+            loadingDocument loading = new loadingDocument();
             loading.Show();
             XpsDocument xpsDocument = await GetXpsDocumentAsync(filename, FindAndReplace);
             if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
