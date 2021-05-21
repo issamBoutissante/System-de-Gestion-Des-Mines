@@ -149,6 +149,12 @@
       <DependentUpon>Loading.xaml</DependentUpon>
     </Compile>
     <Compile Include="RapportPath.cs" />
+    <Compile Include="loadingDocument.xaml.cs">
+      <DependentUpon>loadingDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationPage.xaml.cs">
+      <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
@@ -221,6 +227,7 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Loading.xaml">
+    <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotificationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
