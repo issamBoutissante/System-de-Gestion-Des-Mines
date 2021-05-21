@@ -38,7 +38,7 @@
         <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
         <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
-         <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  Height="20" KeyUp="Search_KeyUp"/>
+         <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  FontSize="12" FontFamily="Arial"  KeyUp="Search_KeyUp"/>
         <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
 
         <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#EAA221" BorderBrush="{x:Null}" IsMainMenu="False"  Margin="5,5,0,0" Width="125">

@@ -7,7 +7,7 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="" Height="6300" Width="1000" Closing="Window_Closing">
+        Title="" Height="630" Width="1000" Closing="Window_Closing">
     <Window.Resources>
        
     </Window.Resources>
