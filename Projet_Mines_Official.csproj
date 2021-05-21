@@ -145,9 +145,6 @@
     <Compile Include="EtatPermis.cs" />
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="InitilializerLesDossierPermis.cs" />
-    <Compile Include="Loading.xaml.cs">
-      <DependentUpon>Loading.xaml</DependentUpon>
-    </Compile>
     <Compile Include="RapportPath.cs" />
     <Compile Include="loadingDocument.xaml.cs">
       <DependentUpon>loadingDocument.xaml</DependentUpon>
@@ -226,7 +223,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Loading.xaml">
+    <!--<Page Include="Loading.xaml">-->
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
