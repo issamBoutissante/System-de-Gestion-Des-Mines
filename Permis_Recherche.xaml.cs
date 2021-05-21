@@ -180,16 +180,22 @@ namespace Projet_Mines_Official
         private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
+            string NomSociete = Nom_Societe.Text;
+            string RegistreCommerce = Registre_Commerce.Text;
+            string NumeroCNSS = Numero_CNSS.Text;
+            string TaxeProf = Taxe_Prof.Text;
+            string NumeroDemande = Numero_Demande.Text;
+            string DomicileDemandeur = Domicile_Demandeur.Text;
             DocumentGenerator.GenerateDocument(RapportPath.Bulletin_Versement_PR.Value,
                 (Word.Application wordApp) =>
                 {
                     DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", Nom_Societe.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", Registre_Commerce.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", Numero_CNSS.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", Taxe_Prof.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", Numero_Demande.Text);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", Domicile_Demandeur.Text);
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", RegistreCommerce);
+                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", NumeroCNSS);
+                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", TaxeProf);
+                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", NumeroDemande);
+                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", DomicileDemandeur);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
