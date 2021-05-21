@@ -145,6 +145,12 @@
     <Compile Include="EtatPermis.cs" />
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="InitilializerLesDossierPermis.cs" />
+    <Compile Include="loadingDocument.xaml.cs">
+      <DependentUpon>loadingDocument.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="NotificationPage.xaml.cs">
+      <DependentUpon>NotificationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
@@ -216,6 +222,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="loadingDocument.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +235,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ModalInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NotificationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

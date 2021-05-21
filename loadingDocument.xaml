@@ -1,0 +1,17 @@
+﻿<Window x:Class="Projet_Mines_Official.loadingDocument"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Projet_Mines_Official"
+        mc:Ignorable="d"
+        ContentRendered="Window_ContentRendered"
+        WindowStyle="None"
+         WindowStartupLocation="CenterScreen" 
+        Title="loadingDocument" Height="100" Width="300">
+    <Grid Margin="5">
+        <TextBlock Text="Chargement en cours..." TextAlignment="Center" Padding="0,5,0,0"
+          Foreground="#0861AD"  FontSize="14" FontFamily="Arial" FontWeight="Bold"       />
+        <ProgressBar Minimum="0" Maximum="100" Name="pbStatus" Height="10" />
+    </Grid>
+</Window>
