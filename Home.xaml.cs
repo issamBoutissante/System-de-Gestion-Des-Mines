@@ -17,9 +17,9 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
         }
-        void RemplirDataGrid()
+        internal void RemplirDataGrid()
         {
-            DataGridPermis.ItemsSource=this.projetMinesDBContext.Les_Permis.ToList().Take(5);
+            DataGridPermis.ItemsSource=this.projetMinesDBContext.Les_Permis.Take(5).ToList();
             //ObservableCollection<Permis> obs= (ObservableCollection<Permi>)this.projetMinesDBContext.Les_Permis.ToList();
         }
 
@@ -43,8 +43,8 @@ namespace Projet_Mines_Official
         private void Afficher_Click(object sender, RoutedEventArgs e)
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
-            new Permis_Recherche(this, false,permis.PermisId).Show();
-            //this.Hide();
+            new Permis_Recherche(this,false,permis.PermisId).Show();
+            this.Hide();
         }
         private void SearchPermis(string searchBy)
         {
@@ -68,7 +68,7 @@ namespace Projet_Mines_Official
         private void Search_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
             if (string.IsNullOrEmpty(Search.Text)) return;
-            string searchby = ((TextBlock)SearchBy.SelectedItem).Text;
+            string searchby = ((TextBlock)SearchByCombo.SelectedItem).Text;
             SearchPermis(searchby);
         }
     }

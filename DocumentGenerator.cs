@@ -1,14 +1,42 @@
 ﻿using System;
-using System.IO;
-using System.Reflection;
 using System.Windows;
-using Word = Microsoft.Office.Interop.Word;
+using System.Windows.Xps.Packaging;
+using System.IO;
+using word = Microsoft.Office.Interop.Word;
+using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Controls;
+
 namespace Projet_Mines_Official
 {
     class DocumentGenerator
     {
-        //this method will find and replace the input words
-        internal static void FindAndReplace(Word.Application wordApp, object ToFindText, object replaceWithText)
+        internal static XpsDocument ConvertWordDocToXPSDocUpdated(word.Document document, string xpsDocName)
+        {
+            try
+            {
+                document.SaveAs(xpsDocName, word.WdSaveFormat.wdFormatXPS);
+                XpsDocument xpsDoc = new XpsDocument(xpsDocName, System.IO.FileAccess.Read);
+                return xpsDoc;
+            }
+            catch (Exception exp)
+            {
+                MessageBox.Show(exp.Message);
+            }
+            return null;
+        }
+        internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer = null,Action OpenDocumentWindow=null)
+        {
+            Loading loading = new Loading();
+            loading.Show();
+            XpsDocument xpsDocument = await GetXpsDocumentAsync(filename, FindAndReplace);
+            if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
+            //I wont need this for know cause by default when i want the close document word they are asking to save As
+            //await CreateNewDocumentAsync(filename, FindAndReplace);
+            loading.Close();
+            OpenDocumentWindow?.Invoke();
+        }
+        internal static void FindAndReplace(word.Application wordApp, object ToFindText, object replaceWithText)
         {
             object matchCase = true;
             object matchWholeWord = true;
@@ -36,44 +64,74 @@ namespace Projet_Mines_Official
                 ref matchControl);
         }
 
-        //this method will create a new copy of the passed document word 
-        internal static void CreateWordDocument(object filename, object SaveAs, Action<Word.Application> FindAndReplace)
+        internal static Task<XpsDocument> GetXpsDocumentAsync(object filename, Action<word.Application> FindAndReplace)
         {
-            Word.Application wordApp = new Word.Application();
-            object missing = Missing.Value;
-            Word.Document myWordDoc = null;
-
-            if (File.Exists((string)filename))
+            return Task.Factory.StartNew(() =>
             {
-                object readOnly = false;
-                object isVisible = false;
-                wordApp.Visible = false;
+                word.Application wordApp = new word.Application();
+                object missing = Missing.Value;
+                word.Document myWordDoc = null;
 
-                myWordDoc = wordApp.Documents.Open(ref filename, ref missing, ref readOnly,
-                                        ref missing, ref missing, ref missing,
-                                        ref missing, ref missing, ref missing,
-                                        ref missing, ref missing, ref missing,
-                                        ref missing, ref missing, ref missing, ref missing);
-                myWordDoc.Activate();
-                
-                //find and replace
-                FindAndReplace(wordApp);
-            }
-            else
+                if (File.Exists((string)filename))
+                {
+                    object readOnly = false;
+                    object isVisible = false;
+                    wordApp.Visible = false;
+                    wordApp.Documents.Add(filename);
+                    myWordDoc = wordApp.ActiveDocument;
+
+                    FindAndReplace(wordApp);
+                }
+                else
+                {
+                    return null;
+                }
+                string newXPSDocumentName = String.Concat(Path.GetDirectoryName(filename.ToString()), "\\",
+                                System.IO.Path.GetFileNameWithoutExtension(filename.ToString()), ".xps");
+                XpsDocument xpsDocument = null;
+                try
+                {
+                    xpsDocument = ConvertWordDocToXPSDocUpdated(myWordDoc, newXPSDocumentName);
+                    myWordDoc.Close();
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("La document n'est pas sauvegarder");
+                }
+                wordApp.Quit();
+                return xpsDocument;
+            });
+        }
+        internal static Task CreateNewDocumentAsync(object filename, Action<word.Application> FindAndReplace)
+        {
+            return Task.Factory.StartNew(() =>
             {
-                MessageBox.Show("Document pas trouve!");
-            }
+                word.Application wordApp = new word.Application();
+                object missing = Missing.Value;
+                word.Document myWordDoc = null;
 
-            //Save the document
-            myWordDoc.SaveAs2(ref SaveAs, ref missing, ref missing, ref missing,
-                            ref missing, ref missing, ref missing,
-                            ref missing, ref missing, ref missing,
-                            ref missing, ref missing, ref missing,
-                            ref missing, ref missing, ref missing);
+                if (File.Exists((string)filename))
+                {
+                    object readOnly = false;
+                    object isVisible = false;
+                    wordApp.Visible = false;
+                    wordApp.Documents.Add(filename);
+                    myWordDoc = wordApp.ActiveDocument;
 
-            myWordDoc.Close();
-            wordApp.Quit();
-            MessageBox.Show("Document A ete cree!");
+                    FindAndReplace(wordApp);
+                }
+                else
+                {
+                    return;
+                }
+                myWordDoc.SaveAs2(ref missing, ref missing, ref missing, ref missing,
+                                ref missing, ref missing, ref missing,
+                                ref missing, ref missing, ref missing,
+                                ref missing, ref missing, ref missing,
+                                ref missing, ref missing, ref missing);
+                myWordDoc.Close();
+                wordApp.Quit();
+            });
         }
     }
 }
