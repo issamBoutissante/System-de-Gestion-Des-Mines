@@ -335,9 +335,9 @@
                 <Button Content="Générer le bon d'achat" Grid.ColumnSpan="3"
                        Grid.Column="0" Grid.Row="10" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
                         Margin="10,0,0,0"/>
-                <Button Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
+                <Button x:Name="GenererBLV_PR" Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
                        Grid.Column="3" Grid.Row="10" Height="30"   BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0" Click="Button_Click" />
+                        Margin="10,0,0,0" Click="GenererBLV_PR_Click" />
 
             </Grid>
             <!--Vérification des pièces-->
