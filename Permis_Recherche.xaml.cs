@@ -319,5 +319,40 @@ namespace Projet_Mines_Official
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
+
+        private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.lettre_transmission_PR.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+
+        private void Generer_Bordereau_envoi_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.Bordereau_envoi_PR.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
     }
 }
