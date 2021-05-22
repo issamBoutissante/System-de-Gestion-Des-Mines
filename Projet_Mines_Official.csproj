@@ -205,6 +205,7 @@
     <None Include="Rapports\Bulletin de versement PR.docx" />
     <None Include="Rapports\Decision_PR.docx" />
     <None Include="Rapports\lettre_transmission_PR.docx" />
+    <None Include="Rapports\premier_mise_demeure.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -224,7 +225,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

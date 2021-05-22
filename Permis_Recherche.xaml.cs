@@ -225,5 +225,58 @@ namespace Projet_Mines_Official
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
+
+        private void Mise_demeur_TP_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+           
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
+                (Word.Application wordApp) =>
+                {
+                    
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+
+        private void Mise_demeur_OuvertureTravaux_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Generer_Decision_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+            string abscisse = Abscisse.Text;
+            string ordonnee = Ordonne.Text;
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            string carte = Carte.SelectedValue.ToString();
+            string Dis_SN = Dis_n_s.Text;
+            string DisEstO = Dis_e_o.Text;
+            string date_decision = Date_Decision.Text;
+            string date_plus_trois = Date_Decision.SelectedDate.Value.AddYears(3).ToString();
+            DocumentGenerator.GenerateDocument(RapportPath.Decision_PR.Value,
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
+                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Dis_SN>", Dis_SN);
+                    DocumentGenerator.FindAndReplace(wordApp, "<DisEstO>", DisEstO);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date_decision>", date_decision);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date_plus_trois>", date_plus_trois);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
     }
 }
