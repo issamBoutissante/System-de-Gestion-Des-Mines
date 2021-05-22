@@ -29,20 +29,30 @@ namespace Projet_Mines_Official
             }
             return null;
         }
-        internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer = null,Action OpenDocumentWindow=null)
+        internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer,Action OpenDocumentWindow=null)
         {
+            loadingDocument loading = new loadingDocument();
+            loading.Show();
             try
             {
-                loadingDocument loading = new loadingDocument();
-                loading.Show();
                 XpsDocument xpsDocument = await GetXpsDocumentAsync(filename,FindAndReplace);
-                if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
-                loading.Close();
+                if (xpsDocument != null)
+                {
+                    documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
+                }
+                else
+                    //i'm not going to use this exception message for the instant
+                    throw new Exception("there was an error related the file access call the Programmer cuase he had expected this error");
             }catch(Exception exp)
             {
-                ModalError.ShowMsg(exp.Message);
+                return;
+            }
+            finally
+            {
+                loading.Close();
             }
             //I wont need this for know cause by default when i want the close document word they are asking to save As
+            
             //await CreateNewDocumentAsync(filename, FindAndReplace);
 
             OpenDocumentWindow?.Invoke();
@@ -111,12 +121,12 @@ namespace Projet_Mines_Official
                 }
                 catch
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        ModalError.ShowMsg("La document n'est pas sauvegarder");
-                    });
+                    return null;
                 }
-                wordApp.Quit();
+                finally
+                {
+                    wordApp.Quit();
+                }
 
                 return xpsDocument;
             });
