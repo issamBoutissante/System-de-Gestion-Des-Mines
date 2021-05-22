@@ -95,25 +95,26 @@ namespace Projet_Mines_Official
                 TextWrapping = TextWrapping.Wrap,
             };
             CheckBox checkBox = new CheckBox() ;
-            Border border= new Border()
+            Grid grid = new Grid()
             {
-                DataContext=dataSource,
-                BorderThickness=new Thickness(1),
-                BorderBrush=Brushes.Gray,
-                Margin=new Thickness(5,10,5,0),
-                Padding=new Thickness(10,10,10,10),
-                Child=new Grid()
-                {
-
-                    Margin=new Thickness(5,10,0,5),
-                    Children =
-                    {
-                        textBlock,
-                        checkBox
-                    },
-                    
-                }
+                Margin = new Thickness(5, 10, 0, 5)
             };
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(10,GridUnitType.Star) }) ;
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0.5, GridUnitType.Star) }) ;
+            grid.Children.Add(textBlock);
+            grid.Children.Add(checkBox);
+            textBlock.SetValue(Grid.ColumnProperty, 0);
+            checkBox.SetValue(Grid.ColumnProperty, 1);
+            Border border = new Border()
+            {
+                DataContext = dataSource,
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Gray,
+                Margin = new Thickness(5, 10, 5, 0),
+                Padding = new Thickness(10, 10, 10, 10),
+                Child = grid
+            };
+            
             textBlock.SetBinding(TextBlock.TextProperty, "Element_Dossier.nom_dossier");
             checkBox.SetBinding(CheckBox.IsCheckedProperty, "isExist");
             return border;
