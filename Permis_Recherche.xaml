@@ -363,7 +363,30 @@
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
             Vérification des pièces</TextBlock>
-                <DataGrid AutoGenerateColumns="False" x:Name="InfoVerification" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
+                <StackPanel Name="ElementsDossierStack" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
+                    <Border>
+                        <Border.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="BorderThickness" Value="1"/>
+                                <Setter Property="BorderBrush" Value="Gray"/>
+                                <Setter Property="Margin" Value="5 10 5 0"/>
+                                <Setter Property="Padding" Value="10 10 10 10"/>
+                            </Style>
+                            <Style TargetType="Grid">
+                                <Setter Property="Margin" Value="5 10 0 5"/>
+                            </Style>
+                        </Border.Resources>
+                        <Grid Margin="0 0 0 1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="6*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Hello i'am here"    FontSize="14" FontFamily="Arial"  TextWrapping="Wrap">-  Les diplômes, titres et références professionnelles du</TextBlock>
+                            <CheckBox Grid.Column="1" IsChecked="{Binding isExist,Mode=TwoWay}"  />
+                        </Grid>
+                    </Border>
+                </StackPanel>
+                <!--<DataGrid AutoGenerateColumns="False" x:Name="InfoVerification" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
                     <DataGrid.Columns>
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.CellTemplate>
@@ -391,7 +414,7 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
-                </DataGrid>
+                </DataGrid>-->
                 <Button x:Name="Rejet_demande" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="13" Content="Rejet demande" Margin="0,0,10,0"/>
                 <Button x:Name="Valider_demande" Grid.ColumnSpan="2"
