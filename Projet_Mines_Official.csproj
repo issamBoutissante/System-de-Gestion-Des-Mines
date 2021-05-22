@@ -200,6 +200,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Rapports\Bon_achat.docx" />
     <None Include="Rapports\Bordereau_envoi_PR.docx" />
     <None Include="Rapports\Bulletin de versement PR.docx" />
     <None Include="Rapports\Decision_PR.docx" />
@@ -223,6 +224,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <!-- <Page Include="Loading.xaml">-->
     <!--<Page Include="Loading.xaml">-->
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>

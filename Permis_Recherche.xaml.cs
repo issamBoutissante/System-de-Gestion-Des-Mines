@@ -180,6 +180,7 @@ namespace Projet_Mines_Official
         private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
+
             string NomSociete = Nom_Societe.Text;
             string RegistreCommerce = Registre_Commerce.Text;
             string NumeroCNSS = Numero_CNSS.Text;
@@ -198,6 +199,30 @@ namespace Projet_Mines_Official
                     DocumentGenerator.FindAndReplace(wordApp, "<domicile>", DomicileDemandeur);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
+           
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+
+        private void Generer_Bon_achat_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+
+            string abscisse = Abscisse.Text;
+            string ordonnee = Ordonne.Text;
+            string carte = Carte.Text;
+            string societe = Nom_Societe.Text;
+            string DomicileDemandeur = Domicile_Demandeur.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.Bon_achat.Value,
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
+                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
+                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
                 , dw.documentsContainer, () => { dw.Show(); });
         }
     }

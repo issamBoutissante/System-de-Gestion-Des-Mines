@@ -77,6 +77,7 @@ namespace Projet_Mines_Official
                     object readOnly = false;
                     object isVisible = false;
                     wordApp.Visible = false;
+                    MessageBox.Show(File.Exists(filename.ToString()).ToString());
                     wordApp.Documents.Add(filename);
                     myWordDoc = wordApp.ActiveDocument;
 

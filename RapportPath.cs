@@ -15,6 +15,7 @@ namespace Projet_Mines_Official
             this.Value = value;
         }
         public static RapportPath Decision_PR { get { return new RapportPath(GetPathFromCurrentProject("Rapports\\Decision_PR.docx")); } }
+        public static RapportPath Bon_achat { get { return new RapportPath(GetPathFromCurrentProject("Rapports\\Bon_achat.docx")); } }
         public static RapportPath Bulletin_Versement_PR { get { return new RapportPath(GetPathFromCurrentProject("Rapports\\Bulletin de versement PR.docx")); } }
 
         private static string GetPathFromCurrentProject(string FolderOrFileName)
