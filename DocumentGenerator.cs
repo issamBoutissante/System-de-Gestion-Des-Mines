@@ -16,29 +16,43 @@ namespace Projet_Mines_Official
             try
             {
                 document.SaveAs(xpsDocName, word.WdSaveFormat.wdFormatXPS);
+
                 XpsDocument xpsDoc = new XpsDocument(xpsDocName, System.IO.FileAccess.Read);
                 return xpsDoc;
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ModalError.ShowMsg(exp.Message);
+                });
             }
             return null;
         }
-        internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer = null,Action OpenDocumentWindow=null)
+        internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer,Action OpenDocumentWindow=null)
         {
+            loadingDocument loading = new loadingDocument();
+            loading.Show();
             try
             {
-                loadingDocument loading = new loadingDocument();
-                loading.Show();
                 XpsDocument xpsDocument = await GetXpsDocumentAsync(filename,FindAndReplace);
-                if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
-                loading.Close();
+                if (xpsDocument != null)
+                {
+                    documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
+                }
+                else
+                    //i'm not going to use this exception message for the instant
+                    throw new Exception("there was an error related the file access call the Programmer cuase he had expected this error");
             }catch(Exception exp)
             {
-                ModalError.ShowMsg(exp.Message);
+                return;
+            }
+            finally
+            {
+                loading.Close();
             }
             //I wont need this for know cause by default when i want the close document word they are asking to save As
+            
             //await CreateNewDocumentAsync(filename, FindAndReplace);
 
             OpenDocumentWindow?.Invoke();
@@ -84,7 +98,6 @@ namespace Projet_Mines_Official
                     object readOnly = false;
                     object isVisible = false;
                     wordApp.Visible = false;
-                    MessageBox.Show(File.Exists(filename.ToString()).ToString());
                     wordApp.Documents.Add(filename);
                     myWordDoc = wordApp.ActiveDocument;
 
@@ -92,24 +105,29 @@ namespace Projet_Mines_Official
                 }
                 else
                 {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ModalError.ShowMsg("the file name doesnt exists");
+                    });
                     return null;
                 }
                 string newXPSDocumentName = String.Concat(Path.GetDirectoryName(filename.ToString()), "\\",
-                                System.IO.Path.GetFileNameWithoutExtension(filename.ToString()), ".xps");
+                                System.IO.Path.GetFileNameWithoutExtension(filename.ToString()),new Random().Next(1,1000), ".xps");
                 XpsDocument xpsDocument = null;
                 try
                 {
                     xpsDocument = ConvertWordDocToXPSDocUpdated(myWordDoc, newXPSDocumentName);
                     myWordDoc.Close();
                 }
-                catch (Exception exp)
+                catch
                 {
-                    Application.Current.Dispatcher.Invoke(() =>
-                    {
-                        ModalError.ShowMsg("La document n'est pas sauvegarder");
-                    });
+                    return null;
                 }
-                wordApp.Quit();
+                finally
+                {
+                    wordApp.Quit();
+                }
+
                 return xpsDocument;
             });
         }
