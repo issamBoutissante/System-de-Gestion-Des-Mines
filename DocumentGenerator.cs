@@ -16,12 +16,16 @@ namespace Projet_Mines_Official
             try
             {
                 document.SaveAs(xpsDocName, word.WdSaveFormat.wdFormatXPS);
+
                 XpsDocument xpsDoc = new XpsDocument(xpsDocName, System.IO.FileAccess.Read);
                 return xpsDoc;
             }
             catch (Exception exp)
             {
-                MessageBox.Show(exp.Message);
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    ModalError.ShowMsg(exp.Message);
+                });
             }
             return null;
         }
@@ -84,7 +88,6 @@ namespace Projet_Mines_Official
                     object readOnly = false;
                     object isVisible = false;
                     wordApp.Visible = false;
-                    MessageBox.Show(File.Exists(filename.ToString()).ToString());
                     wordApp.Documents.Add(filename);
                     myWordDoc = wordApp.ActiveDocument;
 
@@ -92,17 +95,21 @@ namespace Projet_Mines_Official
                 }
                 else
                 {
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ModalError.ShowMsg("the file name doesnt exists");
+                    });
                     return null;
                 }
                 string newXPSDocumentName = String.Concat(Path.GetDirectoryName(filename.ToString()), "\\",
-                                System.IO.Path.GetFileNameWithoutExtension(filename.ToString()), ".xps");
+                                System.IO.Path.GetFileNameWithoutExtension(filename.ToString()),new Random().Next(1,1000), ".xps");
                 XpsDocument xpsDocument = null;
                 try
                 {
                     xpsDocument = ConvertWordDocToXPSDocUpdated(myWordDoc, newXPSDocumentName);
                     myWordDoc.Close();
                 }
-                catch (Exception exp)
+                catch
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
@@ -110,6 +117,7 @@ namespace Projet_Mines_Official
                     });
                 }
                 wordApp.Quit();
+
                 return xpsDocument;
             });
         }
