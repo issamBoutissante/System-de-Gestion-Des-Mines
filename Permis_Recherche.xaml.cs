@@ -9,10 +9,10 @@ namespace Projet_Mines_Official
 {
     public partial class Permis_Recherche : Window
     {
-        ProjetMinesDBContext projetMinesDBContext=new ProjetMinesDBContext();
+        ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
         Home Home;
-        public Permis_Recherche(Home home,bool isNewPermis,int PermisId=0)
+        public Permis_Recherche(Home home, bool isNewPermis, int PermisId = 0)
         {
             InitializeComponent();
             Home = home;
@@ -21,7 +21,7 @@ namespace Projet_Mines_Official
                 this.Permis = new Permis(new Area(), new Titulaire());
                 this.projetMinesDBContext.Les_Permis.Add(this.Permis);
                 this.projetMinesDBContext.SaveChanges();
-            }else
+            } else
                 this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
             InitializeControls(isNewPermis);
@@ -29,7 +29,7 @@ namespace Projet_Mines_Official
         }
         private void InitializeAutoCompleteCombo()
         {
-            ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis ).ToList();
+            ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
         }
         #region Fill data 
         private void FillComboboxes(bool isNewPermis)
@@ -63,7 +63,6 @@ namespace Projet_Mines_Official
         }
         private void BindDatePickers(bool isNewPermis)
         {
-           
             Date_Depot.SetBinding(DatePicker.SelectedDateProperty, "Date_Depot");
             Date_Decision.SetBinding(DatePicker.SelectedDateProperty, "Date_Decision");
             Date_Echeance.SetBinding(DatePicker.SelectedDateProperty, "Echeance");
@@ -75,8 +74,50 @@ namespace Projet_Mines_Official
             {
                 InitilializerLesDossierPermis.InitilizerDossiers(this.Permis, TypePermis.PR);
             }
-                //this.Permis.Permis_ElementDossiers.ToList().ForEach(e => MessageBox.Show($"{e.Element_DossierId} - {e.Element_Dossier.Element_DossierId} - {e.Element_Dossier.nom_dossier}"));
-            InfoVerification.ItemsSource = this.Permis.Permis_ElementDossiers;
+            SetVerificationDossier();
+            //I'm working to change thsi line and use something elese other than using grid;
+            //InfoVerification.ItemsSource = this.Permis.Permis_ElementDossiers.ToList();
+        }
+        private void SetVerificationDossier()
+        {
+            this.Permis.Permis_ElementDossiers.ToList().ForEach(ED =>
+            {
+                ElementsDossierStack.Children.Add(GetElementDossierTemplate(ED));
+            });
+
+        }
+        private Border GetElementDossierTemplate(Permis_ElementDossier dataSource)
+        {
+            TextBlock textBlock = new TextBlock()
+            {
+                FontSize = 14,
+                FontFamily = new FontFamily("Arial"),
+                TextWrapping = TextWrapping.Wrap,
+            };
+            CheckBox checkBox = new CheckBox() ;
+            Grid grid = new Grid()
+            {
+                Margin = new Thickness(5, 10, 0, 5)
+            };
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(10,GridUnitType.Star) }) ;
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0.5, GridUnitType.Star) }) ;
+            grid.Children.Add(textBlock);
+            grid.Children.Add(checkBox);
+            textBlock.SetValue(Grid.ColumnProperty, 0);
+            checkBox.SetValue(Grid.ColumnProperty, 1);
+            Border border = new Border()
+            {
+                DataContext = dataSource,
+                BorderThickness = new Thickness(1),
+                BorderBrush = Brushes.Gray,
+                Margin = new Thickness(5, 10, 5, 0),
+                Padding = new Thickness(10, 10, 10, 10),
+                Child = grid
+            };
+            
+            textBlock.SetBinding(TextBlock.TextProperty, "Element_Dossier.nom_dossier");
+            checkBox.SetBinding(CheckBox.IsCheckedProperty, "isExist");
+            return border;
         }
         private void InitializeControls(bool isNewPermis)
         {
@@ -148,8 +189,7 @@ namespace Projet_Mines_Official
             UpdateChevauchements();
 
             this.projetMinesDBContext.SaveChanges();
-            Home.RemplirDataGrid();
-            Home.Show();
+            new Home().Show();
         }
         #endregion
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
