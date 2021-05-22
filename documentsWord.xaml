@@ -7,7 +7,7 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
          WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="documentsWord" Height="650" Width="800">
+        Title="documentsWord" Height="630" Width="1000">
     <ScrollViewer>
         <StackPanel>
             <!--Header Logo-->
@@ -29,7 +29,7 @@
                 <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
                 <fa:ImageAwesome Icon="Bell"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
                 <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
-            Royaume du Maroc Ministre de l'Energien, des Mines</TextBlock>
+            Royaume du Maroc Ministre de l'Energie, des Mines</TextBlock>
                 <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
                 <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
@@ -40,17 +40,13 @@
 
                 <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="95"/>
+                    
 
                     <ColumnDefinition Width="*"/>
 
                 </Grid.ColumnDefinitions>
 
-                <StackPanel>
-
-                    <Button x:Name="btnImprimer" Content="Imprimer" Background="#0861AD"></Button>
-
-                </StackPanel>
+                
 
                 <DocumentViewer  Grid.Column="1" x:Name="documentsContainer" 
                  ShowPageBorders="True" >

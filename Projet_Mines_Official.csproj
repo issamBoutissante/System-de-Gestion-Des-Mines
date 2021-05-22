@@ -204,8 +204,10 @@
     <None Include="Rapports\Bordereau_envoi_PR.docx" />
     <None Include="Rapports\Bulletin de versement PR.docx" />
     <None Include="Rapports\Decision_PR.docx" />
+    <None Include="Rapports\deuxieme_mise_demeure.docx" />
     <None Include="Rapports\lettre_transmission_PR.docx" />
     <None Include="Rapports\premier_mise_demeure.docx" />
+    <None Include="Rapports\Revocation_PR.docx" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

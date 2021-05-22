@@ -286,7 +286,20 @@ namespace Projet_Mines_Official
 
         private void Mise_demeur_OuvertureTravaux_Click(object sender, RoutedEventArgs e)
         {
+            documentsWord dw = new documentsWord();
 
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
         }
 
         private void Generer_Decision_Click(object sender, RoutedEventArgs e)
@@ -349,6 +362,24 @@ namespace Projet_Mines_Official
 
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+
+        private void Rejet_demande_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.Revocation_PR.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
 
                 , dw.documentsContainer, () => { dw.Show(); });
