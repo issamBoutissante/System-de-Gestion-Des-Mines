@@ -53,12 +53,13 @@ namespace Projet_Mines_Official
             Commune.ItemsSource = projetMinesDBContext.Communes.ToList();
             Commune.SelectedValuePath = "CommuneId";
             Commune.DisplayMemberPath = "Nom_Commune";
-            //Carte.SetBinding(ComboBox.SelectedValueProperty, "Area.Carte.CarteId");
-            //Region.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.Region.RegionId");
-            //Province.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.ProvinceId");
-            //Point_Pevot.SetBinding(ComboBox.SelectedValueProperty, "Area.Point_Pivot.Point_PevotId");
-            //Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CommuneId");
-            //Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.CaidatId");
+            //Bind them
+            Carte.SetBinding(ComboBox.SelectedValueProperty, "Area.CarteId");
+            Region.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.RegionId");
+            Province.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.ProvinceId");
+            Point_Pevot.SetBinding(ComboBox.SelectedValueProperty, "Area.Point_PivotId");
+            Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.CommuneId");
+            Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
 
         }
         private void BindDatePickers(bool isNewPermis)
