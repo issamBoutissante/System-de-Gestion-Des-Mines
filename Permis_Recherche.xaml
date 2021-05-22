@@ -477,7 +477,7 @@
                     	Lettre de transmission de la décision du permis de recherche au titulaire
                 </TextBlock>
                 <Button x:Name="Generer_Lettre_Transmission" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="7" Content="Générer" Margin="0,10,25,10" />
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="7" Content="Générer" Margin="0,10,25,10" Click="Generer_Lettre_Transmission_Click" />
 
                 <!-- Bordereau d’envoi -->
                 <Rectangle Grid.Column="0"  Grid.Row="8" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
@@ -485,7 +485,7 @@
                   Bordereau d’envoi de la décision du permis de recherche
                 </TextBlock>
                 <Button x:Name="Generer_Bordereau_envoi" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="8" Content="Générer" Margin="0,10,25,10" />
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="8" Content="Générer" Margin="0,10,25,10" Click="Generer_Bordereau_envoi_Click" />
 
             </Grid>
             <!-- Programme de Travaux -->
