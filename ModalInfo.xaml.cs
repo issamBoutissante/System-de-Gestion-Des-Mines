@@ -23,5 +23,21 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
         }
+        internal static Action<string> ShowMsg
+        {
+            get => (message) =>
+            {
+                new ModalError().ShowMessage(message);
+            };
+        }
+        internal void ShowMessage(string message)
+        {
+            this.Message.Text = message;
+            this.Show();
+        }
+        private void Ok_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }
