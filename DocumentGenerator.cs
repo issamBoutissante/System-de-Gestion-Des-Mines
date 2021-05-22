@@ -27,13 +27,20 @@ namespace Projet_Mines_Official
         }
         internal static async void GenerateDocument(object filename, Action<word.Application> FindAndReplace, DocumentViewer documentViewer = null,Action OpenDocumentWindow=null)
         {
-            loadingDocument loading = new loadingDocument();
-            loading.Show();
-            XpsDocument xpsDocument = await GetXpsDocumentAsync(filename, FindAndReplace);
-            if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
+            try
+            {
+                loadingDocument loading = new loadingDocument();
+                loading.Show();
+                XpsDocument xpsDocument = await GetXpsDocumentAsync(filename,FindAndReplace);
+                if (documentViewer != null) documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
+                loading.Close();
+            }catch(Exception exp)
+            {
+                ModalError.ShowMsg(exp.Message);
+            }
             //I wont need this for know cause by default when i want the close document word they are asking to save As
             //await CreateNewDocumentAsync(filename, FindAndReplace);
-            loading.Close();
+
             OpenDocumentWindow?.Invoke();
         }
         internal static void FindAndReplace(word.Application wordApp, object ToFindText, object replaceWithText)
@@ -97,7 +104,10 @@ namespace Projet_Mines_Official
                 }
                 catch (Exception exp)
                 {
-                    MessageBox.Show("La document n'est pas sauvegarder");
+                    Application.Current.Dispatcher.Invoke(() =>
+                    {
+                        ModalError.ShowMsg("La document n'est pas sauvegarder");
+                    });
                 }
                 wordApp.Quit();
                 return xpsDocument;
