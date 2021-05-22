@@ -27,7 +27,7 @@ namespace Projet_Mines_Official
         {
             get => (message) =>
             {
-                new ModalError().ShowMessage(message);
+                new ModalInfo().ShowMessage(message);
             };
         }
         internal void ShowMessage(string message)
