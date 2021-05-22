@@ -75,9 +75,7 @@
             Numéro Demande</TextBlock>
                 <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" Text="{Binding Num_Demmande,Mode=TwoWay}"/>
-                <!--<Button x:Name="Enregistrer_DemmandeInfo" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="2" Content="Enregistrer" Margin="0,0,10,0"/>-->
-            </Grid>
+                </Grid>
             <!-- Les informations de Titulaire -->
             <Grid  Height="420">
                 <Grid.ColumnDefinitions>
@@ -341,7 +339,16 @@
 
             </Grid>
             <!--Vérification des pièces-->
-            <Grid Height="750">
+            <StackPanel Height="50" Background="#0861AD">
+
+                <TextBlock Grid.Row="0" TextAlignment="Center" 
+                           FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0">
+                Vérification des pièces</TextBlock>
+            </StackPanel>
+            <StackPanel Name="ElementsDossierStack" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
+                <!--the Content of this element will be filled from code behind-->
+            </StackPanel>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
@@ -353,49 +360,10 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="13*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
-                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
-                       Grid.Column="3" Grid.Row="0">
-            Vérification des pièces</TextBlock>
-                <DataGrid AutoGenerateColumns="False" x:Name="InfoVerification" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
-                    <DataGrid.Columns>
-                        <DataGridTemplateColumn Width="*">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Border>
-                                        <Border.Resources>
-                                            <Style TargetType="Border">
-                                                <Setter Property="BorderThickness" Value="1"/>
-                                                <Setter Property="BorderBrush" Value="Gray"/>
-                                            </Style>
-                                            <Style TargetType="Grid">
-                                                <Setter Property="Margin" Value="5 10 0 5"/>
-                                            </Style>
-                                        </Border.Resources>
-                                        <Grid >
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="6*"/>
-                                                <ColumnDefinition Width="*"/>
-                                            </Grid.ColumnDefinitions>
-                                            <TextBlock Grid.Column="0" Text="{Binding Element_Dossier.nom_dossier}" FontSize="13"  Margin="25,5,0,0" TextWrapping="Wrap">-  Les diplômes, titres et références professionnelles du</TextBlock>
-                                            <CheckBox Grid.Column="1" IsChecked="{Binding isExist,Mode=TwoWay}"    Margin="0,5,20,0"/>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid>
                 <Button x:Name="Rejet_demande" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Grid.Row="13" Content="Rejet demande" Margin="0,0,10,0"/>
+                       Grid.Column="7"  Background="#EAA221" Content="Rejet demande" Margin="0,20,10,20"/>
                 <Button x:Name="Valider_demande" Grid.ColumnSpan="2"
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="13" Content="Valider demande" Margin="0,0,10,0"/>
+                       Grid.Column="5"  Background="#EAA221" Content="Valider demande" Margin="0,20,10,20"/>
             </Grid>
             <!-- Suivi Decision -->
             <Grid  Height="480">

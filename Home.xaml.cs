@@ -19,8 +19,7 @@ namespace Projet_Mines_Official
         }
         internal void RemplirDataGrid()
         {
-            DataGridPermis.ItemsSource=this.projetMinesDBContext.Les_Permis.Take(5).ToList();
-            //ObservableCollection<Permis> obs= (ObservableCollection<Permi>)this.projetMinesDBContext.Les_Permis.ToList();
+            this.DataGridPermis.ItemsSource= this.projetMinesDBContext.Les_Permis.Take(5).ToList();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -35,7 +34,7 @@ namespace Projet_Mines_Official
             {
                 case "PR":
                     new Permis_Recherche(this, true).Show();
-                    this.Hide();
+                    this.Close();
                     break;
             }
         }
@@ -44,7 +43,7 @@ namespace Projet_Mines_Official
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
             new Permis_Recherche(this,false,permis.PermisId).Show();
-            this.Hide();
+            this.Close();
         }
         private void SearchPermis(string searchBy)
         {
