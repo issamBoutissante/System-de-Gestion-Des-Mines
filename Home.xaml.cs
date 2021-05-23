@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Projet_Mines_Official
 {
@@ -13,9 +14,12 @@ namespace Projet_Mines_Official
     public partial class Home : Window
     {
         ProjetMinesDBContext projetMinesDBContext =new ProjetMinesDBContext();
+        string searchByText= "Numero demmande";
+        Button SelectedButton;
         public Home()
         {
             InitializeComponent();
+            SelectedButton = NumDemmandeBtn;
         }
         internal void RemplirDataGrid()
         {
@@ -47,28 +51,62 @@ namespace Projet_Mines_Official
         }
         private void SearchPermis(string searchBy)
         {
+            List<Permis> Les_Permis = this.projetMinesDBContext.Les_Permis.ToList();
             switch (searchBy)
             {
-                case "Numero Demmande":
-                    int? numDemande = Convert.ToInt32(Search.Text);
-                    this.DataGridPermis.ItemsSource = this.projetMinesDBContext.Les_Permis.Where(p => p.Num_Demmande == numDemande).ToList();
-                    break;
-                case "Numero Permis":
+                case "Numero demmande":
+                    int numDemande;
+                    if (int.TryParse(Search.Text, out numDemande)==false) return;
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Num_Demmande == numDemande).ToList();
                     break;
                 case "Nom Societe":
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Titulaire.Nom_Societe.Contains(Search.Text)).ToList();
                     break;
-                case "Type":
+                case "Numero Permis":
+                    int numPermis;
+                    if (int.TryParse(Search.Text, out numPermis) == false) return;
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Num_Permis == numPermis).ToList();
                     break;
-                case "Etat":
+                case "Province":
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Area.Commune.Caidat.Province.Nom_Province.Contains(Search.Text)).ToList();
+                    break;
+                case "Commune":
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Area.Commune.Nom_Commune.Contains(Search.Text)).ToList();
+                    break;
+                case "Region":
+                    this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Area.Commune.Caidat.Province.Region.Nom_Region.Contains(Search.Text)).ToList();
                     break;
             }
         }
 
         private void Search_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
         {
-            if (string.IsNullOrEmpty(Search.Text)) return;
-            string searchby = ((TextBlock)SearchByCombo.SelectedItem).Text;
-            SearchPermis(searchby);
+            if (string.IsNullOrEmpty(Search.Text)) 
+            {
+                if (DataGridPermis.Items.Count < 5)
+                {
+                    RemplirDataGrid();
+                }
+                return;
+            };
+            SearchPermis(searchByText);
+        }
+
+        private void ChangeSearchCritire_Click(object sender, RoutedEventArgs e)
+        {
+            Button button = sender as Button;
+            searchByText = button.Content.ToString();
+
+            //switch backcolor;
+            Brush BackColor =SelectedButton.Background;
+            SelectedButton.Background = button.Background;
+            button.Background = BackColor;
+
+            //switch forecolor
+            Brush foreColor = SelectedButton.Foreground;
+            SelectedButton.Foreground = button.Foreground;
+            button.Foreground = foreColor;
+            SelectedButton = button;
         }
     }
 }
