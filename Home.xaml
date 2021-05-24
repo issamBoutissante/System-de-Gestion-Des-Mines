@@ -112,7 +112,10 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False">
+        <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <Setter Property="BorderBrush" Value="Gray"/>

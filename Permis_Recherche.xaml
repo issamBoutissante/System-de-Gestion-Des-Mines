@@ -422,7 +422,7 @@
                     Décision de permis de recherche
                 </TextBlock>
                 <Button x:Name="Generer_Decision" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="4" Content="Générer" Margin="0,10,25,10" Click="Generer_Decision_Click" />
+                       Grid.Column="5"  Background="#EAA221" Grid.Row="4" Content="Générer" Margin="0,10,25,10" Click="Generer_Decision_Click" RenderTransformOrigin="0.502,0.5" />
                 <!--Décision signé-->
                 <TextBlock Grid.Column="0"  Grid.Row="5" Grid.ColumnSpan="7" FontSize="16" FontWeight="Bold" Margin="20,15,0,0" TextWrapping="Wrap">
                     Décision signé

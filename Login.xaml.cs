@@ -23,5 +23,20 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
         }
+
+        private void S_authentifier_Click(object sender, RoutedEventArgs e)
+        {
+            new Home().Show();
+            this.Close();
+        }
+        private Task GoToMain()
+        {
+            return Task.Factory.StartNew(() =>
+            {
+
+                
+
+            });
+        }
     }
 }
