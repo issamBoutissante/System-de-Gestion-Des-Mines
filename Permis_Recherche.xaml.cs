@@ -188,7 +188,9 @@ namespace Projet_Mines_Official
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             UpdateChevauchements();
-
+            //update Etat Permis
+            if(Numero_Permis.Text!="0")
+                this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
             this.projetMinesDBContext.SaveChanges();
             new Home().Show();
         }
@@ -331,6 +333,7 @@ namespace Projet_Mines_Official
                 }
 
                 , dw.documentsContainer, () => { dw.Show(); });
+            this.Permis.Etat_PermisId = (int)EtatPermis.Decision;
         }
 
         private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)

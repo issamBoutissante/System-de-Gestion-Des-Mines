@@ -69,56 +69,53 @@
                 </MenuItem>
             </MenuItem>
         </Menu>
-        <ComboBox Name="SearchByCombo" SelectedIndex="0" Grid.Column="0" Grid.Row="2" Margin="0,0,88.333,0" Grid.ColumnSpan="2" HorizontalAlignment="Right" Width="79">
-            <TextBlock Text="Numero Demmande"/>
-            <TextBlock Text="Numero Permis"/>
-            <TextBlock Text="Nom Societe"/>
-            <TextBlock Text="Etat"/>
-            <TextBlock Text="Type"/>
-        </ComboBox>
-        <!--<Button Content="Tous" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button x:Name="NumDemmandeBtn" Content="Numero demmande" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0"
+                Click="ChangeSearchCritire_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="Demande" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Nom Societe" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="PR" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Numero Permis" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="PRR" Grid.Column="3" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0">
+        <Button Content="Province" Grid.Column="3" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="LE" Grid.Column="4" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
+        <Button Content="Commune" Grid.Column="4" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Content="LER" Grid.Column="5" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" >
+        <Button Content="Region" Grid.Column="5" Grid.Row="2" Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="7"/>
                 </Style>
             </Button.Resources>
-        </Button>-->
-        <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False">
+        </Button>
+        <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False"
+                  CanUserAddRows="False"
+                  IsReadOnly="True"
+                  SelectionUnit="FullRow">
             <DataGrid.Resources>
                 <Style TargetType="DataGridRow">
                     <Setter Property="BorderBrush" Value="Gray"/>
@@ -137,9 +134,30 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type_Permis.Type}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Nom Societe" Binding="{Binding Titulaire.Nom_Societe}"></DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat_Permis.Etat}"></DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type_Permis.Type}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Nom Societe" Binding="{Binding Titulaire.Nom_Societe}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat_Permis.Etat}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTemplateColumn>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
