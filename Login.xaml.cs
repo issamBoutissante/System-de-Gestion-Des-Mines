@@ -26,16 +26,14 @@ namespace Projet_Mines_Official
 
         private void S_authentifier_Click(object sender, RoutedEventArgs e)
         {
-            new Home().Show();
-            this.Close();
+            GoToMain();
+            //this.Close();
         }
         private Task GoToMain()
         {
+
             return Task.Factory.StartNew(() =>
             {
-
-                
-
             });
         }
     }
