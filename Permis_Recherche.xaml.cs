@@ -8,6 +8,9 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
+using Microsoft.Win32;
+using ClosedXML.Excel;
+using System.Data;
 
 namespace Projet_Mines_Official
 {
@@ -199,6 +202,7 @@ namespace Projet_Mines_Official
             new Home().Show();
         }
         #endregion
+        #region add Chevauchemnet area
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
         {
             int num_Permis=Convert.ToInt32(ChevauchementCombo.Text);
@@ -240,7 +244,8 @@ namespace Projet_Mines_Official
         {
             Chevauchements.Children.Remove((Button)sender);
         }
-
+        #endregion
+        #region Generation Des Rapport
         private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
@@ -409,7 +414,8 @@ namespace Projet_Mines_Official
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-
+        #endregion
+        #region validation
         private void GetOnlyNumbers_KeyDown(object sender, KeyEventArgs e)
         {
             List<Key> keys = new List<Key>()
@@ -450,6 +456,23 @@ namespace Projet_Mines_Official
                 });
                 e.Handled = true;
             }
+        }
+        #endregion
+
+        private void Exporter_excel_Click(object sender, RoutedEventArgs e)
+        {
+            using(XLWorkbook xL=new XLWorkbook())
+            {
+                DataTable dataTable = this.projetMinesDBContext.Les_Permis.Select(p =>new 
+                {
+                    numeroDemmande= "123",
+                    nomTitulaire="Boutissante"
+                }).CopyToDataTable();
+
+                xL.Worksheets.Add(dataTable,"LesPermis");
+                xL.SaveAs(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Les Permis Excel.xlsx");
+                MessageBox.Show("done");
+            };
         }
     }
 }

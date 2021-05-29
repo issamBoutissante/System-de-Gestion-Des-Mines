@@ -138,6 +138,7 @@
     <Compile Include="Classes\Region.cs" />
     <Compile Include="Classes\Titulaire.cs" />
     <Compile Include="Classes\Type_Permis.cs" />
+    <Compile Include="Helper Classes\CustomLINQtoDataSetMethods.cs" />
     <Compile Include="documentsWord.xaml.cs">
       <DependentUpon>documentsWord.xaml</DependentUpon>
     </Compile>
@@ -145,6 +146,7 @@
     <Compile Include="EtatPermis.cs" />
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="InitilializerLesDossierPermis.cs" />
+    <Compile Include="Helper Classes\ObjectShredder.cs" />
     <Compile Include="RapportPath.cs" />
     <Compile Include="loadingDocument.xaml.cs">
       <DependentUpon>loadingDocument.xaml</DependentUpon>
