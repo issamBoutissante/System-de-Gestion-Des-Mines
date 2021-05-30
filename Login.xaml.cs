@@ -26,7 +26,8 @@ namespace Projet_Mines_Official
 
         private void S_authentifier_Click(object sender, RoutedEventArgs e)
         {
-            GoToMain();
+            new Home().Show();
+            //GoToMain();
             //this.Close();
         }
         private Task GoToMain()

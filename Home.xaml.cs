@@ -37,7 +37,7 @@ namespace Projet_Mines_Official
             switch (menuItem.Header)
             {
                 case "PR":
-                    new Permis_Recherche(this, true).Show();
+                    new Permis_Recherche(this, true);
                     this.Close();
                     break;
             }
