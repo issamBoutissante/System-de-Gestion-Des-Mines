@@ -29,7 +29,7 @@
             <TextBlock x:Name="Message" 
              TextWrapping="Wrap" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" Foreground="White"
              FontSize="16" TextAlignment="Justify"   Margin="10,25,10,0"  >
-            <fa:ImageAwesome Icon="CheckCircle"  Grid.Column="0" Grid.Row="0"  Foreground="White" Width="15" />
+            <fa:ImageAwesome Icon="CheckCircle"  Grid.Column="0" Grid.Row="0"  Foreground="White"  Width="15" />
              Lorem ipsum dolor sit amet, consectetur adipiscing  elit, sed do eiusmod tempor incididunt ut labore et dolore magna
             </TextBlock>
 

@@ -276,7 +276,7 @@
             Carte</TextBlock>
                 <ComboBox x:Name="Carte" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="6" Height="30" BorderThickness="1"
-                        Padding="0,0,5,0" />
+                         FontSize="14" FontFamily="Arial" Padding="5" />
 
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
@@ -284,7 +284,7 @@
             Province</TextBlock>
                 <ComboBox x:Name="Province" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="6" Margin="0,0,10,0" Height="30" BorderThickness="1"
-                    Padding="0,0,5,0"  />
+                     FontSize="14" FontFamily="Arial" Padding="5" />
                 <!--line 5-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
@@ -292,14 +292,14 @@
             Commune</TextBlock>
                 <ComboBox x:Name="Commune" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="7" Height="30" BorderThickness="1"
-                       Padding="0,0,5,0" />
+                        FontSize="14" FontFamily="Arial" Padding="5"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="7">
             Region</TextBlock>
                 <ComboBox x:Name="Region" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="7" Margin="0,0,10,0" Height="30" BorderThickness="1"
-                      Padding="0,0,5,0"/>
+                       FontSize="14" FontFamily="Arial" Padding="5"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
@@ -307,14 +307,14 @@
             Caidat</TextBlock>
                 <ComboBox x:Name="Caidat" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="8" Height="30" BorderThickness="1"
-                       Padding="0,0,5,0"/>
+                      FontSize="14" FontFamily="Arial" Padding="5"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="8">
             Point pévot</TextBlock>
                 <ComboBox x:Name="Point_Pevot" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="8" Margin="0,0,10,0" Height="30" BorderThickness="1"
-                     Padding="0,0,5,0"/>
+                      FontSize="14" FontFamily="Arial" Padding="5"/>
                 <!--line 6-->
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
