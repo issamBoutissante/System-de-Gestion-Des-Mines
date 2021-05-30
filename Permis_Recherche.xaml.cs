@@ -460,19 +460,73 @@ namespace Projet_Mines_Official
         #endregion
 
         private void Exporter_excel_Click(object sender, RoutedEventArgs e)
-        {
+        {   
             using(XLWorkbook xL=new XLWorkbook())
             {
-                DataTable dataTable = this.projetMinesDBContext.Les_Permis.Select(p =>new 
-                {
-                    numeroDemmande= "123",
-                    nomTitulaire="Boutissante"
-                }).CopyToDataTable();
+                var data = this.projetMinesDBContext.Les_Permis.Select(p => new {
+                    numeroPermis = p.Num_Permis.ToString(),
+                    numeroDemmande = p.Num_Demmande.ToString(),
+                    dateDepotDemmande = p.Date_Depot.ToString(),
+                    type = p.Type_Permis.Type.ToString(),
+                    ex_permis = p.Ex_Permis.Num_Permis.ToString(),
+                    //chevauchement = p.Chevauchements.Select(c => c.Num_Permis).ToArray().ToString(),
+                    Superficie=p.Area.Superficie.ToString(),
+                    pointPivot=p.Area.Point_Pivot.Nom_Point_Pevot.ToString(),
+                    Abscisse=p.Area.Abscisse.ToString(),
+                    Ordonne=p.Area.Ordonnee.ToString(),
+                    //DirEastOuest=p.Area.Dir_Est_ouest.ToString(),
+                    //DirNordSud=p.Area.Dir_nord_sud.ToString(),
+                    //DisEastOust=p.Area.Dis_e_o.ToString(),
+                    //DisNorSud=p.Area.Dis_n_s.ToString(),
+                    //Bornes
+                    Zone=p.Area.Zone.ToString(),
+                    RaisonSocial=p.Titulaire.Raison_Social.ToString(),
+                    Titulaire=p.Titulaire.Nom_Societe,
+                    Region=p.Area.Commune.Caidat.Province.Region.Nom_Region.ToString(),
+                    Province=p.Area.Commune.Caidat.Province.Nom_Province.ToString(),
+                    CodeProvince=p.Area.Commune.Caidat.Province.code_Province.ToString(),
+                    Commune=p.Area.Commune.Nom_Commune.ToString(),
+                    Caidat=p.Area.Commune.Caidat.Nom_Caidat.ToString(),
+                    Date_Institision=p.Date_Institition.ToString(),
+                    Carte=p.Area.Carte.Nom_carte.ToString(),
+                    Echeance=p.Echeance.ToString(),
+                    //demmandeRenouvelomentPR
+                    //demmandeDeLE
+                    //demmandeDeRenouvelementLE
+                    //observation
+                    //anneDeLacte
+                    //substanceRechercheOuExploite
+                    NomSite=p.Titulaire.Nom_Site.ToString(),
+                    //CorrespondanceSEP
+                    DateDepart_CRI_CF_DMH_DR=p.Date_Depart_CRI.ToString(),
+                    DateReutor_CRI=p.Date_Retour_CRI.ToString(),
+                    Date_Decision=p.Date_Decision.ToString(),
+                    Date_Enquete=p.Date_Enquete.ToString(),
+                    //Date_Rapport_Enquete
+                    Election_Domicile=p.Titulaire.Election_Domicile.ToString(),
+                    Effective=p.Titulaire.Effictif.ToString(),
+                    Investisement_Realise=p.Investisement_Realise.ToString(),
+                    Investisement_Projete=p.Investisement_Projet.ToString(),
+                    occupation_temporaire=p.Occupation_Temporaire.ToString(),
+                    Inscription_Conservation=p.Inscription_Conservation.ToString()
 
-                xL.Worksheets.Add(dataTable,"LesPermis");
+                });
+                xL.Worksheets.Add(data.CopyToDataTable(),"LesPermis");
                 xL.SaveAs(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Les Permis Excel.xlsx");
                 MessageBox.Show("done");
             };
+        }
+        private object GetData(Permis permis)
+        {
+            return new
+            {
+                numeroPermis=GetValue(permis.Num_Permis),
+                numeroDemmande=GetValue(permis.Num_Demmande)
+            };
+        }
+        private string GetValue(object value)
+        {
+            return value == null ? " " : value.ToString();
         }
     }
 }
