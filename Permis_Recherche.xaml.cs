@@ -25,14 +25,32 @@ namespace Projet_Mines_Official
             Home = home;
             if (isNewPermis)
             {
-                this.Permis = new Permis(new Area(), new Titulaire());
-                this.projetMinesDBContext.Les_Permis.Add(this.Permis);
+                Permis newPermis = new Permis(new Area(), new Titulaire());
+                this.projetMinesDBContext.Les_Permis.Add(newPermis);
                 this.projetMinesDBContext.SaveChanges();
-            } else
-                this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
+                InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
+                this.Home = null;
+                new Permis_Recherche(home, false,newPermis.PermisId).Show();
+                return;
+            }
+            this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
             InitializeControls(isNewPermis);
             InitializeAutoCompleteCombo();
+        }
+        private void InitializeControls(bool isNewPermis)
+        {
+            FillComboboxes(isNewPermis);
+            BindDatePickers(isNewPermis);
+            FillElementDossiers(isNewPermis);
+            if (isNewPermis)
+            {
+                RestJourProgramme.Text = "Rest : 180";
+                RestJourDeclarationTravaux.Text = "Rest : 360";
+                return;
+            }
+            BindTextBoxes(isNewPermis);
+
         }
         private void InitializeAutoCompleteCombo()
         {
@@ -80,7 +98,7 @@ namespace Projet_Mines_Official
         {
             if (isNewPermis)
             {
-                InitilializerLesDossierPermis.InitilizerDossiers(this.Permis, TypePermis.PR);
+                this.projetMinesDBContext.SaveChanges();
             }
             SetVerificationDossier();
             //I'm working to change thsi line and use something elese other than using grid;
@@ -126,19 +144,6 @@ namespace Projet_Mines_Official
             textBlock.SetBinding(TextBlock.TextProperty, "Element_Dossier.nom_dossier");
             checkBox.SetBinding(CheckBox.IsCheckedProperty, "isExist");
             return border;
-        }
-        private void InitializeControls(bool isNewPermis)
-        {
-            FillComboboxes(isNewPermis);
-            BindDatePickers(isNewPermis);
-            FillElementDossiers(isNewPermis);
-            if (isNewPermis)
-            {
-                RestJourProgramme.Text = "Rest : 180";
-                RestJourDeclarationTravaux.Text = "Rest : 360";
-                return;
-            }
-            BindTextBoxes(isNewPermis);
         }
         private void BindTextBoxes(bool isNewPermis)
         {
@@ -194,6 +199,7 @@ namespace Projet_Mines_Official
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            if (Home == null) return;
             UpdateChevauchements();
             //update Etat Permis
             if(Numero_Permis.Text!="0")
@@ -514,14 +520,6 @@ namespace Projet_Mines_Official
                 xL.Worksheets.Add(data.CopyToDataTable(),"LesPermis");
                 xL.SaveAs(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Les Permis Excel.xlsx");
                 MessageBox.Show("done");
-            };
-        }
-        private object GetData(Permis permis)
-        {
-            return new
-            {
-                numeroPermis=GetValue(permis.Num_Permis),
-                numeroDemmande=GetValue(permis.Num_Demmande)
             };
         }
         private string GetValue(object value)

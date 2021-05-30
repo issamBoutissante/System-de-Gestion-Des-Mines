@@ -74,7 +74,7 @@
                        Grid.Column="5" Grid.Row="1">
             Numéro Demande</TextBlock>
                 <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
-                    FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" Text="{Binding Num_Demmande,Mode=TwoWay}" KeyDown="GetOnlyNumbers_KeyDown"/>
+                    FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" KeyDown="GetOnlyNumbers_KeyDown"/>
                 </Grid>
             <!-- Les informations de Titulaire -->
             <Grid  Height="420">
