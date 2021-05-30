@@ -11,7 +11,7 @@ namespace Projet_Mines_Official
 {
     class DocumentGenerator
     {
-        internal static XpsDocument ConvertWordDocToXPSDocUpdated(word.Document document, string xpsDocName)
+        internal static XpsDocument ConvertWordDocToXPSDoc(word.Document document, string xpsDocName)
         {
             try
             {
@@ -35,7 +35,7 @@ namespace Projet_Mines_Official
             loading.Show();
             try
             {
-                XpsDocument xpsDocument = await GetXpsDocumentAsync(filename,FindAndReplace);
+                XpsDocument xpsDocument = await GetXpsGetXpsDocumentAndSaveAsync(filename,FindAndReplace);
                 if (xpsDocument != null)
                 {
                     documentViewer.Document = xpsDocument.GetFixedDocumentSequence();
@@ -43,7 +43,7 @@ namespace Projet_Mines_Official
                 else
                     //i'm not going to use this exception message for the instant
                     throw new Exception("there was an error related the file access call the Programmer cuase he had expected this error");
-            }catch(Exception exp)
+            }catch
             {
                 return;
             }
@@ -51,10 +51,6 @@ namespace Projet_Mines_Official
             {
                 loading.Close();
             }
-            //I wont need this for know cause by default when i want the close document word they are asking to save As
-            
-            //await CreateNewDocumentAsync(filename, FindAndReplace);
-
             OpenDocumentWindow?.Invoke();
         }
         internal static void FindAndReplace(word.Application wordApp, object ToFindText, object replaceWithText)
@@ -85,7 +81,7 @@ namespace Projet_Mines_Official
                 ref matchControl);
         }
 
-        internal static Task<XpsDocument> GetXpsDocumentAsync(object filename, Action<word.Application> FindAndReplace)
+        internal static Task<XpsDocument> GetXpsGetXpsDocumentAndSaveAsync(object filename, Action<word.Application> FindAndReplace)
         {
             return Task.Factory.StartNew(() =>
             {
@@ -116,7 +112,7 @@ namespace Projet_Mines_Official
                 XpsDocument xpsDocument = null;
                 try
                 {
-                    xpsDocument = ConvertWordDocToXPSDocUpdated(myWordDoc, newXPSDocumentName);
+                    xpsDocument = ConvertWordDocToXPSDoc(myWordDoc, newXPSDocumentName);
                     myWordDoc.Close();
                 }
                 catch
@@ -129,37 +125,6 @@ namespace Projet_Mines_Official
                 }
 
                 return xpsDocument;
-            });
-        }
-        internal static Task CreateNewDocumentAsync(object filename, Action<word.Application> FindAndReplace)
-        {
-            return Task.Factory.StartNew(() =>
-            {
-                word.Application wordApp = new word.Application();
-                object missing = Missing.Value;
-                word.Document myWordDoc = null;
-
-                if (File.Exists((string)filename))
-                {
-                    object readOnly = false;
-                    object isVisible = false;
-                    wordApp.Visible = false;
-                    wordApp.Documents.Add(filename);
-                    myWordDoc = wordApp.ActiveDocument;
-
-                    FindAndReplace(wordApp);
-                }
-                else
-                {
-                    return;
-                }
-                myWordDoc.SaveAs2(ref missing, ref missing, ref missing, ref missing,
-                                ref missing, ref missing, ref missing,
-                                ref missing, ref missing, ref missing,
-                                ref missing, ref missing, ref missing,
-                                ref missing, ref missing, ref missing);
-                myWordDoc.Close();
-                wordApp.Quit();
             });
         }
     }
