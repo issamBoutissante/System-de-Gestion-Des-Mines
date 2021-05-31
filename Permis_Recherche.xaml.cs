@@ -518,7 +518,7 @@ namespace Projet_Mines_Official
 
                 });
                 xL.Worksheets.Add(data.CopyToDataTable(),"LesPermis");
-                xL.SaveAs(@"C:\Users\ISSAM\Desktop\PFF\Projet Mines Official\Les Permis Excel.xlsx");
+                xL.SaveAs(@"C:\Users\user\Documents\Projet mines\Les Permis Excel.xlsx");
                 MessageBox.Show("done");
             };
         }
