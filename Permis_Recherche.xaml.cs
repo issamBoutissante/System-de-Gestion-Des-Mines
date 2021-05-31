@@ -205,7 +205,8 @@ namespace Projet_Mines_Official
             if(Numero_Permis.Text!="0")
                 this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
             this.projetMinesDBContext.SaveChanges();
-            new Home().Show();
+            this.Home.RemplirDataGrid();
+            this.Home.Show();
         }
         #endregion
         #region add Chevauchemnet area

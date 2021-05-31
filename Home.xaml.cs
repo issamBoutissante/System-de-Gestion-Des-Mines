@@ -40,7 +40,7 @@ namespace Projet_Mines_Official
             {
                 case "PR":
                     new Permis_Recherche(this, true);
-                    this.Close();
+                    this.Hide();
                     break;
             }
         }
@@ -49,7 +49,7 @@ namespace Projet_Mines_Official
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
             new Permis_Recherche(this,false,permis.PermisId).Show();
-            this.Close();
+            this.Hide();
         }
         private void SearchPermis(string searchBy)
         {
