@@ -54,7 +54,7 @@ namespace Projet_Mines_Official
             List<Permis> Les_Permis = this.projetMinesDBContext.Les_Permis.ToList();
             switch (searchBy)
             {
-                case "Numero demmande":
+                case "N° demmande":
                     int numDemande;
                     if (int.TryParse(Search.Text, out numDemande)==false) return;
                     this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Num_Demmande == numDemande).ToList();
@@ -62,7 +62,7 @@ namespace Projet_Mines_Official
                 case "Nom Societe":
                     this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Titulaire.Nom_Societe.Contains(Search.Text)).ToList();
                     break;
-                case "Numero Permis":
+                case "N° Permis":
                     int numPermis;
                     if (int.TryParse(Search.Text, out numPermis) == false) return;
                     this.DataGridPermis.ItemsSource = Les_Permis.Where(p => p.Num_Permis == numPermis).ToList();
@@ -89,7 +89,7 @@ namespace Projet_Mines_Official
                 }
                 return;
             };
-            SearchPermis(searchByText);
+            SearchPermis(SelectedButton.Content.ToString());
         }
 
         private void ChangeSearchCritire_Click(object sender, RoutedEventArgs e)
