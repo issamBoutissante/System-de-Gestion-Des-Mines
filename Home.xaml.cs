@@ -23,7 +23,9 @@ namespace Projet_Mines_Official
         }
         internal void RemplirDataGrid()
         {
-            this.DataGridPermis.ItemsSource= this.projetMinesDBContext.Les_Permis.Take(5).ToList();
+            List<Permis> Les_Permis=this.projetMinesDBContext.Les_Permis.ToList();
+            Les_Permis.Reverse();
+            this.DataGridPermis.ItemsSource = Les_Permis;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
