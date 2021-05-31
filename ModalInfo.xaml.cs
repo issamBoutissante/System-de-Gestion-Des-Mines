@@ -33,7 +33,7 @@ namespace Projet_Mines_Official
         internal void ShowMessage(string message)
         {
             this.Message.Text = message;
-            this.Show();
+            this.ShowDialog();
         }
         private void Ok_Click(object sender, RoutedEventArgs e)
         {
