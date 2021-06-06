@@ -19,7 +19,7 @@ namespace Projet_Mines_Official
         internal void ShowMessage(string message)
         {
             this.Message.Text = message;
-            this.Show();
+            this.ShowDialog();
         }
 
         private void OK_Click(object sender, RoutedEventArgs e)
