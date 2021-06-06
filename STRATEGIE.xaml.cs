@@ -15,27 +15,13 @@ using System.Windows.Shapes;
 namespace Projet_Mines_Official
 {
     /// <summary>
-    /// Interaction logic for Login.xaml
+    /// Interaction logic for STRATEGIE.xaml
     /// </summary>
-    public partial class Login : Window
+    public partial class STRATEGIE : Window
     {
-        public Login()
+        public STRATEGIE()
         {
             InitializeComponent();
-        }
-
-        private void S_authentifier_Click(object sender, RoutedEventArgs e)
-        {
-            new Home().Show();
-            //GoToMain();
-            this.Close();
-        }
-        private Task GoToMain()
-        {
-
-            return Task.Factory.StartNew(() =>
-            {
-            });
         }
     }
 }
