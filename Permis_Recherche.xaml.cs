@@ -19,37 +19,34 @@ namespace Projet_Mines_Official
         ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
         Home Home;
-        public Permis_Recherche(Home home, bool isNewPermis, int PermisId = 0)
+        public Permis_Recherche(Home home, int PermisId)
         {
             InitializeComponent();
             Home = home;
-            if (isNewPermis)
-            {
-                Permis newPermis = new Permis(new Area(), new Titulaire());
-                this.projetMinesDBContext.Les_Permis.Add(newPermis);
-                this.projetMinesDBContext.SaveChanges();
-                InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
-                this.Home = null;
-                new Permis_Recherche(home, false,newPermis.PermisId).Show();
-                return;
-            }
             this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
-            InitializeControls(isNewPermis);
+            InitializeControls();
             InitializeAutoCompleteCombo();
         }
-        private void InitializeControls(bool isNewPermis)
+        internal static void ShowNewPermis(Home home)
         {
-            FillComboboxes(isNewPermis);
-            BindDatePickers(isNewPermis);
-            FillElementDossiers(isNewPermis);
-            if (isNewPermis)
-            {
-                RestJourProgramme.Text = "Rest : 180";
-                RestJourDeclarationTravaux.Text = "Rest : 360";
-                return;
-            }
-            BindTextBoxes(isNewPermis);
+            ProjetMinesDBContext context = new ProjetMinesDBContext();
+            Permis newPermis = new Permis(new Area(), new Titulaire());
+            context.Les_Permis.Add(newPermis);
+            context.SaveChanges();
+            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
+            new Permis_Recherche(home,newPermis.PermisId).Show();
+        }
+        internal static void ShowExistingPermis(Home home,int permisId)
+        {
+            new Permis_Recherche(home, permisId).Show();
+        }
+        private void InitializeControls()
+        {
+            FillComboboxes();
+            BindDatePickers();
+            FillElementDossiers();
+            BindTextBoxes();
 
         }
         private void InitializeAutoCompleteCombo()
@@ -57,7 +54,7 @@ namespace Projet_Mines_Official
             ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
         }
         #region Fill data 
-        private void FillComboboxes(bool isNewPermis)
+        private void FillComboboxes()
         {
             Carte.ItemsSource = projetMinesDBContext.Cartes.ToList();
             Carte.SelectedValuePath = "CarteId";
@@ -87,22 +84,16 @@ namespace Projet_Mines_Official
             Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
 
         }
-        private void BindDatePickers(bool isNewPermis)
+        private void BindDatePickers()
         {
             Date_Depot.SetBinding(DatePicker.SelectedDateProperty, "Date_Depot");
             Date_Decision.SetBinding(DatePicker.SelectedDateProperty, "Date_Decision");
             Date_Echeance.SetBinding(DatePicker.SelectedDateProperty, "Echeance");
             Date_Institision.SetBinding(DatePicker.SelectedDateProperty, "Date_Institition");
         }
-        private void FillElementDossiers(bool isNewPermis)
+        private void FillElementDossiers()
         {
-            if (isNewPermis)
-            {
-                this.projetMinesDBContext.SaveChanges();
-            }
             SetVerificationDossier();
-            //I'm working to change thsi line and use something elese other than using grid;
-            //InfoVerification.ItemsSource = this.Permis.Permis_ElementDossiers.ToList();
         }
         private void SetVerificationDossier()
         {
@@ -145,7 +136,7 @@ namespace Projet_Mines_Official
             checkBox.SetBinding(CheckBox.IsCheckedProperty, "isExist");
             return border;
         }
-        private void BindTextBoxes(bool isNewPermis)
+        private void BindTextBoxes()
         {
             //Set Binding For
             //Titulaire Information
@@ -179,8 +170,6 @@ namespace Projet_Mines_Official
             investisement_realise.SetBinding(TextBox.TextProperty, "Investisement_Realise");
             occupation_temporaire.SetBinding(TextBox.TextProperty, "Occupation_Temporaire");
 
-            //
-            if (isNewPermis) return;
             double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
             RestJourProgramme.Text = $"Rest : {180-daysPassed}";
             RestJourDeclarationTravaux.Text = $"Rest : {360-daysPassed}";
@@ -199,7 +188,6 @@ namespace Projet_Mines_Official
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (Home == null) return;
             UpdateChevauchements();
             //update Etat Permis
             if(Numero_Permis.Text!="0")
@@ -476,7 +464,7 @@ namespace Projet_Mines_Official
                 {
                     path = dialog.SelectedPath;
                 }
-                using (XLWorkbook xL = new XLWorkbook())
+                using (IXLWorkbook xL = new XLWorkbook())
                 {
                     var data = this.projetMinesDBContext.Les_Permis.Select(p => new {
                         numeroPermis = p.Num_Permis.ToString(),
@@ -527,6 +515,12 @@ namespace Projet_Mines_Official
 
                     });
                     xL.Worksheets.Add(data.CopyToDataTable(), "LesPermis");
+                    var details=xL.AddWorksheet("Style");
+                    xL.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    xL.Style.Font.Bold = true;
+                    details.Columns().AdjustToContents();
+                    details.Rows().AdjustToContents();
+                    details.Columns().Style.Fill.SetBackgroundColor(XLColor.BlueBell);
                     path += @"\Les Permis Excel.xlsx";
                     xL.SaveAs(path);
                     ModalInfo.ShowMsg("Les Informations ont ete sauvegarder sous format excel");
@@ -534,13 +528,8 @@ namespace Projet_Mines_Official
                 }
             catch(Exception ex)
             {
-                MessageBox.Show(ex.Message);
-              
+                ModalError.ShowMsg(ex.Message);
             };
-        }
-        private string GetValue(object value)
-        {
-            return value == null ? " " : value.ToString();
         }
     }
 }
