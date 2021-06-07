@@ -7,8 +7,9 @@
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
         Title="Presentation" Height="250" Width="1000">
-    <StackPanel  Orientation="Vertical" >
-        <TextBlock Text="Généralités sur le secteur minier national:" Margin="10" FontFamily="Arial" FontSize="16" FontWeight="Bold"/>
+    <StackPanel  Orientation="Vertical" Background="#F7F7F7" >
+        <TextBlock Text="Généralités sur le secteur minier national:" Margin="10" FontFamily="Arial"
+                   FontSize="20" Foreground="#1D7ED0" FontWeight="Bold"/>
         <TextBlock  FontFamily="Arial" FontSize="14" Margin="10" TextWrapping="Wrap" >
             Le secteur minier au Maroc constitue une composante essentielle dans le développement économique et social du Royaume. Il joue un rôle important dans l'économie nationale. Cette importance est perceptible à travers sa part dans le Produit Intérieur Brut qui a avoisiné 10% en 2017, dans les exportations du pays (près de 80 % en volume et 20 % en valeur) ainsi qu'à travers le nombre d'emplois directs et indirects créés (41 000 postes en 2017). Ledit secteur a également des retombées bénéfiques sur le développement régional et local et permet le désenclavement des régions souvent difficilement accessibles par la construction de pistes et de routes sans oublier ses effets d'entraînement au niveau d'autres secteurs tels que le secteur des transports (routier, ferroviaire et maritime) et celui de l'énergie électrique.
         </TextBlock>

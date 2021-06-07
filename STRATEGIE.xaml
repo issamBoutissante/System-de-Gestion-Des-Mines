@@ -6,10 +6,11 @@
         xmlns:local="clr-namespace:Projet_Mines_Official"
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="Stratégie" Height="250" Width="1000">
+        Title="Stratégie" Height="235" Width="1000">
     <ScrollViewer>
-    <StackPanel  Orientation="Vertical" >
-        <TextBlock Text="STRATÉGIE :" Margin="10" FontFamily="Arial" FontSize="16" FontWeight="Bold"/>
+        <StackPanel  Orientation="Vertical" Background="#F7F7F7" >
+            <TextBlock Text="STRATÉGIE :" Margin="10"  FontFamily="Arial"
+                       FontSize="20" Foreground="#1D7ED0" FontWeight="Bold"/>
         <TextBlock  FontFamily="Arial" FontSize="14" Margin="10" TextWrapping="Wrap" >
             Le Maroc a mis en place, en 2013, une stratégie pour le secteur minier hors phosphates. Basée sur un diagnostic approfondi du secteur minier, soulignant ses forces et ses faiblesses ainsi que les opportunités et menaces auxquelles il est confronté, la nouvelle stratégie minière ambitionne, à l'horizon 2025, de :
         </TextBlock>

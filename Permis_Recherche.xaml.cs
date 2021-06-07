@@ -512,10 +512,6 @@ namespace Projet_Mines_Official
                         Investisement_Projete = p.Investisement_Projet.ToString(),
                         occupation_temporaire = p.Occupation_Temporaire.ToString(),
                         Inscription_Conservation = p.Inscription_Conservation.ToString()
-
-
-               
-
                     });
                     xL.Worksheets.Add(data.CopyToDataTable(), "LesPermis");
                     var details=xL.AddWorksheet("Style");
