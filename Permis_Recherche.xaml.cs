@@ -19,6 +19,7 @@ namespace Projet_Mines_Official
         ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
         Home Home;
+        int? CurrentNumeroDemmand;
         public Permis_Recherche(Home home, int PermisId)
         {
             InitializeComponent();
@@ -27,6 +28,7 @@ namespace Projet_Mines_Official
             this.DataContext = this.Permis;
             InitializeControls();
             InitializeAutoCompleteCombo();
+            this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
         }
         internal static void ShowNewPermis(Home home)
         {
@@ -153,6 +155,9 @@ namespace Projet_Mines_Official
             Effective.SetBinding(TextBox.TextProperty, "Titulaire.Effictif");
             //Area Information
             Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
+            NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
+            ProgrammeTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isProgrammeTravauxExist");
+            DeclarationTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDeclarationOuverture");
             Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
             dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
@@ -193,8 +198,9 @@ namespace Projet_Mines_Official
             if(Numero_Permis.Text!="0")
                 this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
             this.projetMinesDBContext.SaveChanges();
-            this.Home.RemplirDataGrid();
-            this.Home.Show();
+            new Home().Show();
+            //this.Home.RemplirDataGrid();
+            //this.Home.Show();
         }
         #endregion
         #region add Chevauchemnet area
@@ -529,6 +535,18 @@ namespace Projet_Mines_Official
             {
                 ModalError.ShowMsg(ex.Message);
             };
+        }
+
+        private void Numero_Demande_MouseLeave(object sender, MouseEventArgs e)
+        {
+            List<int?> numerosDemmandes = projetMinesDBContext.Les_Permis.Select(p => p.Num_Demmande).ToList();
+            numerosDemmandes.Remove(CurrentNumeroDemmand);
+            int EnteredNumeroDemmand =Convert.ToInt32(((TextBox)sender).Text);
+            if (numerosDemmandes.Contains(EnteredNumeroDemmand))
+            {
+                ModalError.ShowMsg("Ce Numero Deja Exist .");
+                Numero_Demande.Text = CurrentNumeroDemmand.ToString();
+            }
         }
     }
 }

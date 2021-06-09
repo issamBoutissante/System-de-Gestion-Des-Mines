@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Windows;
 
 namespace Projet_Mines_Official
 {
@@ -16,7 +14,7 @@ namespace Projet_Mines_Official
                 new Type_Permis(){Type="LE"},
                 new Type_Permis(){Type="LEE"}
             };
-            if(projetMinesDBContext.Types_Permis.ToList().Count==0)
+            if(projetMinesDBContext.Types_Permis.Count()==0)
                 projetMinesDBContext.Types_Permis.AddRange(type_Permis);
         }
         public static void RemplirEtat_Permis()
@@ -27,31 +25,32 @@ namespace Projet_Mines_Official
                 new Etat_Permis() { Etat="Decision"},
                 new Etat_Permis() { Etat="Permis"},
             };
-            if(projetMinesDBContext.Etats_Permis.ToList().Count==0)
+            if(projetMinesDBContext.Etats_Permis.Count()==0)
                 projetMinesDBContext.Etats_Permis.AddRange(etat_Permis);
         }
         public static void RemplirRegion()
         {
             List<Region> regions = new List<Region>()
             {
-                new Region(){Nom_Region="Region1"},
-                new Region(){Nom_Region="Region2"},
-                new Region(){Nom_Region="Region3"},
-                new Region(){Nom_Region="Region4"},
+                new Region(){Nom_Region="Marrakech-Safi"},
             };
-            if(projetMinesDBContext.Regions.ToList().Count==0)
+            if(projetMinesDBContext.Regions.Count()==0)
                 projetMinesDBContext.Regions.AddRange(regions);
         }
         public static void RemplirProvince()
         {
             List<Province> provinces = new List<Province>()
             {
-                new Province(){code_Province="1111",Nom_Province="Province1",Region=projetMinesDBContext.Regions.Find(1)},
-                new Province(){code_Province="1112",Nom_Province="Province2",Region=projetMinesDBContext.Regions.Find(1)},
-                new Province(){code_Province="1113",Nom_Province="Province3",Region=projetMinesDBContext.Regions.Find(1)},
-                new Province(){code_Province="1114",Nom_Province="Province4",Region=projetMinesDBContext.Regions.Find(1)},
+                new Province(){Nom_Province="Marrakech",Region=projetMinesDBContext.Regions.Single(r=>r.Nom_Region=="Marrakech-Safi")},
+                new Province(){Nom_Province="Chichaoua",RegionId=1},
+                new Province(){Nom_Province="Al Haouz"},
+                new Province(){Nom_Province="El Kelaâ des Sraghna"},
+                new Province(){Nom_Province="Essaouira"},
+                new Province(){Nom_Province="Rehamna"},
+                new Province(){Nom_Province="Safi"},
+                new Province(){Nom_Province="Youssoufia"},
             };
-            if (projetMinesDBContext.Provinces.ToList().Count == 0)
+            if (projetMinesDBContext.Provinces.Count() == 0)
                 projetMinesDBContext.Provinces.AddRange(provinces);
         }
         public static void RemplirCaidat()
@@ -63,7 +62,7 @@ namespace Projet_Mines_Official
                 new Caidat(){Nom_Caidat="Caidat3",Province=projetMinesDBContext.Provinces.Find(1)},
                 new Caidat(){Nom_Caidat="Caidat4",Province=projetMinesDBContext.Provinces.Find(1)},
             };
-            if (projetMinesDBContext.Caidats.ToList().Count == 0)
+            if (projetMinesDBContext.Caidats.Count() == 0)
                 projetMinesDBContext.Caidats.AddRange(caidats);
         }
         public static void RemplirCommune()
@@ -75,7 +74,7 @@ namespace Projet_Mines_Official
                 new Commune(){Nom_Commune="commune3",Caidat=projetMinesDBContext.Caidats.Find(1)},
                 new Commune(){Nom_Commune="commune4",Caidat=projetMinesDBContext.Caidats.Find(1)},
             };
-            if (projetMinesDBContext.Communes.ToList().Count == 0)
+            if (projetMinesDBContext.Communes.Count() == 0)
                 projetMinesDBContext.Communes.AddRange(communes);
         }
         public static void RemplirCarte()
@@ -87,7 +86,7 @@ namespace Projet_Mines_Official
                 new Carte(){Nom_carte="carte3"},
                 new Carte(){Nom_carte="carte4"},
             };
-            if (projetMinesDBContext.Cartes.ToList().Count==0)
+            if (projetMinesDBContext.Cartes.Count()==0)
                 projetMinesDBContext.Cartes.AddRange(cartes);
         }
         public static void RemplirPointPivot()
@@ -99,7 +98,7 @@ namespace Projet_Mines_Official
                 new Point_Pivot(){Nom_Point_Pevot="point_pevot3"},
                 new Point_Pivot(){Nom_Point_Pevot="point_pevot4"},
             };
-            if (projetMinesDBContext.Point_Pivots.ToList().Count == 0)
+            if (projetMinesDBContext.Point_Pivots.Count() == 0)
                 projetMinesDBContext.Point_Pivots.AddRange(point_Pivots);
         }
             //Scafolding
@@ -121,22 +120,44 @@ namespace Projet_Mines_Official
                 new Element_Dossier(){nom_dossier=" - L’original du récépissé du versement de la rémunération des services rendus au titre de l’institution du permis de recherche."},
                 new Element_Dossier(){nom_dossier=" - Une pièce attestant de la qualité de mandataire de la personne morale au cas où la demande est formulée par un mandataire."},
             };
-            if (projetMinesDBContext.Elements_Dossiers.ToList().Count == 0)
+            if (projetMinesDBContext.Elements_Dossiers.Count() == 0)
                 projetMinesDBContext.Elements_Dossiers.AddRange(element_Dossiers);
         }
         public static void RemplirPermis()
         {
-
-
-            Permis permis = new Permis(new Area(), new Titulaire());
             //permis.Permis_ElementDossiers = projetMinesDBContext.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
-            if (projetMinesDBContext.Les_Permis.ToList().Count == 0)
+            if (projetMinesDBContext.Les_Permis.Count() == 0)
             {
-                projetMinesDBContext.Les_Permis.Add(permis);
+                List<Permis> Les_permis = new List<Permis>()
+                {
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                    new Permis(new Area(),new Titulaire()),
+                };
+                projetMinesDBContext.Les_Permis.AddRange(Les_permis);
                 projetMinesDBContext.SaveChanges();
-                InitilializerLesDossierPermis.InitilizerDossiers(permis, TypePermis.PR);
+                projetMinesDBContext.Les_Permis.ToList().ForEach(p =>
+                {
+                    InitilializerLesDossierPermis.InitilizerDossiers(p, TypePermis.PR);
+                });
             }
-
+        }
+        public static void RemplirLogin()
+        {
+            List<Utilisateur> utilisateurs = new List<Utilisateur>()
+            {
+                new Utilisateur(){NomUtilisateur="chaimae",MotPass="chaimae"},
+                new Utilisateur(){NomUtilisateur="issam",MotPass="issam"},
+                new Utilisateur(){NomUtilisateur="aoujil",MotPass="aoujil"},
+                new Utilisateur(){NomUtilisateur="aginane",MotPass="aginane"},
+            };
+            if (projetMinesDBContext.Utilisateurs.Count() == 0)
+                projetMinesDBContext.Utilisateurs.AddRange(utilisateurs);
         }
         public static void Remplir()
         {
@@ -166,8 +187,11 @@ namespace Projet_Mines_Official
 
             RemplirElementDossierPR();
             projetMinesDBContext.SaveChanges();
-
+            
             RemplirPermis();
+            projetMinesDBContext.SaveChanges();
+
+            RemplirLogin();
             projetMinesDBContext.SaveChanges();
         }
     }

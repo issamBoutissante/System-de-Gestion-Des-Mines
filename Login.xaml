@@ -30,12 +30,32 @@
         <Grid VerticalAlignment="Bottom" Margin="35,80" Height="240">
             <Label Content="S'authentifier" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="20" FontWeight="Bold"/>
             <StackPanel VerticalAlignment="Center" Margin="15">
-                <TextBox Margin="0,10" materialDesign:HintAssist.Hint="Email"  FontFamily="Champagne &amp; Limousines" FontSize="18" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                <PasswordBox Margin="0,10" materialDesign:HintAssist.Hint="Mot de passe"  FontFamily="Champagne &amp; Limousines" FontSize="18" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
+                <TextBox x:Name="NomUtilisateur" Margin="0,10" materialDesign:HintAssist.Hint="Nom d'utilisateur"  FontFamily="Champagne &amp; Limousines" FontSize="18" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <PasswordBox x:Name="MotPass" Margin="0,10" materialDesign:HintAssist.Hint="Mot de passe"  FontFamily="Champagne &amp; Limousines" FontSize="18" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"/>
             </StackPanel>
         </Grid>
-        <Button x:Name="S_authentifier" Background="#0861AA" Width="150" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="S'authentifier" Click="S_authentifier_Click"/>
-        <TextBlock Text="Mot de passe oublié?" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Gray" Cursor="Hand"/>
+        <Button x:Name="S_authentifier" Content="S'authentifier" Click="S_authentifier_Click">
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#0861AA"/>
+                    <Setter Property="Foreground" Value="White"/>
+                    <Setter Property="Width" Value="150"/>
+                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                    <Setter Property="VerticalAlignment" Value="Bottom"/>
+                    <Setter Property="Margin" Value="0,65"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=NomUtilisateur, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding Text.Length, ElementName=MotPass, UpdateSourceTrigger=PropertyChanged}" Value="0">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        
+        <TextBlock x:Name="ErrorMessage" Text=""  HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30" Foreground="Red" Cursor="Hand"/>
         <Image Source="./Images/kingdomLogo.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
 
     </Grid>

@@ -138,6 +138,7 @@
     <Compile Include="Classes\Commune.cs" />
     <Compile Include="Classes\Element_Dossier.cs" />
     <Compile Include="Classes\Etat_Permis.cs" />
+    <Compile Include="Classes\Utilisateur.cs" />
     <Compile Include="Classes\Observation.cs" />
     <Compile Include="Classes\Permis.cs" />
     <Compile Include="Classes\Permis_ElementDossier.cs" />
