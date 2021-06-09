@@ -2,19 +2,30 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Projet_Mines_Official
 {
     public class Permis
     {
+        ProjetMinesDBContext context;
         public Permis(Area area,Titulaire titulaire)
         {
+            context = new ProjetMinesDBContext();
             this.Chevauchements = new HashSet<Permis>();
             this.Licence_Permis = new HashSet<Permis>();
             this.Permis_ElementDossiers = new HashSet<Permis_ElementDossier>();
             //this.Observations = new HashSet<Observation>();
             //Associate Default Values
-            this.Num_Demmande = 0;
+            if (context.Les_Permis.Count() == 0)
+            {
+                this.Num_Demmande = 1;
+            }
+            else
+            {
+                //increment each time 'numero demmande'
+                this.Num_Demmande = context.Les_Permis.ToList().Last().Num_Demmande+1;
+            }
             this.Num_Permis = 0;
             this.Date_Depot = DateTime.Now.Date;
             this.Investisement_Projet = 0;
@@ -32,6 +43,11 @@ namespace Projet_Mines_Official
             this.Type_PermisId = (int)TypePermis.PR;
             this.Area = area;
             this.Titulaire = titulaire;
+            this.isDecisionSigne = false;
+            this.isProgrammeTravauxExist = false;
+            this.isDeclarationOuverture = false;
+            context.Les_Permis.Add(this);
+            context.SaveChanges();
         }
         public Permis()
         {
@@ -60,6 +76,9 @@ namespace Projet_Mines_Official
         public DateTime Date_Enquete { get; set; }
         [Column(TypeName = "Date")]
         public DateTime Date_Rapot { get; set; }
+        public bool isDecisionSigne { get; set; }
+        public bool isProgrammeTravauxExist { get; set; }
+        public bool isDeclarationOuverture { get; set; }
         //les relation avec lui meme
 
         public virtual ICollection<Permis> Chevauchements { get; set; }

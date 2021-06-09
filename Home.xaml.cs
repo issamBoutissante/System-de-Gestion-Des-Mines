@@ -30,7 +30,6 @@ namespace Projet_Mines_Official
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Remplir_la_base_de_donne.Remplir();
             RemplirDataGrid();
         }
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -40,7 +39,8 @@ namespace Projet_Mines_Official
             {
                 case "PR":
                     Permis_Recherche.ShowNewPermis(this);
-                    this.Hide();
+                    //this.Hide();
+                    this.Close();
                     break;
             }
         }
@@ -49,7 +49,8 @@ namespace Projet_Mines_Official
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
             Permis_Recherche.ShowExistingPermis(this,permis.PermisId);
-            this.Hide();
+            //this.Hide();
+            this.Close();
         }
         private void SearchPermis(string searchBy)
         {

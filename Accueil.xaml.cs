@@ -22,9 +22,13 @@ namespace Projet_Mines_Official
         public Accueil()
         {
             InitializeComponent();
+            this.Loaded += Accueil_Loaded;
         }
 
-        
+        private void Accueil_Loaded(object sender, RoutedEventArgs e)
+        {
+            Remplir_la_base_de_donne.Remplir();
+        }
 
         private void TbPresentation_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
