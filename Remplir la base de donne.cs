@@ -128,19 +128,12 @@ namespace Projet_Mines_Official
             //permis.Permis_ElementDossiers = projetMinesDBContext.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
             if (projetMinesDBContext.Les_Permis.Count() == 0)
             {
-                List<Permis> Les_permis = new List<Permis>()
+                for(int i = 0; i <= 10; i++)
                 {
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                    new Permis(new Area(),new Titulaire()),
-                };
-                projetMinesDBContext.Les_Permis.AddRange(Les_permis);
-                projetMinesDBContext.SaveChanges();
+                    Permis newPermis = new Permis(new Area(), new Titulaire());
+                    projetMinesDBContext.Les_Permis.Add(newPermis);
+                    projetMinesDBContext.SaveChanges();
+                }
                 projetMinesDBContext.Les_Permis.ToList().ForEach(p =>
                 {
                     InitilializerLesDossierPermis.InitilizerDossiers(p, TypePermis.PR);
