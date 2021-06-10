@@ -46,8 +46,6 @@ namespace Projet_Mines_Official
             this.isDecisionSigne = false;
             this.isProgrammeTravauxExist = false;
             this.isDeclarationOuverture = false;
-            context.Les_Permis.Add(this);
-            context.SaveChanges();
         }
         public Permis()
         {
