@@ -49,6 +49,7 @@ namespace Projet_Mines_Official
                 new Province(){Nom_Province="Rehamna"},
                 new Province(){Nom_Province="Safi"},
                 new Province(){Nom_Province="Youssoufia"},
+                
             };
             if (projetMinesDBContext.Provinces.Count() == 0)
                 projetMinesDBContext.Provinces.AddRange(provinces);
