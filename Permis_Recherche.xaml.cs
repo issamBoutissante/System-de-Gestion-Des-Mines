@@ -20,6 +20,7 @@ namespace Projet_Mines_Official
         public Permis Permis { get; set; }
         Home Home;
         int? CurrentNumeroDemmand;
+        int? CurrentNumeroPermis;
         public Permis_Recherche(Home home, int PermisId)
         {
             InitializeComponent();
@@ -193,6 +194,7 @@ namespace Projet_Mines_Official
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            Numero_Demande.Focus();
             UpdateChevauchements();
             //update Etat Permis
             if(Numero_Permis.Text!="0")
@@ -544,8 +546,21 @@ namespace Projet_Mines_Official
             int EnteredNumeroDemmand =Convert.ToInt32(((TextBox)sender).Text);
             if (numerosDemmandes.Contains(EnteredNumeroDemmand))
             {
-                ModalError.ShowMsg("Ce Numero Deja Exist .");
+                ModalError.ShowMsg("Ce Numero De Demmande Deja Exist .");
                 Numero_Demande.Text = CurrentNumeroDemmand.ToString();
+            }
+        }
+
+        private void Numero_Permis_MouseLeave(object sender, MouseEventArgs e)
+        {
+            List<int?> numerosPermis = projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
+            numerosPermis.Remove(CurrentNumeroPermis);
+            numerosPermis.Remove(0);
+            int EnteredNumeroPermis = Convert.ToInt32(((TextBox)sender).Text);
+            if (numerosPermis.Contains(EnteredNumeroPermis))
+            {
+                ModalError.ShowMsg("Ce Numero De Permis Deja Exist .");
+                Numero_Permis.Text = CurrentNumeroPermis.ToString();
             }
         }
     }
