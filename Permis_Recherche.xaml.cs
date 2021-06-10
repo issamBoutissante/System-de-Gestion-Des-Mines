@@ -30,6 +30,7 @@ namespace Projet_Mines_Official
             InitializeControls();
             InitializeAutoCompleteCombo();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
+            this.CurrentNumeroPermis = this.Permis.Num_Permis;
         }
         internal static void ShowNewPermis(Home home)
         {
@@ -543,7 +544,12 @@ namespace Projet_Mines_Official
         {
             List<int?> numerosDemmandes = projetMinesDBContext.Les_Permis.Select(p => p.Num_Demmande).ToList();
             numerosDemmandes.Remove(CurrentNumeroDemmand);
-            int EnteredNumeroDemmand =Convert.ToInt32(((TextBox)sender).Text);
+            if (string.IsNullOrEmpty(Numero_Demande.Text))
+            {
+                Numero_Demande.Text = CurrentNumeroDemmand.ToString();
+                return;
+            }
+            int EnteredNumeroDemmand =Convert.ToInt32(Numero_Demande.Text);
             if (numerosDemmandes.Contains(EnteredNumeroDemmand))
             {
                 ModalError.ShowMsg("Ce Numero De Demmande Deja Exist .");
@@ -553,10 +559,15 @@ namespace Projet_Mines_Official
 
         private void Numero_Permis_MouseLeave(object sender, MouseEventArgs e)
         {
-            List<int?> numerosPermis = projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
+            List<int?> numerosPermis = projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).Distinct().ToList();
             numerosPermis.Remove(CurrentNumeroPermis);
             numerosPermis.Remove(0);
-            int EnteredNumeroPermis = Convert.ToInt32(((TextBox)sender).Text);
+            if (string.IsNullOrEmpty(Numero_Permis.Text))
+            {
+                Numero_Permis.Text = CurrentNumeroPermis.ToString();
+                return;
+            }
+            int EnteredNumeroPermis = Convert.ToInt32(Numero_Permis.Text);
             if (numerosPermis.Contains(EnteredNumeroPermis))
             {
                 ModalError.ShowMsg("Ce Numero De Permis Deja Exist .");
