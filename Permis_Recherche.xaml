@@ -437,7 +437,7 @@
                 <TextBox x:Name="Numero_Permis" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="6" Margin="20,0,10,0" Height="30" BorderThickness="1" 
                               Text  ="{Binding Num_Permis,Mode=TwoWay}" 
-        Visibility="{Binding ElementName=NumPermisCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" KeyDown="GetOnlyNumbers_KeyDown"/>
+        Visibility="{Binding ElementName=NumPermisCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" KeyDown="GetOnlyNumbers_KeyDown" MouseLeave="Numero_Permis_MouseLeave"/>
 
                 <!--Lettre de transmission-->
                 <Rectangle Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
