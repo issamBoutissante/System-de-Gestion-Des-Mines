@@ -40,6 +40,7 @@
                     <Setter Property="Background" Value="#0861AA"/>
                     <Setter Property="Foreground" Value="White"/>
                     <Setter Property="Width" Value="150"/>
+                    <Setter Property="Height" Value="30"/>
                     <Setter Property="HorizontalAlignment" Value="Center"/>
                     <Setter Property="VerticalAlignment" Value="Bottom"/>
                     <Setter Property="Margin" Value="0,65"/>
