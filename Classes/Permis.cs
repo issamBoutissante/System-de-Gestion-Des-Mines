@@ -24,7 +24,7 @@ namespace Projet_Mines_Official
             else
             {
                 //increment each time 'numero demmande'
-                this.Num_Demmande = context.Les_Permis.ToList().Last().Num_Demmande+1;
+                this.Num_Demmande = context.Les_Permis.Select(p=>p.Num_Demmande).Max()+1;
             }
             this.Num_Permis = 0;
             this.Date_Depot = DateTime.Now.Date;
