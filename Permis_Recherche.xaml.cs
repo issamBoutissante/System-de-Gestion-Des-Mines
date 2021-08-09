@@ -8,7 +8,6 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
-using Microsoft.Win32;
 using ClosedXML.Excel;
 using System.Data;
 
@@ -38,6 +37,7 @@ namespace Projet_Mines_Official
             Permis newPermis = new Permis(new Area(), new Titulaire());
             context.Les_Permis.Add(newPermis);
             context.SaveChanges();
+
             InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
             new Permis_Recherche(home,newPermis.PermisId).Show();
         }
@@ -160,9 +160,9 @@ namespace Projet_Mines_Official
             NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
             ProgrammeTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isProgrammeTravauxExist");
             DeclarationTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDeclarationOuverture");
-            Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
-            dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
+            Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dir_Est_ouest");
+            dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dir_nord_sud");
             Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
             Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
             foreach(Permis chev in this.Permis.Chevauchements)

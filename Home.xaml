@@ -60,11 +60,11 @@
                 </MenuItem.Style>
                 <MenuItem Header="PR" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="PRR"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
+                <MenuItem Header="PRR" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="LE"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
+                <MenuItem Header="LE" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
                 </MenuItem>
-                <MenuItem Header="LER"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial" >
+                <MenuItem Header="LER" Click="MenuItem_Click"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial" >
                 </MenuItem>
             </MenuItem>
         </Menu>

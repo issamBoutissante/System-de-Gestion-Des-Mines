@@ -33,6 +33,7 @@ namespace Projet_Mines_Official
             List<Region> regions = new List<Region>()
             {
                 new Region(){Nom_Region="Marrakech-Safi"},
+                new Region(){Nom_Region="MTH"},
             };
             if(projetMinesDBContext.Regions.Count()==0)
                 projetMinesDBContext.Regions.AddRange(regions);
@@ -58,10 +59,14 @@ namespace Projet_Mines_Official
         {
             List<Caidat> caidats = new List<Caidat>()
             {
-                new Caidat(){Nom_Caidat="Caidat1",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Caidat2",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Caidat3",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Caidat4",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Ighod",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="jnane Bouih",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="jdour",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="ahdil",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="nfifa-oued Lbour",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Sidi Bou Othmane",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Asif Lmal",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Tazart",Province=projetMinesDBContext.Provinces.Find(1)},
             };
             if (projetMinesDBContext.Caidats.Count() == 0)
                 projetMinesDBContext.Caidats.AddRange(caidats);
@@ -70,10 +75,15 @@ namespace Projet_Mines_Official
         {
             List<Commune> communes = new List<Commune>()
             {
-                new Commune(){Nom_Commune="commune1",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="commune2",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="commune3",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="commune4",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ighoud",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Jnane-Bouih",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Sidi-Ghanem",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ahdil",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ait Faska",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Lalla Aaziza",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Douirane",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Afalla Issen",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Siti Fadma",Caidat=projetMinesDBContext.Caidats.Find(1)},
             };
             if (projetMinesDBContext.Communes.Count() == 0)
                 projetMinesDBContext.Communes.AddRange(communes);
@@ -82,10 +92,10 @@ namespace Projet_Mines_Official
         {
             List<Carte> cartes = new List<Carte>()
             {
-                new Carte(){Nom_carte="carte1"},
-                new Carte(){Nom_carte="carte2"},
-                new Carte(){Nom_carte="carte3"},
-                new Carte(){Nom_carte="carte4"},
+                new Carte(){Nom_carte="Chichaoua"},
+                new Carte(){Nom_carte="Yousoufia"},
+                new Carte(){Nom_carte="Demnat"},
+                new Carte(){Nom_carte="Inim-N-Tanout"},
             };
             if (projetMinesDBContext.Cartes.Count()==0)
                 projetMinesDBContext.Cartes.AddRange(cartes);
@@ -94,10 +104,11 @@ namespace Projet_Mines_Official
         {
             List<Point_Pivot> point_Pivots = new List<Point_Pivot>()
             {
-                new Point_Pivot(){Nom_Point_Pevot="point_pevot1"},
-                new Point_Pivot(){Nom_Point_Pevot="point_pevot2"},
-                new Point_Pivot(){Nom_Point_Pevot="point_pevot3"},
-                new Point_Pivot(){Nom_Point_Pevot="point_pevot4"},
+                new Point_Pivot(){Nom_Point_Pevot="Zorg"},
+                new Point_Pivot(){Nom_Point_Pevot="Cheikh Ben Allou"},
+                new Point_Pivot(){Nom_Point_Pevot="J.Ighoud"},
+                new Point_Pivot(){Nom_Point_Pevot="Sous"},
+                new Point_Pivot(){Nom_Point_Pevot="Kt Si Ahmed"},
             };
             if (projetMinesDBContext.Point_Pivots.Count() == 0)
                 projetMinesDBContext.Point_Pivots.AddRange(point_Pivots);

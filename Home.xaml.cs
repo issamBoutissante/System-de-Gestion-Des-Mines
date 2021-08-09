@@ -14,14 +14,13 @@ namespace Projet_Mines_Official
     public partial class Home : Window
     {
         ProjetMinesDBContext projetMinesDBContext =new ProjetMinesDBContext();
-        string searchByText= "Numero demmande";
         Button SelectedButton;
         public Home()
         {
             InitializeComponent();
             SelectedButton = NumDemmandeBtn;
         }
-        internal void RemplirDataGrid()
+        public void RemplirDataGrid()
         {
             List<Permis> Les_Permis=this.projetMinesDBContext.Les_Permis.ToList();
             Les_Permis.Reverse();
