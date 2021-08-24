@@ -13,38 +13,32 @@ using System.Data;
 
 namespace Projet_Mines_Official
 {
-    public partial class Permis_Recherche : Window
+    /// <summary>
+    /// Interaction logic for Permis_Recherche_Rennouvelle.xaml
+    /// </summary>
+    public partial class Permis_Recherche_Rennouvelle : Window
     {
+
         ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
         Home Home;
         int? CurrentNumeroDemmand;
         int? CurrentNumeroPermis;
-        public Permis_Recherche(Home home, int PermisId)
+        public Permis_Recherche_Rennouvelle(Home home, int PermisId)
         {
             InitializeComponent();
-            Home = home;
+            this.Home = home;
             this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
             InitializeControls();
-            InitializeAutoCompleteCombo();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
         }
-        internal static void ShowNewPermis(Home home)
+        internal static void ShowExistingPermis(Home home, int permisId)
         {
-            ProjetMinesDBContext context = new ProjetMinesDBContext();
-            Permis newPermis = new Permis(new Area(), new Titulaire());
-            context.Les_Permis.Add(newPermis);
-            context.SaveChanges();
+            new Permis_Recherche_Rennouvelle(home, permisId).ShowDialog();
+        }
 
-            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
-            new Permis_Recherche(home,newPermis.PermisId).Show();
-        }
-        internal static void ShowExistingPermis(Home home,int permisId)
-        {
-            new Permis_Recherche(home, permisId).Show();
-        }
         private void InitializeControls()
         {
             FillComboboxes();
@@ -53,10 +47,7 @@ namespace Projet_Mines_Official
             BindTextBoxes();
 
         }
-        private void InitializeAutoCompleteCombo()
-        {
-            ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
-        }
+       
         #region Fill data 
         private void FillComboboxes()
         {
@@ -97,16 +88,12 @@ namespace Projet_Mines_Official
         }
         private void FillElementDossiers()
         {
-            SetVerificationDossier();
-        }
-        private void SetVerificationDossier()
-        {
             this.Permis.Permis_ElementDossiers.ToList().ForEach(ED =>
             {
                 ElementsDossierStack.Children.Add(GetElementDossierTemplate(ED));
             });
-
         }
+
         private Border GetElementDossierTemplate(Permis_ElementDossier dataSource)
         {
             TextBlock textBlock = new TextBlock()
@@ -115,13 +102,13 @@ namespace Projet_Mines_Official
                 FontFamily = new FontFamily("Arial"),
                 TextWrapping = TextWrapping.Wrap,
             };
-            CheckBox checkBox = new CheckBox() ;
+            CheckBox checkBox = new CheckBox();
             Grid grid = new Grid()
             {
                 Margin = new Thickness(5, 10, 0, 5)
             };
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(10,GridUnitType.Star) }) ;
-            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0.5, GridUnitType.Star) }) ;
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(10, GridUnitType.Star) });
+            grid.ColumnDefinitions.Add(new ColumnDefinition() { Width = new GridLength(0.5, GridUnitType.Star) });
             grid.Children.Add(textBlock);
             grid.Children.Add(checkBox);
             textBlock.SetValue(Grid.ColumnProperty, 0);
@@ -135,7 +122,7 @@ namespace Projet_Mines_Official
                 Padding = new Thickness(10, 10, 10, 10),
                 Child = grid
             };
-            
+
             textBlock.SetBinding(TextBlock.TextProperty, "Element_Dossier.nom_dossier");
             checkBox.SetBinding(CheckBox.IsCheckedProperty, "isExist");
             return border;
@@ -144,10 +131,11 @@ namespace Projet_Mines_Official
         {
             //Set Binding For
             //Titulaire Information
+            NumeroExPermis.SetBinding(TextBox.TextProperty, "Ex_Permis.Num_Permis");
             Numero_Demande.SetBinding(TextBox.TextProperty, "Num_Demmande");
             Nom_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Demandeur");
             Status_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.status_Demandeur");
-            Raison_Social.SetBinding(TextBox.TextProperty,"Titulaire.Raison_Social");
+            Raison_Social.SetBinding(TextBox.TextProperty, "Titulaire.Raison_Social");
             Nom_Societe.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Societe");
             Numero_CNSS.SetBinding(TextBox.TextProperty, "Titulaire.Numero_Cnss");
             Domicile_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Election_Domicile");
@@ -165,11 +153,11 @@ namespace Projet_Mines_Official
             dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dir_nord_sud");
             Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
             Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
-            foreach(Permis chev in this.Permis.Chevauchements)
+            foreach (Permis chev in this.Permis.Chevauchements)
             {
                 Chevauchements.Children.Add(GetChevauchementElement((int)chev.Num_Permis));
             }
-            Zone.SetBinding(TextBox.TextProperty,"Area.Zone");
+            Zone.SetBinding(TextBox.TextProperty, "Area.Zone");
             Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
             //suivi decision information
@@ -178,8 +166,8 @@ namespace Projet_Mines_Official
             occupation_temporaire.SetBinding(TextBox.TextProperty, "Occupation_Temporaire");
 
             double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
-            RestJourProgramme.Text = $"Rest : {180-daysPassed}";
-            RestJourDeclarationTravaux.Text = $"Rest : {360-daysPassed}";
+            RestJourProgramme.Text = $"Rest : {180 - daysPassed}";
+            RestJourDeclarationTravaux.Text = $"Rest : {360 - daysPassed}";
         }
         #endregion
         #region update data
@@ -187,45 +175,24 @@ namespace Projet_Mines_Official
         {
             this.Permis.Chevauchements.Clear();
             ElementsLooper.GetElements(Chevauchements, typeof(Button), (dynamic obj) =>
-              {
-                  Button b = (Button)obj;
-                  int numero = Convert.ToInt32(b.Content);
-                  this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Single(p=>p.Num_Permis==numero));
-              });
+            {
+                Button b = (Button)obj;
+                int numero = Convert.ToInt32(b.Content);
+                this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Single(p => p.Num_Permis == numero));
+            });
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Numero_Demande.Focus();
             UpdateChevauchements();
             //update Etat Permis
-            if(Numero_Permis.Text!="0")
+            if (Numero_Permis.Text != "0")
                 this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
             this.projetMinesDBContext.SaveChanges();
             this.Home.RemplirDataGrid();
         }
         #endregion
-        #region add Chevauchemnet area
-        private void addChevauchement_Click(object sender, RoutedEventArgs e)
-        {
-            int num_Permis=Convert.ToInt32(ChevauchementCombo.Text);
-            bool isExist=this.projetMinesDBContext.Les_Permis.Any(p => p.Num_Permis == num_Permis);
-            if (isExist
-                )
-            {
-                Chevauchements.Children.Add(GetChevauchementElement(num_Permis));
-                return;
-            }
-            ChevauchementCombo.BorderBrush = Brushes.Red;
-            Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(2000);
-                Application.Current.Dispatcher.Invoke(() =>
-                {
-                    ChevauchementCombo.BorderBrush = (SolidColorBrush)new BrushConverter().ConvertFromString("#FF2196F3");
-                });
-            });
-
-        }
+        #region Chevauchemnet area
         private Button GetChevauchementElement(int NumPermis)
         {
             Button btn = new Button()
@@ -233,18 +200,12 @@ namespace Projet_Mines_Official
                 Content = NumPermis.ToString(),
                 VerticalAlignment = VerticalAlignment.Center,
                 Background = Brushes.White,
-                BorderBrush=Brushes.Black,
-                BorderThickness=new Thickness(1),
-                Margin=new Thickness(10,0,0,0),
-                Foreground=Brushes.Gray
+                BorderBrush = Brushes.Black,
+                BorderThickness = new Thickness(1),
+                Margin = new Thickness(10, 0, 0, 0),
+                Foreground = Brushes.Gray
             };
-            btn.Click += Btn_Click;
             return btn;
-        }
-
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            Chevauchements.Children.Remove((Button)sender);
         }
         #endregion
         #region Generation Des Rapport
@@ -270,7 +231,7 @@ namespace Projet_Mines_Official
                     DocumentGenerator.FindAndReplace(wordApp, "<domicile>", DomicileDemandeur);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
-           
+
                 , dw.documentsContainer, () => { dw.Show(); });
         }
 
@@ -300,13 +261,13 @@ namespace Projet_Mines_Official
         private void Mise_demeur_TP_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-           
+
             string societe = Nom_Societe.Text;
             string Num_PR = Numero_Permis.Text;
             DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
                 (Word.Application wordApp) =>
                 {
-                    
+
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
@@ -363,7 +324,7 @@ namespace Projet_Mines_Official
                 , dw.documentsContainer, () => { dw.Show(); });
             this.Permis.Etat_PermisId = (int)EtatPermis.Decision;
         }
-        
+
         private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
@@ -443,7 +404,7 @@ namespace Projet_Mines_Official
                 Key.NumPad8,
                 Key.NumPad9,
             };
-            
+
             if (!keys.Contains(e.Key))
             {
                 TextBox textBox = sender as TextBox;
@@ -465,7 +426,7 @@ namespace Projet_Mines_Official
         {
             try
             {
-                string path="";
+                string path = "";
                 var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
                 if (dialog.ShowDialog(this).GetValueOrDefault())
                 {
@@ -521,7 +482,7 @@ namespace Projet_Mines_Official
                         Inscription_Conservation = p.Inscription_Conservation.ToString()
                     });
                     xL.Worksheets.Add(data.CopyToDataTable(), "LesPermis");
-                    var details=xL.AddWorksheet("Style");
+                    var details = xL.AddWorksheet("Style");
                     xL.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                     xL.Style.Font.Bold = true;
                     details.Columns().AdjustToContents();
@@ -530,9 +491,9 @@ namespace Projet_Mines_Official
                     path += @"\Les Permis Excel.xlsx";
                     xL.SaveAs(path);
                     ModalInfo.ShowMsg("Les Informations ont ete sauvegarder sous format excel");
-                  }
                 }
-            catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 ModalError.ShowMsg(ex.Message);
             };
@@ -547,7 +508,7 @@ namespace Projet_Mines_Official
                 Numero_Demande.Text = CurrentNumeroDemmand.ToString();
                 return;
             }
-            int EnteredNumeroDemmand =Convert.ToInt32(Numero_Demande.Text);
+            int EnteredNumeroDemmand = Convert.ToInt32(Numero_Demande.Text);
             if (numerosDemmandes.Contains(EnteredNumeroDemmand))
             {
                 ModalError.ShowMsg("Ce Numero De Demmande Deja Exist .");
@@ -572,5 +533,11 @@ namespace Projet_Mines_Official
                 Numero_Permis.Text = CurrentNumeroPermis.ToString();
             }
         }
+        #region Le Code De PRR
+        private void AfficherExPermis_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

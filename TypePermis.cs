@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Projet_Mines_Official
 {
-    public enum TypePermis
+    public class TypePermis
     {
-        PR=1,
-        PRR=2,
-        LE=3,
-        LER=4
+        public const int PR=1;
+        public const int PRR = 2;
+        public const int LE = 3;
+        public const int LER = 4;
     }
 }

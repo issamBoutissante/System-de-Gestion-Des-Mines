@@ -9,10 +9,10 @@ namespace Projet_Mines_Official
 {
     class InitilializerLesDossierPermis
     {
-        public static void InitilizerDossiers(Permis permis,TypePermis type)
+        public static void InitilizerDossiers(Permis permis,int type)
         {
             ProjetMinesDBContext context = new ProjetMinesDBContext();
-            int typePermis = (int)type;
+            int typePermis = type;
             context.Elements_Dossiers.Where(ed=>ed.Type_PermisId==typePermis).ToList().ForEach(E =>
             {
                 context.Permis_ElementDossiers.Add(new Permis_ElementDossier()

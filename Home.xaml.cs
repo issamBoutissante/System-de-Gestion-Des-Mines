@@ -15,6 +15,7 @@ namespace Projet_Mines_Official
     {
         ProjetMinesDBContext projetMinesDBContext =new ProjetMinesDBContext();
         Button SelectedButton;
+        string searchByText;
         public Home()
         {
             InitializeComponent();
@@ -24,9 +25,10 @@ namespace Projet_Mines_Official
         {
             List<Permis> Les_Permis=this.projetMinesDBContext.Les_Permis.ToList();
             Les_Permis.Reverse();
+            this.DataGridPermis.ItemsSource = null;
             this.DataGridPermis.ItemsSource = Les_Permis;
         }
-
+       
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             RemplirDataGrid();
@@ -38,8 +40,9 @@ namespace Projet_Mines_Official
             {
                 case "PR":
                     Permis_Recherche.ShowNewPermis(this);
-                    //this.Hide();
-                    this.Close();
+                    break;
+                case "PRR":
+                    Selection_Permis_A_Renouveller.Show(this);
                     break;
             }
         }
@@ -47,9 +50,19 @@ namespace Projet_Mines_Official
         private void Afficher_Click(object sender, RoutedEventArgs e)
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
-            Permis_Recherche.ShowExistingPermis(this,permis.PermisId);
-            //this.Hide();
-            this.Close();
+            switch (permis.Type_PermisId)
+            {
+                case TypePermis.PR:
+                    Permis_Recherche.ShowExistingPermis(this,permis.PermisId);
+                    break;
+                case TypePermis.PRR:
+                    Permis_Recherche_Rennouvelle.ShowExistingPermis(this, permis.PermisId);
+                    break;
+                case TypePermis.LE:
+                    break;
+                case TypePermis.LER:
+                    break;
+            }
         }
         private void SearchPermis(string searchBy)
         {

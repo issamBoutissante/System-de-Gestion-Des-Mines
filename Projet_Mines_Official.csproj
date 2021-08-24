@@ -169,6 +169,9 @@
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="InitilializerLesDossierPermis.cs" />
     <Compile Include="Helper Classes\ObjectShredder.cs" />
+    <Compile Include="Permis_Recherche_Rennouvelle.xaml.cs">
+      <DependentUpon>Permis_Recherche_Rennouvelle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Presentation.xaml.cs">
       <DependentUpon>Presentation.xaml</DependentUpon>
     </Compile>
@@ -182,6 +185,9 @@
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Selection_Permis_A_Renouveller.xaml.cs">
+      <DependentUpon>Selection_Permis_A_Renouveller.xaml</DependentUpon>
     </Compile>
     <Compile Include="STRATEGIE.xaml.cs">
       <DependentUpon>STRATEGIE.xaml</DependentUpon>
@@ -286,11 +292,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Permis_Recherche_Rennouvelle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Presentation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="saveForINfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Selection_Permis_A_Renouveller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
