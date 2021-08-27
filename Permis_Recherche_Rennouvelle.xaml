@@ -40,41 +40,42 @@
             <!--les information de l'ex permis-->
             <Grid Height="200">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="109*" />
+                    <ColumnDefinition Width="109*" />
+                    <ColumnDefinition Width="109*" />
+                    <ColumnDefinition Width="109*" />
+                    <ColumnDefinition Width="37*" />
+                    <ColumnDefinition Width="71*"/>
+                    <ColumnDefinition Width="109*" />
+                    <ColumnDefinition Width="108*" />
+                    <ColumnDefinition Width="108*" />
+                    <ColumnDefinition Width="108*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="*" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Text="Ex Permis" Grid.ColumnSpan="3" TextAlignment="Center"
+                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="10"/>
+                <TextBlock Text="Ex Permis" Grid.ColumnSpan="4" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0"/>
                 <TextBlock
                        Text="Numero Ex Permis"
-                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="  10,5,0,0" Grid.ColumnSpan="2"
+                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,25,108,20.333" Grid.ColumnSpan="3"
                        Grid.Column="0" Grid.Row="1"/>
                 <TextBox 
                     x:Name="NumeroExPermis"
-                    Grid.ColumnSpan="2"     
+                    Grid.ColumnSpan="3"     
                     FontSize="14" FontFamily="Arial" Padding="5"   
-                         Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" 
+                         Grid.Column="1" Grid.Row="1" Height="30" BorderThickness="1" Margin="108.333,23,9.667,22.333" 
                     IsReadOnly="True"/>
                 <Button x:Name="AfficherExPermis"
                         Grid.ColumnSpan="2"
                         Content="Afficher Ex Permis"
-                        Grid.Column="7"
+                        Grid.Column="8"
                         Grid.Row="1"
-                        Click="AfficherExPermis_Click"/>
+                        Click="AfficherExPermis_Click" Margin="0,22,0,21.333"/>
             </Grid>
             <!--Les informations de Demande-->
             <!--Les informations de Demande-->
@@ -364,12 +365,12 @@
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="7" Grid.Row="9" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--<Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0"/>-->
-                <Button x:Name="Generer_Bon_achat" Content="Générer le bon d'achat" Grid.ColumnSpan="3"
+                <!--<Button x:Name="Generer_Bon_achat" Content="Générer le bon d'achat" Grid.ColumnSpan="3"
                        Grid.Column="0" Grid.Row="10" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
                         Margin="10,0,0,0" Click="Generer_Bon_achat_Click"/>
                 <Button x:Name="GenererBLV_PR" Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
                        Grid.Column="3" Grid.Row="10" Height="30"   BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0" Click="GenererBLV_PR_Click" />
+                        Margin="10,0,0,0" Click="GenererBLV_PR_Click" />-->
 
             </Grid>
             <!--Vérification des pièces-->
@@ -394,12 +395,11 @@
                     <ColumnDefinition Width="*" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
+                <!--<Button x:Name="Valider_demande" Grid.ColumnSpan="2"
+                       Grid.Column="5"  Background="#EAA221" Content="Valider demande" Margin="0,20,10,20"/>-->
                 <Button x:Name="Rejet_demande" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Content="Rejet demande" Margin="0,20,10,20" Click="Rejet_demande_Click"/>
-                <Button x:Name="Valider_demande" Grid.ColumnSpan="2"
-                       Grid.Column="5"  Background="#EAA221" Content="Valider demande" Margin="0,20,10,20"/>
             </Grid>
-            <!-- Suivi Decision -->
             <Grid  Height="480">
                 <Grid.Resources>
                     <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
@@ -472,110 +472,22 @@
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="6" Margin="20,0,10,0" Height="30" BorderThickness="1" 
                               Text  ="{Binding Num_Permis,Mode=TwoWay}" 
         Visibility="{Binding ElementName=NumPermisCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" KeyDown="GetOnlyNumbers_KeyDown" MouseLeave="Numero_Permis_MouseLeave"/>
-
+                <Button Grid.ColumnSpan="6"
+                        Name="Invitation_Enquete"
+                       Grid.Column="0" Grid.Row="7"
+                        Content="Genere •	Lettre d'invitation au titulaire pour la réalisation d'enquête"
+                        Background="#EAA221"  Click="Invitation_Enquete_Click" Margin="50,0,0,0"/>
                 <!--Lettre de transmission-->
-                <Rectangle Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                    	Lettre de transmission de la décision du permis de recherche au titulaire
-                </TextBlock>
-                <Button x:Name="Generer_Lettre_Transmission" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="7" Content="Générer" Margin="0,10,25,10" Click="Generer_Lettre_Transmission_Click" />
-
-                <!-- Bordereau d’envoi -->
-                <Rectangle Grid.Column="0"  Grid.Row="8" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="8" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                  Bordereau d’envoi de la décision du permis de recherche
-                </TextBlock>
-                <Button x:Name="Generer_Bordereau_envoi" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="8" Content="Générer" Margin="0,10,25,10" Click="Generer_Bordereau_envoi_Click" />
-
-            </Grid>
-            <!-- Programme de Travaux -->
-            <Grid  Height="200">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
-                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
-                       Grid.Column="3" Grid.Row="0">
-                 Programme de Travaux</TextBlock>
-
-                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
-                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
-                    	Programme de travaux
-                </TextBlock>
-                <Button x:Name="Mise_demeur_TP" 
-                       Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" Click="Mise_demeur_TP_Click" />
-                <TextBlock x:Name="RestJourProgramme" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
-                    	reste : 29 j
-                </TextBlock>
-                <CheckBox x:Name="ProgrammeTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
-                <TextBlock 
-                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
-                       Grid.Column="0" Grid.Row="2">
-            Investisement réaliser</TextBlock>
-                <TextBox x:Name="investisement_realise" Grid.ColumnSpan="2"
-                     FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
-
-            </Grid>
-            <!-- Déclaration d’ouverture des travaux -->
-            <Grid  Height="260">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
-                       FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
-                       Grid.Column="3" Grid.Row="0">
-                 Déclaration d’ouverture des travaux</TextBlock>
-
-                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
-                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
-                    	Déclaration d’ouverture des travaux
-                </TextBlock>
-                <Button x:Name="Mise_demeur_OuvertureTravaux" 
-                       Grid.Column="5"  Background="#EAA221"  Grid.ColumnSpan="2"  Grid.Row="1" Content="Générer Mise en demeur" Margin="0,10,25,10" Click="Mise_demeur_OuvertureTravaux_Click" />
-                <TextBlock x:Name="RestJourDeclarationTravaux" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
-                    	reste : 29 j
-                </TextBlock>
-                <CheckBox Name="DeclarationTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
-                <TextBlock 
-                       FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
-                       Grid.Column="0" Grid.Row="2">
-            Occupation temporaire</TextBlock>
-                <TextBox x:Name="occupation_temporaire" Grid.ColumnSpan="2"
-                     FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
+                <Rectangle Grid.Column="0"  Grid.Row="3" Grid.ColumnSpan="7" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
+                <Button x:Name="PremierMiseEnDemeure"
+                       Grid.Column="0" Grid.ColumnSpan="3"  Background="#EAA221" Grid.Row="8" Content="Générer Premiere Mise en demeur" Margin="50,10,0,10" 
+                        Click="PremierMiseEnDemeure_Click" />
+                <Button x:Name="DeuxiemeMiseEnDemeure"
+                       Grid.Column="3" Grid.ColumnSpan="3"  Background="#EAA221" Grid.Row="8" Content="Générer Mise en demeur" Margin="50,10,0,10" 
+                        Click="DeuxiemeMiseEnDemeure_Click" />
+                <!---->
                 <Button x:Name="Exporter_excel" 
-                       Grid.Column="7"  Background="#0861AD"  Grid.ColumnSpan="2"  Grid.Row="3" Content="Exporter Excel" Margin="0,10,20,10" Click="Exporter_excel_Click" />
-
+                       Grid.Column="7"  Background="#0861AD"  Grid.ColumnSpan="2"  Grid.Row="8" Content="Exporter Excel" Margin="0,10,20,10" Click="Exporter_excel_Click" />
             </Grid>
         </StackPanel>
     </ScrollViewer>

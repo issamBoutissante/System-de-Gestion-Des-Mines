@@ -14,8 +14,8 @@ namespace Projet_Mines_Official
             this.Superficie = 0;
             this.Abscisse = "";
             this.Ordonnee = "";
-            this.Dir_Est_ouest = 'e';
-            this.Dir_nord_sud = 'n';
+            this.Dir_Est_ouest = "e";
+            this.Dir_nord_sud = "n";
             this.Dis_e_o = "";
             this.Dis_n_s = "";
             this.Zone = "";
@@ -28,8 +28,8 @@ namespace Projet_Mines_Official
         public double? Superficie { get; set; }
         public string Abscisse { get; set; }
         public string Ordonnee { get; set; }
-        public char? Dir_Est_ouest { get; set; }
-        public char? Dir_nord_sud { get; set; }
+        public string Dir_Est_ouest { get; set; }
+        public string Dir_nord_sud { get; set; }
         public string Dis_e_o { get; set; }
         public string Dis_n_s { get; set; }
         public string Zone { get; set; }

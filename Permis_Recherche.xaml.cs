@@ -10,6 +10,7 @@ using System.Threading;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Projet_Mines_Official
 {
@@ -23,6 +24,7 @@ namespace Projet_Mines_Official
         public Permis_Recherche(Home home, int PermisId)
         {
             InitializeComponent();
+            this.Height = 630;
             Home = home;
             this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
@@ -58,8 +60,42 @@ namespace Projet_Mines_Official
             ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
         }
         #region Fill data 
+        class DirInfo
+        {
+            public string DirName { get; set; }
+            public string DirValue { get ; set; }
+            public DirInfo(string dirName,string dirValue)
+            {
+                this.DirName = dirName;
+                this.DirValue = dirValue;
+            }
+        }
+        
         private void FillComboboxes()
         {
+            ICollection<DirInfo> DirEOList = new List<DirInfo>() {
+                new DirInfo("Est","e"),
+                new DirInfo("Ouest","o")
+            };
+            Dir_e_o.ItemsSource = DirEOList;
+            Dir_e_o.SelectedValuePath = "DirValue";
+            Dir_e_o.DisplayMemberPath = "DirName";
+            Dir_e_o.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_Est_ouest");
+            Dir_e_o.SelectionChanged += Dir_SelectionChanged;
+
+
+            ICollection<DirInfo> DirNSList = new List<DirInfo>() {
+                new DirInfo("Nord","n"),
+                new DirInfo("Sud","s")
+            };
+            dir_n_s.ItemsSource = DirNSList;
+            dir_n_s.SelectedValuePath = "DirValue";
+            dir_n_s.DisplayMemberPath = "DirName";
+            dir_n_s.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_nord_sud");
+            dir_n_s.SelectionChanged += Dir_SelectionChanged;
+
+
+
             Carte.ItemsSource = projetMinesDBContext.Cartes.ToList();
             Carte.SelectedValuePath = "CarteId";
             Carte.DisplayMemberPath = "Nom_carte";
@@ -88,6 +124,12 @@ namespace Projet_Mines_Official
             Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
 
         }
+
+        private void Dir_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            MessageBox.Show(((ComboBox)sender).SelectedValue.ToString());
+        }
+
         private void BindDatePickers()
         {
             Date_Depot.SetBinding(DatePicker.SelectedDateProperty, "Date_Depot");
@@ -161,8 +203,6 @@ namespace Projet_Mines_Official
             ProgrammeTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isProgrammeTravauxExist");
             DeclarationTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDeclarationOuverture");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
-            Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dir_Est_ouest");
-            dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dir_nord_sud");
             Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
             Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
             foreach(Permis chev in this.Permis.Chevauchements)
@@ -296,17 +336,16 @@ namespace Projet_Mines_Official
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-
-        private void Mise_demeur_TP_Click(object sender, RoutedEventArgs e)
+        private void PremierMiseEnDemeure_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-           
+
             string societe = Nom_Societe.Text;
             string Num_PR = Numero_Permis.Text;
             DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
                 (Word.Application wordApp) =>
                 {
-                    
+
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
@@ -315,7 +354,7 @@ namespace Projet_Mines_Official
                 , dw.documentsContainer, () => { dw.Show(); });
         }
 
-        private void Mise_demeur_OuvertureTravaux_Click(object sender, RoutedEventArgs e)
+        private void DeuxiemeMiseEnDemeure_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
 
@@ -326,13 +365,11 @@ namespace Projet_Mines_Official
                 {
 
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-
         private void Generer_Decision_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
@@ -370,25 +407,27 @@ namespace Projet_Mines_Official
 
             string societe = Nom_Societe.Text;
             string Num_PR = Numero_Permis.Text;
+            string Num_DR = Numero_Demande.Text;
             DocumentGenerator.GenerateDocument(RapportPath.lettre_transmission_PR.Value,
                 (Word.Application wordApp) =>
                 {
 
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_DR>", Num_DR);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-
-        private void Generer_Bordereau_envoi_Click(object sender, RoutedEventArgs e)
+        #region Bordereau d'envoi
+        private void Generer_Bordereau_Denvoi(string Path)
         {
             documentsWord dw = new documentsWord();
 
             string societe = Nom_Societe.Text;
             string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bordereau_envoi_PR.Value,
+            DocumentGenerator.GenerateDocument(Path,
                 (Word.Application wordApp) =>
                 {
 
@@ -398,13 +437,25 @@ namespace Projet_Mines_Official
 
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-
+        private void Generer_Bordereau_envoi_DMH_Click(object sender, RoutedEventArgs e)
+        {
+            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DMH.Value);
+        }
+        private void Generer_Bordereau_envoi_DP_Click(object sender, RoutedEventArgs e)
+        {
+            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DP.Value);
+        }
+        private void Generer_Bordereau_envoi_Conservation_Click(object sender, RoutedEventArgs e)
+        {
+            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_Conservation.Value);
+        }
+        #endregion
         private void Rejet_demande_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
 
             string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
+            string Num_PR = Numero_Demande.Text;
             DocumentGenerator.GenerateDocument(RapportPath.Revocation_PR.Value,
                 (Word.Application wordApp) =>
                 {
@@ -572,5 +623,6 @@ namespace Projet_Mines_Official
                 Numero_Permis.Text = CurrentNumeroPermis.ToString();
             }
         }
+
     }
 }

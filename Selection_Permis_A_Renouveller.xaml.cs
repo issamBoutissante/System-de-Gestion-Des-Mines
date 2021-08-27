@@ -24,8 +24,8 @@ namespace Projet_Mines_Official
         Home home;
         public Selection_Permis_A_Renouveller(Home home)
         {
-            this.home = home;
             InitializeComponent();
+            this.home = home;
             List<int?> numeroPermis=context.Les_Permis.Select(p => p.Num_Permis).ToList();
             numeroPermis.RemoveAll(n => n.Value == 0);
             PermisAutoCombo.ItemsSource = numeroPermis;

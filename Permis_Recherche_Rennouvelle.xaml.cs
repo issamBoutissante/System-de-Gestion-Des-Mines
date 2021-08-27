@@ -21,13 +21,14 @@ namespace Projet_Mines_Official
 
         ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
-        Home Home;
+        Home home;
         int? CurrentNumeroDemmand;
         int? CurrentNumeroPermis;
         public Permis_Recherche_Rennouvelle(Home home, int PermisId)
         {
             InitializeComponent();
-            this.Home = home;
+            this.Height = 630;
+            this.home = home;
             this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
             InitializeControls();
@@ -146,8 +147,6 @@ namespace Projet_Mines_Official
             //Area Information
             Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
             NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
-            ProgrammeTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isProgrammeTravauxExist");
-            DeclarationTravauxCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDeclarationOuverture");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
             Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dir_Est_ouest");
             dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dir_nord_sud");
@@ -162,12 +161,6 @@ namespace Projet_Mines_Official
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
             //suivi decision information
             Numero_Permis.SetBinding(TextBox.TextProperty, "Num_Permis");
-            investisement_realise.SetBinding(TextBox.TextProperty, "Investisement_Realise");
-            occupation_temporaire.SetBinding(TextBox.TextProperty, "Occupation_Temporaire");
-
-            double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
-            RestJourProgramme.Text = $"Rest : {180 - daysPassed}";
-            RestJourDeclarationTravaux.Text = $"Rest : {360 - daysPassed}";
         }
         #endregion
         #region update data
@@ -189,7 +182,7 @@ namespace Projet_Mines_Official
             if (Numero_Permis.Text != "0")
                 this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
             this.projetMinesDBContext.SaveChanges();
-            this.Home.RemplirDataGrid();
+            this.home.RemplirDataGrid();
         }
         #endregion
         #region Chevauchemnet area
@@ -209,91 +202,6 @@ namespace Projet_Mines_Official
         }
         #endregion
         #region Generation Des Rapport
-        private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string NomSociete = Nom_Societe.Text;
-            string RegistreCommerce = Registre_Commerce.Text;
-            string NumeroCNSS = Numero_CNSS.Text;
-            string TaxeProf = Taxe_Prof.Text;
-            string NumeroDemande = Numero_Demande.Text;
-            string DomicileDemandeur = Domicile_Demandeur.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bulletin_Versement_PR.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", RegistreCommerce);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", NumeroCNSS);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", TaxeProf);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", NumeroDemande);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", DomicileDemandeur);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void Generer_Bon_achat_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-
-            string abscisse = Abscisse.Text;
-            string ordonnee = Ordonne.Text;
-            string carte = Carte.Text;
-            string societe = Nom_Societe.Text;
-            string DomicileDemandeur = Domicile_Demandeur.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bon_achat.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
-                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
-                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void Mise_demeur_TP_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void Mise_demeur_OuvertureTravaux_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
         private void Generer_Decision_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
@@ -325,41 +233,11 @@ namespace Projet_Mines_Official
             this.Permis.Etat_PermisId = (int)EtatPermis.Decision;
         }
 
-        private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)
+
+        private void Invitation_Enquete_Click(object sender, RoutedEventArgs e)
         {
-            documentsWord dw = new documentsWord();
 
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.lettre_transmission_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
         }
-
-        private void Generer_Bordereau_envoi_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bordereau_envoi_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
         private void Rejet_demande_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
@@ -372,6 +250,40 @@ namespace Projet_Mines_Official
 
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+        private void PremierMiseEnDemeure_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
+                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+
+        private void DeuxiemeMiseEnDemeure_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+
+            string societe = Nom_Societe.Text;
+            string Num_PR = Numero_Permis.Text;
+            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
+                (Word.Application wordApp) =>
+                {
+
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
 
@@ -536,7 +448,8 @@ namespace Projet_Mines_Official
         #region Le Code De PRR
         private void AfficherExPermis_Click(object sender, RoutedEventArgs e)
         {
-
+            int permisId = projetMinesDBContext.Les_Permis.Where(p => p.Num_Permis == this.Permis.Ex_Permis.Num_Permis).Single().PermisId;
+            Permis_Recherche.ShowExistingPermis(this.home, permisId);
         }
         #endregion
     }
