@@ -26,7 +26,7 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
             this.home = home;
-            List<int?> numeroPermis=context.Les_Permis.Select(p => p.Num_Permis).ToList();
+            List<int?> numeroPermis=context.Les_Permis.Where(p=>p.Etat_PermisId!=EtatPermis.Renouvelle && p.Etat_PermisId != EtatPermis.EnExploitation).Select(p => p.Num_Permis).ToList();
             numeroPermis.RemoveAll(n => n.Value == 0);
             PermisAutoCombo.ItemsSource = numeroPermis;
 
@@ -53,27 +53,12 @@ namespace Projet_Mines_Official
         private void Selectionner_Click(object sender, RoutedEventArgs e)
         {
             if (NumeroExPermis == 0) return;
-            ProjetMinesDBContext context = new ProjetMinesDBContext();
 
-            //valider si le permis deja rennovelle
-            bool isDejaRenouvelle=false;
-            context.Les_Permis.ToList().ForEach(p =>
-            {
-                if (p.Ex_Permis != null)
-                {
-                    if (p.Ex_Permis.Num_Permis == NumeroExPermis)
-                    {
-                        ModalError.ShowMsg("Ce Permis a ete deja rennouvelle");
-                        isDejaRenouvelle = true;
-                    }
-                }
-            });
-            if (isDejaRenouvelle) return;
             Permis ExPermis = context.Les_Permis.Where(p => p.Num_Permis == NumeroExPermis).Single();
             Permis newPermis = new Permis(ExPermis.Area, ExPermis.Titulaire);
-
             newPermis.Ex_PermisId = ExPermis.PermisId;
             newPermis.Type_PermisId =TypePermis.PRR;
+            ExPermis.Etat_PermisId = EtatPermis.Renouvelle;
             context.Les_Permis.Add(newPermis);
             context.SaveChanges();
 

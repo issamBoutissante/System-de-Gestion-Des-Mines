@@ -39,8 +39,8 @@ namespace Projet_Mines_Official
             this.Date_Decision = DateTime.Now.Date;
             this.Date_Enquete = DateTime.Now.Date;
             this.Date_Rapot = DateTime.Now.Date;
-            this.Etat_PermisId = (int)EtatPermis.Demmande;
-            this.Type_PermisId = (int)TypePermis.PR;
+            this.Etat_PermisId = EtatPermis.Demmande;
+            this.Type_PermisId = TypePermis.PR;
             this.Area = area;
             this.Titulaire = titulaire;
             this.isDecisionSigne = false;

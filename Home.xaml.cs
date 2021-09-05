@@ -26,6 +26,7 @@ namespace Projet_Mines_Official
             List<Permis> Les_Permis=this.projetMinesDBContext.Les_Permis.ToList();
             Les_Permis.Reverse();
             this.DataGridPermis.ItemsSource = null;
+            this.DataGridPermis.Items.Clear();
             this.DataGridPermis.ItemsSource = Les_Permis;
         }
        
@@ -44,6 +45,9 @@ namespace Projet_Mines_Official
                 case "PRR":
                     Selection_Permis_A_Renouveller.Show(this);
                     break;
+                case "LE":
+                    Selectionner_Permis_De_Licence.Show(this, OperationType.New);
+                    break;
             }
         }
 
@@ -59,6 +63,7 @@ namespace Projet_Mines_Official
                     Permis_Recherche_Rennouvelle.ShowExistingPermis(this, permis.PermisId);
                     break;
                 case TypePermis.LE:
+                    Licence_Exploitation.ShowExistingLicence(this, permis.PermisId);
                     break;
                 case TypePermis.LER:
                     break;

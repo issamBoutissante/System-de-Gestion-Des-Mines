@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 
 namespace Projet_Mines_Official
 {
-    public enum EtatPermis
+    public class EtatPermis
     {
-        Demmande=1,
-        Decision=2,
-        Permis=3
+        public const int Demmande = 1;
+        public const int Decision = 2;
+        public const int Permis = 3;
+        public const int Renouvelle = 4;
+        public const int EnExploitation = 5;
     }
 }

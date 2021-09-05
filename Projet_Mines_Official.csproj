@@ -119,6 +119,7 @@
       <HintPath>packages\System.IO.Packaging.4.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.Security" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -139,6 +140,9 @@
     </ApplicationDefinition>
     <Compile Include="Accueil.xaml.cs">
       <DependentUpon>Accueil.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddBorne.xaml.cs">
+      <DependentUpon>AddBorne.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -169,6 +173,13 @@
     <Compile Include="ExcelGenerator.cs" />
     <Compile Include="InitilializerLesDossierPermis.cs" />
     <Compile Include="Helper Classes\ObjectShredder.cs" />
+    <Compile Include="Licence_Area.xaml.cs">
+      <DependentUpon>Licence_Area.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Licence_Exploitation.xaml.cs">
+      <DependentUpon>Licence_Exploitation.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PermisState.cs" />
     <Compile Include="Permis_Recherche_Rennouvelle.xaml.cs">
       <DependentUpon>Permis_Recherche_Rennouvelle.xaml</DependentUpon>
     </Compile>
@@ -186,8 +197,11 @@
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Selection_Permis_A_Renouveller.xaml.cs">
-      <DependentUpon>Selection_Permis_A_Renouveller.xaml</DependentUpon>
+    <Compile Include="Selectionner_Permis_De_Licence.xaml.cs">
+      <DependentUpon>Selectionner_Permis_De_Licence.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Selectionner_Permis_Rennouveller.xaml.cs">
+      <DependentUpon>Selectionner_Permis_Rennouveller.xaml</DependentUpon>
     </Compile>
     <Compile Include="STRATEGIE.xaml.cs">
       <DependentUpon>STRATEGIE.xaml</DependentUpon>
@@ -260,11 +274,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="AddBorne.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="documentsWord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Home.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licence_Area.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Licence_Exploitation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -304,7 +330,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Selection_Permis_A_Renouveller.xaml">
+    <Page Include="Selectionner_Permis_De_Licence.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Selectionner_Permis_Rennouveller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

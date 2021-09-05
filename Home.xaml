@@ -90,6 +90,31 @@
                 </Style>
             </Button.Resources>
         </Button>
+        <Button  
+                Grid.Column="5" 
+                Grid.Row="2"
+                Height="25"
+                HorizontalAlignment="Center"
+                Background="WhiteSmoke" 
+                Foreground="#0861AD" 
+                FontWeight="Bold" 
+                FontSize="10" 
+                FontFamily="Arial" 
+                Margin="10,0,0,0" 
+                Click="Window_Loaded">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+            <fa:ImageAwesome Icon="Refresh"
+                             Grid.Column="0"
+                             Grid.Row="0"
+                             VerticalAlignment="Center"
+                             Foreground="Gray"
+                             Width="20"
+                             HorizontalAlignment="Center"/>
+        </Button>
         <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"

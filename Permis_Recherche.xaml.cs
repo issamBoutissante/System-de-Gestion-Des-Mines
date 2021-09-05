@@ -235,14 +235,18 @@ namespace Projet_Mines_Official
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+            //I will focus on two diffrent Textboxes to terminate the binding
             Numero_Demande.Focus();
+            Superficie.Focus();
+            //====
             UpdateChevauchements();
             //update Etat Permis
-            if(Numero_Permis.Text!="0")
-                this.Permis.Etat_PermisId = (int)EtatPermis.Permis;
+            if (Numero_Permis.Text != "0")
+                PermisState.updateEtat(this.Permis, EtatPermis.Permis);
             this.projetMinesDBContext.SaveChanges();
             this.Home.RemplirDataGrid();
         }
+       
         #endregion
         #region add Chevauchemnet area
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
@@ -398,7 +402,7 @@ namespace Projet_Mines_Official
                 }
 
                 , dw.documentsContainer, () => { dw.Show(); });
-            this.Permis.Etat_PermisId = (int)EtatPermis.Decision;
+            PermisState.updateEtat(this.Permis, EtatPermis.Decision);
         }
         
         private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)
