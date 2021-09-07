@@ -25,7 +25,6 @@ namespace Projet_Mines_Official
                     }
                     break;
             }
-            MessageBox.Show(permis.Etat_PermisId.ToString());
         }
     }
 }

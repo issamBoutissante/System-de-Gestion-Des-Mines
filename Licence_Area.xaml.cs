@@ -26,17 +26,25 @@ namespace Projet_Mines_Official
         public Licence_Area(Permis permis)
         {
             InitializeComponent();
-            this.Permis = permis;
+            this.Permis = this.context.Les_Permis.Find(permis.PermisId);
+            this.DataContext = this.Permis;
             InitializeControls();
+            this.Closing += Licence_Area_Closing;
         }
-        //for test
-        public Licence_Area()
+
+        private void Licence_Area_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            InitializeComponent();
-            this.Permis = context.Les_Permis.Where(p => p.Type_PermisId == TypePermis.LE).ToList().First();
-            InitializeControls();
-            MessageBox.Show(this.Permis.Area.Bornes.Count.ToString());
+            this.context.SaveChanges();
         }
+
+        ////for test
+        //public Licence_Area()
+        //{
+        //    InitializeComponent();
+        //    this.Permis = context.Les_Permis.Where(p => p.Type_PermisId == TypePermis.LE).ToList().First();
+        //    InitializeControls();
+        //    this.Closing += Licence_Area_Closing;
+        //}
         public static void Show(Permis permis)
         {
             new Licence_Area(permis).ShowDialog();
@@ -47,74 +55,17 @@ namespace Projet_Mines_Official
             BindTextBoxes();
         }
         #region Fill data 
-        class DirInfo
-        {
-            public string DirName { get; set; }
-            public string DirValue { get; set; }
-            public DirInfo(string dirName, string dirValue)
-            {
-                this.DirName = dirName;
-                this.DirValue = dirValue;
-            }
-        }
+     
 
         private void FillComboboxes()
         {
-            ICollection<DirInfo> DirEOList = new List<DirInfo>() {
-                new DirInfo("Est","e"),
-                new DirInfo("Ouest","o")
-            };
-            Dir_e_o.ItemsSource = DirEOList;
-            Dir_e_o.SelectedValuePath = "DirValue";
-            Dir_e_o.DisplayMemberPath = "DirName";
-            Dir_e_o.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_Est_ouest");
-            Dir_e_o.SelectionChanged += Dir_SelectionChanged;
+            Carte.SetBinding(TextBox.TextProperty, "Area.Carte.Nom_carte");
+            Region.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Region.Nom_Region");
+            Province.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Nom_Province");
+            Point_Pevot.SetBinding(TextBox.TextProperty, "Area.Point_Pivot.Nom_Point_Pevot");
+            Commune.SetBinding(TextBox.TextProperty, "Area.Commune.Nom_Commune");
+            Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Nom_Caidat");
 
-
-            ICollection<DirInfo> DirNSList = new List<DirInfo>() {
-                new DirInfo("Nord","n"),
-                new DirInfo("Sud","s")
-            };
-            dir_n_s.ItemsSource = DirNSList;
-            dir_n_s.SelectedValuePath = "DirValue";
-            dir_n_s.DisplayMemberPath = "DirName";
-            dir_n_s.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_nord_sud");
-            dir_n_s.SelectionChanged += Dir_SelectionChanged;
-
-
-
-            Carte.ItemsSource = context.Cartes.ToList();
-            Carte.SelectedValuePath = "CarteId";
-            Carte.DisplayMemberPath = "Nom_carte";
-            Point_Pevot.ItemsSource = context.Point_Pivots.ToList();
-            Point_Pevot.SelectedValuePath = "Point_PivotId";
-            Point_Pevot.DisplayMemberPath = "Nom_Point_Pevot";
-            Region.ItemsSource = context.Regions.ToList();
-            Region.SelectedValuePath = "RegionId";
-            Region.DisplayMemberPath = "Nom_Region";
-            //Province.SetBinding(ComboBox.ItemsSourceProperty,"";
-            Province.ItemsSource = context.Provinces.ToList();
-            Province.SelectedValuePath = "ProvinceId";
-            Province.DisplayMemberPath = "Nom_Province";
-            Caidat.ItemsSource = context.Caidats.ToList();
-            Caidat.SelectedValuePath = "CaidatId";
-            Caidat.DisplayMemberPath = "Nom_Caidat";
-            Commune.ItemsSource = context.Communes.ToList();
-            Commune.SelectedValuePath = "CommuneId";
-            Commune.DisplayMemberPath = "Nom_Commune";
-            //Bind them
-            Carte.SetBinding(ComboBox.SelectedValueProperty, "Area.CarteId");
-            Region.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.RegionId");
-            Province.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.ProvinceId");
-            Point_Pevot.SetBinding(ComboBox.SelectedValueProperty, "Area.Point_PivotId");
-            Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.CommuneId");
-            Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
-
-        }
-
-        private void Dir_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show(((ComboBox)sender).SelectedValue.ToString());
         }
 
         private void BindTextBoxes()
@@ -138,7 +89,6 @@ namespace Projet_Mines_Official
         public void RemplirBornes()
         {
             Bornes.Children.Clear();
-            MessageBox.Show(this.Permis.Area.Bornes.Count.ToString());
             foreach (Borne b in this.Permis.Area.Bornes)
             {
                 Bornes.Children.Add(GetBorne(b));

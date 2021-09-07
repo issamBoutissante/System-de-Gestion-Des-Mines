@@ -183,7 +183,7 @@
                 </DataGridTextColumn>
                 <!--Election domicile-->
                 <!--more data-->
-                <DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="*">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">

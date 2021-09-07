@@ -25,7 +25,6 @@ namespace Projet_Mines_Official
     }
     public partial class Selectionner_Permis_De_Licence : Window
     {
-        ProjetMinesDBContext context = new ProjetMinesDBContext();
         int NumeroExPermis = 0;
         Home home;
         OperationType operationType;
@@ -36,7 +35,7 @@ namespace Projet_Mines_Official
             this.operationType = operationType;
             this.currentPermis = currentPermis;
             this.home = home;
-            List<int?> numeroPermis = context.Les_Permis.Where(p => p.Etat_PermisId != EtatPermis.EnExploitation).ToList().Select(p => p.Num_Permis).ToList();
+            List<int?> numeroPermis = Database.context.Les_Permis.Where(p => p.Etat_PermisId != EtatPermis.EnExploitation).ToList().Select(p => p.Num_Permis).ToList();
             numeroPermis.RemoveAll(n => n.Value == 0);
             PermisAutoCombo.ItemsSource = numeroPermis;
 
@@ -55,7 +54,7 @@ namespace Projet_Mines_Official
         private void Afficher_Click(object sender, RoutedEventArgs e)
         {
             if (NumeroExPermis == 0) return;
-            Permis selectedPermis = context.Les_Permis.Where(p => p.Num_Permis == NumeroExPermis).Single();
+            Permis selectedPermis = Database.context.Les_Permis.Where(p => p.Num_Permis == NumeroExPermis).Single();
             if (selectedPermis.Type_PermisId == TypePermis.PR)
             {
                 Permis_Recherche.ShowExistingPermis(this.home, selectedPermis.PermisId);
@@ -81,9 +80,9 @@ namespace Projet_Mines_Official
         }
         private void newPermis()
         {
-            Permis selectedPermis = context.Les_Permis.Where(p => p.Num_Permis == NumeroExPermis).Single();
+            Permis selectedPermis = Database.context.Les_Permis.Where(p => p.Num_Permis == NumeroExPermis).Single();
             selectedPermis.Etat_PermisId = EtatPermis.EnExploitation;
-            context.SaveChanges();
+            Database.context.SaveChanges();
 
             Permis newPermis = new Permis(new Area(), new Titulaire());
             newPermis.Licence_Permis.Add(selectedPermis);

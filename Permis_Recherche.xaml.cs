@@ -81,7 +81,6 @@ namespace Projet_Mines_Official
             Dir_e_o.SelectedValuePath = "DirValue";
             Dir_e_o.DisplayMemberPath = "DirName";
             Dir_e_o.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_Est_ouest");
-            Dir_e_o.SelectionChanged += Dir_SelectionChanged;
 
 
             ICollection<DirInfo> DirNSList = new List<DirInfo>() {
@@ -92,7 +91,6 @@ namespace Projet_Mines_Official
             dir_n_s.SelectedValuePath = "DirValue";
             dir_n_s.DisplayMemberPath = "DirName";
             dir_n_s.SetBinding(ComboBox.SelectedValueProperty, "Area.Dir_nord_sud");
-            dir_n_s.SelectionChanged += Dir_SelectionChanged;
 
 
 
@@ -123,11 +121,6 @@ namespace Projet_Mines_Official
             Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.CommuneId");
             Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
 
-        }
-
-        private void Dir_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show(((ComboBox)sender).SelectedValue.ToString());
         }
 
         private void BindDatePickers()
