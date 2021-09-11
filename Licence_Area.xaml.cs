@@ -21,12 +21,11 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class Licence_Area : Window
     {
-        ProjetMinesDBContext context=new ProjetMinesDBContext();
         Permis Permis;
         public Licence_Area(Permis permis)
         {
             InitializeComponent();
-            this.Permis = this.context.Les_Permis.Find(permis.PermisId);
+            this.Permis = DataBase.context.Les_Permis.Find(permis.PermisId);
             this.DataContext = this.Permis;
             InitializeControls();
             this.Closing += Licence_Area_Closing;
@@ -34,7 +33,7 @@ namespace Projet_Mines_Official
 
         private void Licence_Area_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            this.context.SaveChanges();
+            DataBase.context.SaveChanges();
         }
 
         ////for test
@@ -136,7 +135,7 @@ namespace Projet_Mines_Official
                 Button selectedButton=(Button)sender;
                 Borne selectedBorne = this.Permis.Area.Bornes.Where(b => $"X : {b.Borne_X} - Y : {b.Borne_Y}" == selectedButton.Content.ToString()).First();
                 this.Permis.Area.Bornes.Remove(selectedBorne);
-                this.context.SaveChanges();
+                DataBase.context.SaveChanges();
                 Bornes.Children.Remove(selectedButton);
             }
         }
@@ -187,7 +186,7 @@ namespace Projet_Mines_Official
 
         private void AddBords_Click(object sender, RoutedEventArgs e)
         {
-            AddBorne.Show(this,this.Permis.PermisId,context);
+            AddBorne.Show(this,this.Permis.PermisId);
         }
     }
 }

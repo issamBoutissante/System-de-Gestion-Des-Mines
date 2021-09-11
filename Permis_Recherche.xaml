@@ -557,10 +557,16 @@
                 <!--Lettre de transmission-->
                 <Rectangle Grid.Column="0"  Grid.Row="3" Grid.ColumnSpan="7" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
                 <Button x:Name="PremierMiseEnDemeure"
-                       Grid.Column="0" Grid.ColumnSpan="3"  Background="#EAA221" Grid.Row="3" Content="Générer Premiere Mise en demeur" Margin="50,10,0,10" 
+                       Grid.Column="0" Grid.ColumnSpan="3" 
+                        Background="#EAA221" Grid.Row="3"
+                        Content="Générer Premiere Mise en demeur" 
+                        Margin="50,10,0,10" 
                         Click="PremierMiseEnDemeure_Click" />
                 <Button x:Name="DeuxiemeMiseEnDemeure"
-                       Grid.Column="3" Grid.ColumnSpan="3"  Background="#EAA221" Grid.Row="3" Content="Générer Mise en demeur" Margin="50,10,0,10" 
+                       Grid.Column="3" Grid.ColumnSpan="3" 
+                        Background="#EAA221" Grid.Row="3" 
+                        Content="Générer Mise en demeur"
+                        Margin="50,10,0,10" 
                         Click="DeuxiemeMiseEnDemeure_Click" />
                 <!---->
                 <Button x:Name="Exporter_excel" 

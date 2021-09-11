@@ -11,6 +11,22 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Indigo.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <!--Buttons of the Rapports-->
+            <Style TargetType="Button" x:Key="RapportBtn">
+                <Setter Property="Background" Value="#EAA221"/>
+                <Setter Property="Foreground" Value="White"/>
+                <Setter Property="Padding" Value="10 5 10 5"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="BorderBrush" Value="Gray" />
+                <Setter Property="Margin" Value="0 0 10 0"/>
+                <Setter Property="HorizontalAlignment" Value="Right"/>
+            </Style>
+            <Style TargetType="Border" x:Key="RapportContainer">
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="BorderBrush" Value="Gray"/>
+                <Setter Property="Padding" Value="10"/>
+                <Setter Property="Margin" Value="10 5 10 5"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

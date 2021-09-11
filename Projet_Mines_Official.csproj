@@ -164,6 +164,7 @@
     <Compile Include="Classes\Region.cs" />
     <Compile Include="Classes\Titulaire.cs" />
     <Compile Include="Classes\Type_Permis.cs" />
+    <Compile Include="Database.cs" />
     <Compile Include="Helper Classes\CustomLINQtoDataSetMethods.cs" />
     <Compile Include="documentsWord.xaml.cs">
       <DependentUpon>documentsWord.xaml</DependentUpon>
@@ -179,6 +180,9 @@
     <Compile Include="Licence_Exploitation.xaml.cs">
       <DependentUpon>Licence_Exploitation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Licence_Exploitation_Renouvelle.xaml.cs">
+      <DependentUpon>Licence_Exploitation_Renouvelle.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PermisState.cs" />
     <Compile Include="Permis_Recherche_Rennouvelle.xaml.cs">
       <DependentUpon>Permis_Recherche_Rennouvelle.xaml</DependentUpon>
@@ -193,9 +197,15 @@
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Rapport_PR.xaml.cs">
+      <DependentUpon>Rapport_PR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Selectionner_Licence_Renouvelle.xaml.cs">
+      <DependentUpon>Selectionner_Licence_Renouvelle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Selectionner_Permis_De_Licence.xaml.cs">
       <DependentUpon>Selectionner_Permis_De_Licence.xaml</DependentUpon>
@@ -294,6 +304,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Licence_Exploitation_Renouvelle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -326,7 +340,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Rapport_PR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="saveForINfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Selectionner_Licence_Renouvelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

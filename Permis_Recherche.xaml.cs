@@ -16,7 +16,6 @@ namespace Projet_Mines_Official
 {
     public partial class Permis_Recherche : Window
     {
-        ProjetMinesDBContext projetMinesDBContext = new ProjetMinesDBContext();
         public Permis Permis { get; set; }
         Home Home;
         int? CurrentNumeroDemmand;
@@ -26,7 +25,7 @@ namespace Projet_Mines_Official
             InitializeComponent();
             this.Height = 630;
             Home = home;
-            this.Permis = projetMinesDBContext.Les_Permis.Find(PermisId);
+            this.Permis = DataBase.context.Les_Permis.Find(PermisId);
             this.DataContext = this.Permis;
             InitializeControls();
             InitializeAutoCompleteCombo();
@@ -35,10 +34,9 @@ namespace Projet_Mines_Official
         }
         internal static void ShowNewPermis(Home home)
         {
-            ProjetMinesDBContext context = new ProjetMinesDBContext();
             Permis newPermis = new Permis(new Area(), new Titulaire());
-            context.Les_Permis.Add(newPermis);
-            context.SaveChanges();
+            DataBase.context.Les_Permis.Add(newPermis);
+            DataBase.context.SaveChanges();
 
             InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
             new Permis_Recherche(home,newPermis.PermisId).Show();
@@ -57,7 +55,7 @@ namespace Projet_Mines_Official
         }
         private void InitializeAutoCompleteCombo()
         {
-            ChevauchementCombo.ItemsSource = this.projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).ToList();
+            ChevauchementCombo.ItemsSource = DataBase.context.Les_Permis.Select(p => p.Num_Permis).ToList();
         }
         #region Fill data 
         class DirInfo
@@ -94,23 +92,23 @@ namespace Projet_Mines_Official
 
 
 
-            Carte.ItemsSource = projetMinesDBContext.Cartes.ToList();
+            Carte.ItemsSource = DataBase.context.Cartes.ToList();
             Carte.SelectedValuePath = "CarteId";
             Carte.DisplayMemberPath = "Nom_carte";
-            Point_Pevot.ItemsSource = projetMinesDBContext.Point_Pivots.ToList();
+            Point_Pevot.ItemsSource = DataBase.context.Point_Pivots.ToList();
             Point_Pevot.SelectedValuePath = "Point_PivotId";
             Point_Pevot.DisplayMemberPath = "Nom_Point_Pevot";
-            Region.ItemsSource = projetMinesDBContext.Regions.ToList();
+            Region.ItemsSource = DataBase.context.Regions.ToList();
             Region.SelectedValuePath = "RegionId";
             Region.DisplayMemberPath = "Nom_Region";
             //Province.SetBinding(ComboBox.ItemsSourceProperty,"";
-            Province.ItemsSource = projetMinesDBContext.Provinces.ToList();
+            Province.ItemsSource = DataBase.context.Provinces.ToList();
             Province.SelectedValuePath = "ProvinceId";
             Province.DisplayMemberPath = "Nom_Province";
-            Caidat.ItemsSource = projetMinesDBContext.Caidats.ToList();
+            Caidat.ItemsSource = DataBase.context.Caidats.ToList();
             Caidat.SelectedValuePath = "CaidatId";
             Caidat.DisplayMemberPath = "Nom_Caidat";
-            Commune.ItemsSource = projetMinesDBContext.Communes.ToList();
+            Commune.ItemsSource = DataBase.context.Communes.ToList();
             Commune.SelectedValuePath = "CommuneId";
             Commune.DisplayMemberPath = "Nom_Commune";
             //Bind them
@@ -223,7 +221,7 @@ namespace Projet_Mines_Official
               {
                   Button b = (Button)obj;
                   int numero = Convert.ToInt32(b.Content);
-                  this.Permis.Chevauchements.Add(this.projetMinesDBContext.Les_Permis.Single(p=>p.Num_Permis==numero));
+                  this.Permis.Chevauchements.Add(DataBase.context.Les_Permis.Single(p=>p.Num_Permis==numero));
               });
         }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -236,7 +234,7 @@ namespace Projet_Mines_Official
             //update Etat Permis
             if (Numero_Permis.Text != "0")
                 PermisState.updateEtat(this.Permis, EtatPermis.Permis);
-            this.projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
             this.Home.RemplirDataGrid();
         }
        
@@ -245,7 +243,7 @@ namespace Projet_Mines_Official
         private void addChevauchement_Click(object sender, RoutedEventArgs e)
         {
             int num_Permis=Convert.ToInt32(ChevauchementCombo.Text);
-            bool isExist=this.projetMinesDBContext.Les_Permis.Any(p => p.Num_Permis == num_Permis);
+            bool isExist=DataBase.context.Les_Permis.Any(p => p.Num_Permis == num_Permis);
             if (isExist
                 )
             {
@@ -521,7 +519,7 @@ namespace Projet_Mines_Official
                 }
                 using (IXLWorkbook xL = new XLWorkbook())
                 {
-                    var data = this.projetMinesDBContext.Les_Permis.Select(p => new {
+                    var data = DataBase.context.Les_Permis.Select(p => new {
                         numeroPermis = p.Num_Permis.ToString(),
                         numeroDemmande = p.Num_Demmande.ToString(),
                         dateDepotDemmande = p.Date_Depot.ToString(),
@@ -588,7 +586,7 @@ namespace Projet_Mines_Official
 
         private void Numero_Demande_MouseLeave(object sender, MouseEventArgs e)
         {
-            List<int?> numerosDemmandes = projetMinesDBContext.Les_Permis.Select(p => p.Num_Demmande).ToList();
+            List<int?> numerosDemmandes = DataBase.context.Les_Permis.Select(p => p.Num_Demmande).ToList();
             numerosDemmandes.Remove(CurrentNumeroDemmand);
             if (string.IsNullOrEmpty(Numero_Demande.Text))
             {
@@ -605,7 +603,7 @@ namespace Projet_Mines_Official
 
         private void Numero_Permis_MouseLeave(object sender, MouseEventArgs e)
         {
-            List<int?> numerosPermis = projetMinesDBContext.Les_Permis.Select(p => p.Num_Permis).Distinct().ToList();
+            List<int?> numerosPermis = DataBase.context.Les_Permis.Select(p => p.Num_Permis).Distinct().ToList();
             numerosPermis.Remove(CurrentNumeroPermis);
             numerosPermis.Remove(0);
             if (string.IsNullOrEmpty(Numero_Permis.Text))

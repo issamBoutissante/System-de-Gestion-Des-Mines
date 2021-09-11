@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projet_Mines_Official
 {
-    class Database
+    class DataBase
     {
         public static ProjetMinesDBContext context = new ProjetMinesDBContext();
     }

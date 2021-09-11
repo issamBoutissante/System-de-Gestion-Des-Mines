@@ -26,8 +26,7 @@ namespace Projet_Mines_Official
 
         private void S_authentifier_Click(object sender, RoutedEventArgs e)
         {
-            ProjetMinesDBContext context = new ProjetMinesDBContext();
-            bool exists = context.Utilisateurs.Any(u => u.NomUtilisateur == NomUtilisateur.Text && u.MotPass == MotPass.Password);
+            bool exists = DataBase.context.Utilisateurs.Any(u => u.NomUtilisateur == NomUtilisateur.Text && u.MotPass == MotPass.Password);
             if (!exists)
             {
                 ErrorMessage.Text = "Le nom d'utilisateur ou mot de passe incorrect";

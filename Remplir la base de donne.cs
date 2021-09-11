@@ -5,7 +5,6 @@ namespace Projet_Mines_Official
 {
     class Remplir_la_base_de_donne
     {
-        static ProjetMinesDBContext projetMinesDBContext=new ProjetMinesDBContext();
         public static void RemplirTypePermis()
         {
             List<Type_Permis> type_Permis = new List<Type_Permis>() {
@@ -14,8 +13,8 @@ namespace Projet_Mines_Official
                 new Type_Permis(){Type="LE"},
                 new Type_Permis(){Type="LEE"}
             };
-            if(projetMinesDBContext.Types_Permis.Count()==0)
-                projetMinesDBContext.Types_Permis.AddRange(type_Permis);
+            if(DataBase.context.Types_Permis.Count()==0)
+                DataBase.context.Types_Permis.AddRange(type_Permis);
         }
         public static void RemplirEtat_Permis()
         {
@@ -27,8 +26,8 @@ namespace Projet_Mines_Official
                 new Etat_Permis() { Etat="Renouvelle"},
                 new Etat_Permis() { Etat="EnExploitation"},
             };
-            if(projetMinesDBContext.Etats_Permis.Count()==0)
-                projetMinesDBContext.Etats_Permis.AddRange(etat_Permis);
+            if(DataBase.context.Etats_Permis.Count()==0)
+                DataBase.context.Etats_Permis.AddRange(etat_Permis);
         }
         public static void RemplirRegion()
         {
@@ -37,14 +36,14 @@ namespace Projet_Mines_Official
                 new Region(){Nom_Region="Marrakech-Safi"},
                 new Region(){Nom_Region="MTH"},
             };
-            if(projetMinesDBContext.Regions.Count()==0)
-                projetMinesDBContext.Regions.AddRange(regions);
+            if(DataBase.context.Regions.Count()==0)
+                DataBase.context.Regions.AddRange(regions);
         }
         public static void RemplirProvince()
         {
             List<Province> provinces = new List<Province>()
             {
-                new Province(){Nom_Province="Marrakech",Region=projetMinesDBContext.Regions.Single(r=>r.Nom_Region=="Marrakech-Safi")},
+                new Province(){Nom_Province="Marrakech",Region=DataBase.context.Regions.Single(r=>r.Nom_Region=="Marrakech-Safi")},
                 new Province(){Nom_Province="Chichaoua",RegionId=1},
                 new Province(){Nom_Province="Al Haouz"},
                 new Province(){Nom_Province="El Kelaâ des Sraghna"},
@@ -54,41 +53,41 @@ namespace Projet_Mines_Official
                 new Province(){Nom_Province="Youssoufia"},
                 
             };
-            if (projetMinesDBContext.Provinces.Count() == 0)
-                projetMinesDBContext.Provinces.AddRange(provinces);
+            if (DataBase.context.Provinces.Count() == 0)
+                DataBase.context.Provinces.AddRange(provinces);
         }
         public static void RemplirCaidat()
         {
             List<Caidat> caidats = new List<Caidat>()
             {
-                new Caidat(){Nom_Caidat="Ighod",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="jnane Bouih",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="jdour",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="ahdil",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="nfifa-oued Lbour",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Sidi Bou Othmane",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Asif Lmal",Province=projetMinesDBContext.Provinces.Find(1)},
-                new Caidat(){Nom_Caidat="Tazart",Province=projetMinesDBContext.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Ighod",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="jnane Bouih",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="jdour",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="ahdil",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="nfifa-oued Lbour",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Sidi Bou Othmane",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Asif Lmal",Province=DataBase.context.Provinces.Find(1)},
+                new Caidat(){Nom_Caidat="Tazart",Province=DataBase.context.Provinces.Find(1)},
             };
-            if (projetMinesDBContext.Caidats.Count() == 0)
-                projetMinesDBContext.Caidats.AddRange(caidats);
+            if (DataBase.context.Caidats.Count() == 0)
+                DataBase.context.Caidats.AddRange(caidats);
         }
         public static void RemplirCommune()
         {
             List<Commune> communes = new List<Commune>()
             {
-                new Commune(){Nom_Commune="Ighoud",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Jnane-Bouih",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Sidi-Ghanem",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Ahdil",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Ait Faska",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Lalla Aaziza",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Douirane",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Afalla Issen",Caidat=projetMinesDBContext.Caidats.Find(1)},
-                new Commune(){Nom_Commune="Siti Fadma",Caidat=projetMinesDBContext.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ighoud",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Jnane-Bouih",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Sidi-Ghanem",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ahdil",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Ait Faska",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Lalla Aaziza",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Douirane",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Afalla Issen",Caidat=DataBase.context.Caidats.Find(1)},
+                new Commune(){Nom_Commune="Siti Fadma",Caidat=DataBase.context.Caidats.Find(1)},
             };
-            if (projetMinesDBContext.Communes.Count() == 0)
-                projetMinesDBContext.Communes.AddRange(communes);
+            if (DataBase.context.Communes.Count() == 0)
+                DataBase.context.Communes.AddRange(communes);
         }
         public static void RemplirCarte()
         {
@@ -99,8 +98,8 @@ namespace Projet_Mines_Official
                 new Carte(){Nom_carte="Demnat"},
                 new Carte(){Nom_carte="Inim-N-Tanout"},
             };
-            if (projetMinesDBContext.Cartes.Count()==0)
-                projetMinesDBContext.Cartes.AddRange(cartes);
+            if (DataBase.context.Cartes.Count()==0)
+                DataBase.context.Cartes.AddRange(cartes);
         }
         public static void RemplirPointPivot()
         {
@@ -112,8 +111,8 @@ namespace Projet_Mines_Official
                 new Point_Pivot(){Nom_Point_Pevot="Sous"},
                 new Point_Pivot(){Nom_Point_Pevot="Kt Si Ahmed"},
             };
-            if (projetMinesDBContext.Point_Pivots.Count() == 0)
-                projetMinesDBContext.Point_Pivots.AddRange(point_Pivots);
+            if (DataBase.context.Point_Pivots.Count() == 0)
+                DataBase.context.Point_Pivots.AddRange(point_Pivots);
         }
             //Scafolding
         public static void RemplirElementDossierPR()
@@ -134,21 +133,21 @@ namespace Projet_Mines_Official
                 new Element_Dossier(){nom_dossier=" - L’original du récépissé du versement de la rémunération des services rendus au titre de l’institution du permis de recherche."},
                 new Element_Dossier(){nom_dossier=" - Une pièce attestant de la qualité de mandataire de la personne morale au cas où la demande est formulée par un mandataire."},
             };
-            if (projetMinesDBContext.Elements_Dossiers.Count() == 0)
-                projetMinesDBContext.Elements_Dossiers.AddRange(element_Dossiers);
+            if (DataBase.context.Elements_Dossiers.Count() == 0)
+                DataBase.context.Elements_Dossiers.AddRange(element_Dossiers);
         }
         public static void RemplirPermis()
         {
-            //permis.Permis_ElementDossiers = projetMinesDBContext.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
-            if (projetMinesDBContext.Les_Permis.Count() == 0)
+            //permis.Permis_ElementDossiers = DataBase.context.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
+            if (DataBase.context.Les_Permis.Count() == 0)
             {
                 for(int i = 0; i <= 10; i++)
                 {
                     Permis newPermis = new Permis(new Area(), new Titulaire());
-                    projetMinesDBContext.Les_Permis.Add(newPermis);
-                    projetMinesDBContext.SaveChanges();
+                    DataBase.context.Les_Permis.Add(newPermis);
+                    DataBase.context.SaveChanges();
                 }
-                projetMinesDBContext.Les_Permis.ToList().ForEach(p =>
+                DataBase.context.Les_Permis.ToList().ForEach(p =>
                 {
                     InitilializerLesDossierPermis.InitilizerDossiers(p, TypePermis.PR);
                 });
@@ -163,43 +162,43 @@ namespace Projet_Mines_Official
                 new Utilisateur(){NomUtilisateur="aoujil",MotPass="aoujil"},
                 new Utilisateur(){NomUtilisateur="aginane",MotPass="aginane"},
             };
-            if (projetMinesDBContext.Utilisateurs.Count() == 0)
-                projetMinesDBContext.Utilisateurs.AddRange(utilisateurs);
+            if (DataBase.context.Utilisateurs.Count() == 0)
+                DataBase.context.Utilisateurs.AddRange(utilisateurs);
         }
         public static void Remplir()
         {
             RemplirTypePermis();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirRegion();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirProvince();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirCaidat();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirCommune();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirCarte();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirPointPivot();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirEtat_Permis();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirElementDossierPR();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
             
             RemplirPermis();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
 
             RemplirLogin();
-            projetMinesDBContext.SaveChanges();
+            DataBase.context.SaveChanges();
         }
     }
 }

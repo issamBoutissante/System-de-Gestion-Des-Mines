@@ -13,7 +13,6 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class Home : Window
     {
-        ProjetMinesDBContext projetMinesDBContext =new ProjetMinesDBContext();
         Button SelectedButton;
         string searchByText;
         public Home()
@@ -23,7 +22,7 @@ namespace Projet_Mines_Official
         }
         public void RemplirDataGrid()
         {
-            List<Permis> Les_Permis=this.projetMinesDBContext.Les_Permis.ToList();
+            List<Permis> Les_Permis=DataBase.context.Les_Permis.ToList();
             Les_Permis.Reverse();
             this.DataGridPermis.ItemsSource = null;
             this.DataGridPermis.Items.Clear();
@@ -48,6 +47,9 @@ namespace Projet_Mines_Official
                 case "LE":
                     Selectionner_Permis_De_Licence.Show(this, OperationType.New);
                     break;
+                case "LER":
+                    Selectionner_Licence_Renouvelle.Show(this);
+                    break;
             }
         }
 
@@ -66,12 +68,13 @@ namespace Projet_Mines_Official
                     Licence_Exploitation.ShowExistingLicence(this, permis.PermisId);
                     break;
                 case TypePermis.LER:
+                    Licence_Exploitation_Renouvelle.ShowExistingPermis(this, permis.PermisId);
                     break;
             }
         }
         private void SearchPermis(string searchBy)
         {
-            List<Permis> Les_Permis = this.projetMinesDBContext.Les_Permis.ToList();
+            List<Permis> Les_Permis = DataBase.context.Les_Permis.ToList();
             switch (searchBy)
             {
                 case "N° demmande":

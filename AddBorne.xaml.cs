@@ -20,23 +20,21 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class AddBorne : Window
     {
-        ProjetMinesDBContext context;
         int currentPermisId;
         Licence_Area Licence_Area;
-        public AddBorne(Licence_Area licence_Area,int currentPermisId,ProjetMinesDBContext context)
+        public AddBorne(Licence_Area licence_Area,int currentPermisId)
         {
             InitializeComponent();
             this.currentPermisId = currentPermisId;
             this.Licence_Area = licence_Area;
-            this.context = context;
         }
-        public static void Show(Licence_Area licence_Area,int currentPermisId,ProjetMinesDBContext context)
+        public static void Show(Licence_Area licence_Area,int currentPermisId)
         {
-            new AddBorne(licence_Area,currentPermisId,context).ShowDialog();
+            new AddBorne(licence_Area,currentPermisId).ShowDialog();
         }
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
-            Permis currentPermis = context.Les_Permis.Where(p => p.PermisId == currentPermisId).Single();
+            Permis currentPermis = DataBase.context.Les_Permis.Where(p => p.PermisId == currentPermisId).Single();
             string newBorne = $"X : {X_Borne.Text.Trim()} - Y : {Y_Borne.Text.Trim()}";
             bool isBorneExist = currentPermis.Area.Bornes.Any(b => $"X : {b.Borne_X.Trim()} - Y : {b.Borne_Y.Trim()}" == newBorne);
             if (isBorneExist)
@@ -49,7 +47,7 @@ namespace Projet_Mines_Official
                 Borne_X = X_Borne.Text.Trim(),
                 Borne_Y = X_Borne.Text.Trim()
             });
-            context.SaveChanges();
+            DataBase.context.SaveChanges();
             Licence_Area.RemplirBornes();
             this.Close();
         }
@@ -97,6 +95,5 @@ namespace Projet_Mines_Official
             }
         }
         #endregion
-
     }
 }
