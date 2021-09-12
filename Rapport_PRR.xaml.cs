@@ -22,7 +22,7 @@ namespace Projet_Mines_Official
             Num_PR = permis.Num_Permis.ToString();
             dateDemmande = permis.Date_Depot;
         }
-        public void Show(Permis permis)
+        public static void Show(Permis permis)
         {
             new Rapport_PRR(permis).ShowDialog();
         }

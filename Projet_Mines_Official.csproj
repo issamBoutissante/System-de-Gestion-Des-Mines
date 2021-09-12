@@ -213,9 +213,6 @@
     <Compile Include="Selectionner_Permis_De_Licence.xaml.cs">
       <DependentUpon>Selectionner_Permis_De_Licence.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Selectionner_Permis_Rennouveller.xaml.cs">
-      <DependentUpon>Selectionner_Permis_Rennouveller.xaml</DependentUpon>
-    </Compile>
     <Compile Include="STRATEGIE.xaml.cs">
       <DependentUpon>STRATEGIE.xaml</DependentUpon>
     </Compile>
@@ -360,10 +357,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Selectionner_Permis_De_Licence.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Selectionner_Permis_Rennouveller.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

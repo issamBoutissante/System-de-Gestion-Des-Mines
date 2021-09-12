@@ -33,26 +33,6 @@ namespace Projet_Mines_Official
         {
             RemplirDataGrid();
         }
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            MenuItem menuItem = (MenuItem)sender;
-            switch (menuItem.Header)
-            {
-                case "PR":
-                    Permis_Recherche.ShowNewPermis(this);
-                    break;
-                case "PRR":
-                    Selection_Permis_A_Renouveller.Show(this);
-                    break;
-                case "LE":
-                    Selectionner_Permis_De_Licence.Show(this, OperationType.New);
-                    break;
-                case "LER":
-                    Selectionner_Licence_Renouvelle.Show(this);
-                    break;
-            }
-        }
-
         private void Afficher_Click(object sender, RoutedEventArgs e)
         {
             Permis permis = (Permis)DataGridPermis.SelectedItem;
@@ -130,6 +110,11 @@ namespace Projet_Mines_Official
             SelectedButton.Foreground = button.Foreground;
             button.Foreground = foreColor;
             SelectedButton = button;
+        }
+
+        private void AjouterPermis_Click(object sender, RoutedEventArgs e)
+        {
+            Permis_Recherche.ShowNewPermis(this);
         }
     }
 }

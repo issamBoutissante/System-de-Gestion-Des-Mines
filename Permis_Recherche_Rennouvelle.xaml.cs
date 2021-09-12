@@ -33,6 +33,7 @@ namespace Projet_Mines_Official
             InitializeControls();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
+            NaviagationList.Height = 0;
         }
         internal static void ShowExistingPermis(Home home, int permisId)
         {
@@ -41,44 +42,11 @@ namespace Projet_Mines_Official
 
         private void InitializeControls()
         {
-            FillComboboxes();
             BindDatePickers();
-            FillElementDossiers();
             BindTextBoxes();
-
         }
        
         #region Fill data 
-        private void FillComboboxes()
-        {
-            Carte.ItemsSource = DataBase.context.Cartes.ToList();
-            Carte.SelectedValuePath = "CarteId";
-            Carte.DisplayMemberPath = "Nom_carte";
-            Point_Pevot.ItemsSource = DataBase.context.Point_Pivots.ToList();
-            Point_Pevot.SelectedValuePath = "Point_PivotId";
-            Point_Pevot.DisplayMemberPath = "Nom_Point_Pevot";
-            Region.ItemsSource = DataBase.context.Regions.ToList();
-            Region.SelectedValuePath = "RegionId";
-            Region.DisplayMemberPath = "Nom_Region";
-            //Province.SetBinding(ComboBox.ItemsSourceProperty,"";
-            Province.ItemsSource = DataBase.context.Provinces.ToList();
-            Province.SelectedValuePath = "ProvinceId";
-            Province.DisplayMemberPath = "Nom_Province";
-            Caidat.ItemsSource = DataBase.context.Caidats.ToList();
-            Caidat.SelectedValuePath = "CaidatId";
-            Caidat.DisplayMemberPath = "Nom_Caidat";
-            Commune.ItemsSource = DataBase.context.Communes.ToList();
-            Commune.SelectedValuePath = "CommuneId";
-            Commune.DisplayMemberPath = "Nom_Commune";
-            //Bind them
-            Carte.SetBinding(ComboBox.SelectedValueProperty, "Area.CarteId");
-            Region.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.Province.RegionId");
-            Province.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.Caidat.ProvinceId");
-            Point_Pevot.SetBinding(ComboBox.SelectedValueProperty, "Area.Point_PivotId");
-            Commune.SetBinding(ComboBox.SelectedValueProperty, "Area.CommuneId");
-            Caidat.SetBinding(ComboBox.SelectedValueProperty, "Area.Commune.CaidatId");
-
-        }
         private void BindDatePickers()
         {
             Date_Depot.SetBinding(DatePicker.SelectedDateProperty, "Date_Depot");
@@ -86,14 +54,6 @@ namespace Projet_Mines_Official
             Date_Echeance.SetBinding(DatePicker.SelectedDateProperty, "Echeance");
             Date_Institision.SetBinding(DatePicker.SelectedDateProperty, "Date_Institition");
         }
-        private void FillElementDossiers()
-        {
-            this.Permis.Permis_ElementDossiers.ToList().ForEach(ED =>
-            {
-                ElementsDossierStack.Children.Add(GetElementDossierTemplate(ED));
-            });
-        }
-
         private Border GetElementDossierTemplate(Permis_ElementDossier dataSource)
         {
             TextBlock textBlock = new TextBlock()
@@ -158,6 +118,12 @@ namespace Projet_Mines_Official
             Zone.SetBinding(TextBox.TextProperty, "Area.Zone");
             Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
+            Carte.SetBinding(TextBox.TextProperty, "Area.CarteId");
+            Region.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.RegionId");
+            Province.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.ProvinceId");
+            Point_Pevot.SetBinding(TextBox.TextProperty, "Area.Point_PivotId");
+            Commune.SetBinding(TextBox.TextProperty, "Area.CommuneId");
+            Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.CaidatId");
             //suivi decision information
             Numero_Permis.SetBinding(TextBox.TextProperty, "Num_Permis");
         }
@@ -198,95 +164,6 @@ namespace Projet_Mines_Official
                 Foreground = Brushes.Gray
             };
             return btn;
-        }
-        #endregion
-        #region Generation Des Rapport
-        private void Generer_Decision_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-            string abscisse = Abscisse.Text;
-            string ordonnee = Ordonne.Text;
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            string carte = Carte.SelectedValue.ToString();
-            string Dis_SN = Dis_n_s.Text;
-            string DisEstO = Dis_e_o.Text;
-            string date_decision = Date_Decision.Text;
-            string date_plus_trois = Date_Decision.SelectedDate.Value.AddYears(3).ToString();
-            DocumentGenerator.GenerateDocument(RapportPath.Decision_PR.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
-                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Dis_SN>", Dis_SN);
-                    DocumentGenerator.FindAndReplace(wordApp, "<DisEstO>", DisEstO);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_decision>", date_decision);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_plus_trois>", date_plus_trois);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-            PermisState.updateEtat(this.Permis, EtatPermis.Decision);
-        }
-
-
-        private void Invitation_Enquete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Rejet_demande_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Revocation_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void PremierMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void DeuxiemeMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
         }
         #endregion
         #region validation
@@ -451,5 +328,44 @@ namespace Projet_Mines_Official
             Permis_Recherche.ShowExistingPermis(this.home, permisId);
         }
         #endregion
+        private void GenererRapport_Click(object sender, RoutedEventArgs e)
+        {
+            Numero_Demande.Focus();
+            Superficie.Focus();
+            DataBase.context.SaveChanges();
+            Rapport_PRR.Show(this.Permis);
+        }
+        bool isNavigationListClosed = true;
+        private void NaviagationList_Click(object sender, RoutedEventArgs e)
+        {
+            if (isNavigationListClosed)
+            {
+                NavigationList.Height = Double.NaN;
+                isNavigationListClosed = false;
+            }
+            else
+            {
+                NavigationList.Height = 0;
+                isNavigationListClosed = true;
+            }
+        }
+        private void Transferer_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Permis.Etat_PermisId == EtatPermis.EnExploitation)
+            {
+                MessageBox.Show("Deja en exploitation", "Message");
+                return;
+            }
+            this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
+            DataBase.context.SaveChanges();
+
+            Permis newPermis = new Permis(new Area(), new Titulaire());
+            newPermis.Licence_Permis.Add(this.Permis);
+            newPermis.Type_PermisId = TypePermis.LE;
+            DataBase.context.Les_Permis.Add(newPermis);
+            DataBase.context.SaveChanges();
+            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
+            Licence_Exploitation.ShowExistingLicence(this.home, newPermis.PermisId);
+        }
     }
 }

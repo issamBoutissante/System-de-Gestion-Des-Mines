@@ -5,19 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official" xmlns:Fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        WindowStyle="None"
+        WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
-        Title="Rapport_PR" Height="400" Width="700">
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="6*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="6*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <StackPanel
+        Height="400" Width="700">
+    <StackPanel
                 Grid.RowSpan="2"
                       Grid.ColumnSpan="2">
             <Border Style="{StaticResource RapportContainer}">
@@ -43,16 +34,4 @@
                 </DockPanel>
             </Border>
         </StackPanel>
-        <Button
-                 Grid.Row="1"
-             Grid.Column="1"
-                        x:Name="Close"
-                       Style="{StaticResource navagationBtn}"
-                       Click="Close_Click" Template="{StaticResource roundedBtn}">
-                <Fa:ImageAwesome Icon="Close" 
-                                 VerticalAlignment="Center"
-                                 Foreground="White" Width="20"
-                                 HorizontalAlignment="Center" />
-            </Button>
-    </Grid>
 </Window>

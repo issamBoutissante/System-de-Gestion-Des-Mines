@@ -13,7 +13,7 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -39,36 +39,35 @@
         <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
          <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  FontSize="12" FontFamily="Arial"  KeyUp="Search_KeyUp"/>
         <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
-
-        <Menu Grid.Column="7"  Grid.Row="1"  Grid.ColumnSpan="2" Foreground="White" Background="#EAA221" BorderBrush="{x:Null}" IsMainMenu="False"  Margin="5,5,0,0" Width="125">
-            <Menu.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <DockPanel HorizontalAlignment="Stretch" />
-                </ItemsPanelTemplate>
-            </Menu.ItemsPanel>
-            <MenuItem Header="Ajouter"   Focusable="False" FontFamily="Arial" FontWeight="Bold" Background="#EAA221" 
-         HorizontalAlignment="Center" VerticalAlignment="Center" Width="125" HorizontalContentAlignment="Center" Padding="35,4,5,0" FontSize="14" >
-
-                <MenuItem.Style>
-                    <Style TargetType="MenuItem">
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="IsSubmenuOpen" Value="True" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </MenuItem.Style>
-                <MenuItem Header="PR" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
-                </MenuItem>
-                <MenuItem Header="PRR" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
-                </MenuItem>
-                <MenuItem Header="LE" Click="MenuItem_Click" Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial">
-                </MenuItem>
-                <MenuItem Header="LER" Click="MenuItem_Click"  Foreground="#EAA221"  FontWeight="Bold" FontSize="14" Background="White" Padding="50,0,40,0" FontFamily="Arial" >
-                </MenuItem>
-            </MenuItem>
-        </Menu>
-        <Button x:Name="NumDemmandeBtn" Content="N° demmande" Grid.Column="0" Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0"
+        <Button
+                x:Name="AjouterPermis"
+                Grid.Column="7"  
+                Grid.Row="2"
+                Grid.ColumnSpan="2"
+                Height="25"
+                HorizontalAlignment="Center"
+                Background="#0861AD" 
+                Foreground="White"
+                FontWeight="Bold"
+                FontSize="10" 
+                FontFamily="Arial"
+                Margin="0 0 20 0"
+                Click="AjouterPermis_Click">
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="7"/>
+                </Style>
+            </Button.Resources>
+            <StackPanel Orientation="Horizontal">
+                <fa:ImageAwesome Icon="Plus" 
+                             Foreground="White" 
+                             Width="15"
+                             Margin="0 0 5 0"/>
+                <TextBlock Text="Permis" Foreground="White" FontSize="15"/>
+            </StackPanel>
+        </Button>
+        <Button x:Name="NumDemmandeBtn" Content="N° demmande" Grid.Column="0" 
+                Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0"
                 Click="ChangeSearchCritire_Click">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
