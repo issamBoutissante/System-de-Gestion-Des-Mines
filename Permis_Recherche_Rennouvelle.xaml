@@ -7,7 +7,7 @@
         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="Permis_Recherche_Rennouvelle" Height="6300" Width="1000">
+        Title="Permis_Recherche_Rennouvelle" Height="630" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
@@ -39,13 +39,11 @@
                     <RowDefinition Height="80"/>
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
-                <fa:ImageAwesome Icon="Bell"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
                 <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
             Royaume du Maroc Ministre de l'Energie, des Mines</TextBlock>
                 <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
                 <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
-                <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
 
             </Grid>
             <!--les information de l'ex permis-->
@@ -263,6 +261,7 @@
                        Grid.Column="5" Grid.Row="1">
               Dir Est Ouest</TextBlock>
                 <TextBox x:Name="Dir_e_o" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
@@ -275,6 +274,7 @@
                        Grid.Column="5" Grid.Row="2">
                 Dir Nord Sud</TextBlock>
                 <TextBox x:Name="dir_n_s" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!-- Chevauchement-->
                 <GroupBox  Grid.ColumnSpan="4" Grid.RowSpan="2"  Grid.Column="0" Grid.Row="3"  Margin="10,5,0,0">
@@ -301,6 +301,7 @@
                        Grid.Column="5" Grid.Row="3">
                  Dis Est Ouest</TextBlock>
                 <TextBox x:Name="Dis_e_o" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                    FontSize="14" FontFamily="Arial" Padding="5"    Grid.Column="7" Grid.Row="3" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 3-->
                 <TextBlock 
@@ -308,12 +309,14 @@
                        Grid.Column="0" Grid.Row="5">
             Zone</TextBlock>
                 <TextBox x:Name="Zone" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                     FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="2" Grid.Row="5" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="5">
             Dis Nord Sud</TextBlock>
                 <TextBox x:Name="Dis_n_s" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--line 4-->
                 <TextBlock 
@@ -373,12 +376,14 @@
                        Grid.Column="0" Grid.Row="9">
             Abscisse</TextBlock>
                 <TextBox x:Name="Abscisse" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="2" Grid.Row="9" Height="30" BorderThickness="1"/>
                 <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="9">
             Ordonné</TextBlock>
                 <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
+                         IsReadOnly="True"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="7" Grid.Row="9" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
                 <!--<Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0"/>-->
@@ -464,7 +469,7 @@
             Orientation="Horizontal"
             FlowDirection="RightToLeft"
             VerticalAlignment="Center">
-            <Button x:Name="NaviagationList"
+            <Button 
                     Style="{StaticResource navagationBtn}"
                     Template="{StaticResource roundedBtn}"
                 Click="NaviagationList_Click">

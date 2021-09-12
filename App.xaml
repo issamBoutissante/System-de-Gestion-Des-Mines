@@ -28,6 +28,7 @@
                 <Setter Property="Margin" Value="10 5 10 5"/>
             </Style>
             <Style TargetType="Button" x:Key="navagationBtn">
+                <Setter Property="BorderBrush" Value="White"/>
                 <Setter Property="Padding" Value="15"/>
                 <Setter Property="Background" Value="#0861AD"/>
                 <Setter Property="Foreground" Value="White"/>
@@ -36,7 +37,7 @@
                 <Setter Property="FontSize" Value="15"/>
             </Style>
             <ControlTemplate x:Key="roundedBtn" TargetType="{x:Type ButtonBase}">
-                <Border x:Name="border" CornerRadius="50" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <Border x:Name="border" CornerRadius="50" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                     <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Border>
                 <ControlTemplate.Triggers>
@@ -63,7 +64,7 @@
                 </ControlTemplate.Triggers>
             </ControlTemplate>
             <ControlTemplate x:Key="roundedBtnContent" TargetType="{x:Type ButtonBase}">
-                <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="0" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                <Border x:Name="border" CornerRadius="20" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                     <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                 </Border>
                 <ControlTemplate.Triggers>

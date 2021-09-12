@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
-using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Threading.Tasks;
@@ -33,7 +32,7 @@ namespace Projet_Mines_Official
             InitializeControls();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
-            NaviagationList.Height = 0;
+            NavigationList.Height = 0;
         }
         internal static void ShowExistingPermis(Home home, int permisId)
         {
@@ -107,8 +106,22 @@ namespace Projet_Mines_Official
             Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
             NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
-            Dir_e_o.SetBinding(TextBox.TextProperty, "Area.Dir_Est_ouest");
-            dir_n_s.SetBinding(TextBox.TextProperty, "Area.Dir_nord_sud");
+            if (this.Permis.Area.Dir_Est_ouest == "e")
+            {
+                Dir_e_o.Text = "Est";
+            }
+            else
+            {
+                Dir_e_o.Text = "Ouest";
+            }
+            if (this.Permis.Area.Dir_nord_sud == "n")
+            {
+                dir_n_s.Text = "Nord";
+            }
+            else
+            {
+                dir_n_s.Text = "Sud";
+            }
             Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
             Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
             foreach (Permis chev in this.Permis.Chevauchements)
@@ -118,12 +131,12 @@ namespace Projet_Mines_Official
             Zone.SetBinding(TextBox.TextProperty, "Area.Zone");
             Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
-            Carte.SetBinding(TextBox.TextProperty, "Area.CarteId");
-            Region.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.RegionId");
-            Province.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.ProvinceId");
-            Point_Pevot.SetBinding(TextBox.TextProperty, "Area.Point_PivotId");
-            Commune.SetBinding(TextBox.TextProperty, "Area.CommuneId");
-            Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.CaidatId");
+            Carte.SetBinding(TextBox.TextProperty, "Area.Carte.Nom_carte");
+            Region.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Region.Nom_Region");
+            Province.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Nom_Province");
+            Point_Pevot.SetBinding(TextBox.TextProperty, "Area.Point_Pivot.Nom_Point_Pevot");
+            Commune.SetBinding(TextBox.TextProperty, "Area.Commune.Nom_Commune");
+            Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Nom_Caidat");
             //suivi decision information
             Numero_Permis.SetBinding(TextBox.TextProperty, "Num_Permis");
         }
