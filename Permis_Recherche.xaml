@@ -7,572 +7,542 @@
          xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF" xmlns:controls="clr-namespace:System.Windows.Controls;assembly=DotNetProjects.Input.Toolkit"
         WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
-        Title="" Height="6300" Width="1000" Closing="Window_Closing">
-    <ScrollViewer >
-        
-        <StackPanel x:Name="MainPage" Height="Auto">
-            <!--Header Logo-->
-            <Grid Height="100">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="80"/>
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
-                <fa:ImageAwesome Icon="Bell"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
-                <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
-            Royaume du Maroc Ministre de l'Energie, des Mines</TextBlock>
-                <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
-                <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
-            المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
-                <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
+        Title="" Height="630" Width="1000" Closing="Window_Closing">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer 
+            Grid.ColumnSpan="2"
+            Grid.RowSpan="2">
 
-            </Grid>
-            <!--Les informations de Demande-->
-            <Grid Height="200">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+            <StackPanel x:Name="MainPage" Height="Auto">
+                <!--Header Logo-->
+                <Grid Height="100">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="80"/>
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
+                    <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
+            Royaume du Maroc Ministre de l'Energie, des Mines</TextBlock>
+                    <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
+                    <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
+            المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
+                </Grid>
+                <!--Les informations de Demande-->
+                <Grid Height="200">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
             Les informations de Demande</TextBlock>
-                <TextBlock
+                    <TextBlock
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="  10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Date Dépot</TextBlock>
-                <DatePicker x:Name="Date_Depot" Grid.ColumnSpan="2"
+                    <DatePicker x:Name="Date_Depot" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="1" Height="30" BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
             Numéro Demande</TextBlock>
-                <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Numero_Demande" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="1" Height="30" BorderThickness="1" Margin="0,0,10,0" KeyDown="GetOnlyNumbers_KeyDown" MouseLeave="Numero_Demande_MouseLeave"/>
                 </Grid>
-            <!-- Les informations de Titulaire -->
-            <Grid  Height="420">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                <!-- Les informations de Titulaire -->
+                <Grid  Height="420">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
                   Les informations de Titulaire</TextBlock>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Nom Demandeur</TextBlock>
-                <TextBox x:Name="Nom_Demandeur" Grid.ColumnSpan="2" Text="{Binding Titulaire.Nom_Demandeur,Mode=TwoWay}"
+                    <TextBox x:Name="Nom_Demandeur" Grid.ColumnSpan="2" Text="{Binding Titulaire.Nom_Demandeur,Mode=TwoWay}"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
             Status Demandeur</TextBlock>
-                <TextBox x:Name="Status_Demandeur" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Status_Demandeur" Grid.ColumnSpan="2"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
                 Raison Social</TextBlock>
-                <TextBox x:Name="Raison_Social" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Raison_Social" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="2">
                   Nom Société</TextBlock>
-                <TextBox x:Name="Nom_Societe" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Nom_Societe" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="7" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="3">
             Numéro CNSS</TextBlock>
-                <TextBox x:Name="Numero_CNSS" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Numero_CNSS" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="3" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="3">
             Domicile de Demandeur</TextBlock>
-                <TextBox x:Name="Domicile_Demandeur" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Domicile_Demandeur" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="7" Grid.Row="3" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--line 3-->
-                <TextBlock 
+                    <!--line 3-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="4">
             Registre de Commerce</TextBlock>
-                <TextBox x:Name="Registre_Commerce" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Registre_Commerce" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="4" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="4">
             Taxe Prof</TextBlock>
-                <TextBox x:Name="Taxe_Prof" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Taxe_Prof" Grid.ColumnSpan="2"
                    FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="7" Grid.Row="4" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--line 4-->
-                <TextBlock 
+                    <!--line 4-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="5">
             Nom Site</TextBlock>
-                <TextBox x:Name="Nom_Site" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Nom_Site" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="5" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="5">
             Effective</TextBlock>
-                <TextBox x:Name="Effective" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Effective" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
-                <!--line 4-->
+                    <!--line 4-->
 
-                <!--<Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
+                    <!--<Button x:Name="Enregistrer_Titulaire_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="6" Content="Enregistrer" Margin="0,0,10,0"/>-->
 
 
-            </Grid>
-            <!-- Les informations d-Area -->
-            <Grid  Height="620">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="110*" />
-                    <ColumnDefinition Width="110*" />
-                    <ColumnDefinition Width="110*" />
-                    <ColumnDefinition Width="109*" />
-                    <ColumnDefinition Width="109*" />
-                    <ColumnDefinition Width="109*" />
-                    <ColumnDefinition Width="109*" />
-                    <ColumnDefinition Width="109.333" />
-                    <ColumnDefinition Width="109*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                </Grid>
+                <!-- Les informations d-Area -->
+                <Grid  Height="620">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="110*" />
+                        <ColumnDefinition Width="110*" />
+                        <ColumnDefinition Width="110*" />
+                        <ColumnDefinition Width="109*" />
+                        <ColumnDefinition Width="109*" />
+                        <ColumnDefinition Width="109*" />
+                        <ColumnDefinition Width="109*" />
+                        <ColumnDefinition Width="109.333" />
+                        <ColumnDefinition Width="109*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
                   Les informations d'Area</TextBlock>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Inscription Conservation</TextBlock>
-                <CheckBox x:Name="Inscription_Conservation" Grid.ColumnSpan="2"
+                    <CheckBox x:Name="Inscription_Conservation" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="1" Height="30"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="0,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
               Dir Est Ouest</TextBlock>
-                <ComboBox x:Name="Dir_e_o" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Dir_e_o" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5" 
                           Grid.Column="7" Grid.Row="1" 
                           Margin="0,0,10,0" Height="30"
                           BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
                 Superficie</TextBlock>
-                <TextBox x:Name="Superficie" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Superficie" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="2">
                 Dir Nord Sud</TextBlock>
-                <ComboBox x:Name="dir_n_s" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="dir_n_s" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5" 
                           Grid.Column="7" Grid.Row="2" 
                           Margin="0,0,10,0" Height="30"
                           BorderThickness="1"/>
-                <!-- Chevauchement-->
-                <GroupBox  Grid.ColumnSpan="4" Grid.RowSpan="2"  Grid.Column="0" Grid.Row="3"  Margin="10,5,0,0">
-                    <GroupBox.Header  >
-                        <TextBlock  FontFamily="Arial" FontSize="14"  Foreground="White"> Chevauchement</TextBlock>
-                    </GroupBox.Header>
-                    <StackPanel Orientation="Horizontal" Height="Auto" Width="Auto">
-                        <controls:AutoCompleteBox x:Name="ChevauchementCombo" Width="154"  Height="30"  BorderThickness="1" FilterMode="Contains"/>
-                        <!--<TextBox x:Name="Chevauchement" Width="154"  Height="30"  BorderThickness="1"/>-->
-                        <Button x:Name="addChevauchement"  Background="#0861AD" Width="40"  Height="20"  Content="+" FontSize="14" Margin="5,0,0,0" Padding="0,0,0,2" Click="addChevauchement_Click"/>
-                        <StackPanel x:Name="Chevauchements" Orientation="Horizontal">
-                            <StackPanel.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="BorderBrush" Value="Gray"/>
-                                    <Setter Property="BorderThickness" Value=".5"/>
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                    <Setter Property="Height" Value="30"/>
-                                    <Setter Property="Padding" Value="5"/>
-                                </Style>
-                            </StackPanel.Resources>
+                    <!-- Chevauchement-->
+                    <GroupBox  Grid.ColumnSpan="4" Grid.RowSpan="2"  Grid.Column="0" Grid.Row="3"  Margin="10,5,0,0">
+                        <GroupBox.Header  >
+                            <TextBlock  FontFamily="Arial" FontSize="14"  Foreground="White"> Chevauchement</TextBlock>
+                        </GroupBox.Header>
+                        <StackPanel Orientation="Horizontal" Height="Auto" Width="Auto">
+                            <controls:AutoCompleteBox x:Name="ChevauchementCombo" Width="154"  Height="30"  BorderThickness="1" FilterMode="Contains"/>
+                            <!--<TextBox x:Name="Chevauchement" Width="154"  Height="30"  BorderThickness="1"/>-->
+                            <Button x:Name="addChevauchement"  Background="#0861AD" Width="40"  Height="20"  Content="+" FontSize="14" Margin="5,0,0,0" Padding="0,0,0,2" Click="addChevauchement_Click"/>
+                            <StackPanel x:Name="Chevauchements" Orientation="Horizontal">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Border">
+                                        <Setter Property="BorderBrush" Value="Gray"/>
+                                        <Setter Property="BorderThickness" Value=".5"/>
+                                        <Setter Property="CornerRadius" Value="10"/>
+                                        <Setter Property="Height" Value="30"/>
+                                        <Setter Property="Padding" Value="5"/>
+                                    </Style>
+                                </StackPanel.Resources>
+                            </StackPanel>
                         </StackPanel>
-                    </StackPanel>
-                </GroupBox>
+                    </GroupBox>
 
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="3">
                  Dis Est Ouest</TextBlock>
-                <TextBox x:Name="Dis_e_o" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Dis_e_o" Grid.ColumnSpan="2"
                    FontSize="14" FontFamily="Arial" Padding="5"    Grid.Column="7" Grid.Row="3" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--line 3-->
-                <TextBlock 
+                    <!--line 3-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="5">
             Zone</TextBlock>
-                <TextBox x:Name="Zone" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Zone" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="2" Grid.Row="5" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="5">
             Dis Nord Sud</TextBlock>
-                <TextBox x:Name="Dis_n_s" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Dis_n_s" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="7" Grid.Row="5" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--line 4-->
-                <TextBlock 
+                    <!--line 4-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="6">
             Carte</TextBlock>
-                <ComboBox x:Name="Carte" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Carte" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="6" Height="30" BorderThickness="1"
                          FontSize="14" FontFamily="Arial" Padding="5" />
 
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="6">
             Province</TextBlock>
-                <ComboBox x:Name="Province" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Province" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="6" Margin="0,0,10,0" Height="30" BorderThickness="1"
                      FontSize="14" FontFamily="Arial" Padding="5" />
-                <!--line 5-->
-                <TextBlock 
+                    <!--line 5-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="7">
             Commune</TextBlock>
-                <ComboBox x:Name="Commune" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Commune" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="7" Height="30" BorderThickness="1"
                         FontSize="14" FontFamily="Arial" Padding="5"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="7">
             Region</TextBlock>
-                <ComboBox x:Name="Region" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Region" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="7" Margin="0,0,10,0" Height="30" BorderThickness="1"
                        FontSize="14" FontFamily="Arial" Padding="5"/>
-                <!--line 6-->
-                <TextBlock 
+                    <!--line 6-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="8">
             Caidat</TextBlock>
-                <ComboBox x:Name="Caidat" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Caidat" Grid.ColumnSpan="2"
                        Grid.Column="2" Grid.Row="8" Height="30" BorderThickness="1"
                       FontSize="14" FontFamily="Arial" Padding="5"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="8">
             Point pévot</TextBlock>
-                <ComboBox x:Name="Point_Pevot" Grid.ColumnSpan="2"
+                    <ComboBox x:Name="Point_Pevot" Grid.ColumnSpan="2"
                        Grid.Column="7" Grid.Row="8" Margin="0,0,10,0" Height="30" BorderThickness="1"
                       FontSize="14" FontFamily="Arial" Padding="5"/>
-                <!--line 6-->
-                <TextBlock 
+                    <!--line 6-->
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="9">
             Abscisse</TextBlock>
-                <TextBox x:Name="Abscisse" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Abscisse" Grid.ColumnSpan="2"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="2" Grid.Row="9" Height="30" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="9">
             Ordonné</TextBlock>
-                <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
+                    <TextBox x:Name="Ordonne" Grid.ColumnSpan="2"
                       FontSize="14" FontFamily="Arial" Padding="5" Grid.Column="7" Grid.Row="9" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--<Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
+                    <!--<Button x:Name="Enregistrer_Area_Info" Grid.ColumnSpan="2"
                        Grid.Column="7"  Background="#EAA221" Grid.Row="10" Content="Enregistrer" Margin="0,0,10,0"/>-->
-                <Button x:Name="Generer_Bon_achat" Content="Générer le bon d'achat" Grid.ColumnSpan="3"
-                       Grid.Column="0" Grid.Row="10" Height="30" BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0" Click="Generer_Bon_achat_Click"/>
-                <Button x:Name="GenererBLV_PR" Content="Générer le bulltain de versement" Grid.ColumnSpan="3"
-                       Grid.Column="3" Grid.Row="10" Height="30"   BorderThickness="1" Background="#EAA221" Foreground="White"
-                        Margin="10,0,0,0" Click="GenererBLV_PR_Click" />
 
-            </Grid>
-            <!--Vérification des pièces-->
-            <StackPanel Height="50" Background="#0861AD">
+                </Grid>
+                <!--Vérification des pièces-->
+                <StackPanel Height="50" Background="#0861AD">
 
-                <TextBlock Grid.Row="0" TextAlignment="Center" 
+                    <TextBlock Grid.Row="0" TextAlignment="Center" 
                            FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0">
                 Vérification des pièces</TextBlock>
-            </StackPanel>
-            <StackPanel Name="ElementsDossierStack" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
-                <!--the Content of this element will be filled from code behind-->
-            </StackPanel>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Button x:Name="Rejet_demande" Grid.ColumnSpan="2"
-                       Grid.Column="7"  Background="#EAA221" Content="Rejet demande" Margin="0,20,10,20" Click="Rejet_demande_Click"/>
-              </Grid>
-            <!-- Suivi Decision -->
-            <Grid  Height="550">
-                <Grid.Resources>
-                    <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
-                </Grid.Resources>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                </StackPanel>
+                <StackPanel Name="ElementsDossierStack" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="9">
+                    <!--the Content of this element will be filled from code behind-->
+                </StackPanel>
+                <!-- Suivi Decision -->
+                <Grid  Height="250">
+                    <Grid.Resources>
+                        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+                    </Grid.Resources>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
                  Suivi Decision</TextBlock>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="1">
             Date Decision</TextBlock>
-                <DatePicker x:Name="Date_Decision" Grid.ColumnSpan="2"
+                    <DatePicker x:Name="Date_Decision" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="1" Height="30" BorderThickness="1"/>
 
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
                 Date Institision</TextBlock>
-                <DatePicker x:Name="Date_Institision" Grid.ColumnSpan="2"
+                    <DatePicker x:Name="Date_Institision" Grid.ColumnSpan="2"
                     FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1"/>
-                <TextBlock 
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="5" Grid.Row="1">
                   Date Echeance</TextBlock>
-                <DatePicker x:Name="Date_Echeance" Grid.ColumnSpan="2"
+                    <DatePicker x:Name="Date_Echeance" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="7" Grid.Row="1" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--Décision de permis de recherche-->
-                <Rectangle Grid.Column="0"  Grid.Row="4" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="4" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                    Décision de permis de recherche
-                </TextBlock>
-                <Button x:Name="Generer_Decision" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="4" Content="Générer" Margin="0,10,25,10" Click="Generer_Decision_Click" RenderTransformOrigin="0.502,0.5" />
-                <!--Décision signé-->
-                <TextBlock Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="7" FontSize="16" FontWeight="Bold" Margin="20,15,0,0" TextWrapping="Wrap">
+                    <!--Décision signé-->
+                    <TextBlock Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="7" FontSize="16" FontWeight="Bold" Margin="20,15,0,0" TextWrapping="Wrap">
                     Décision signé
-                </TextBlock>
-
-                <CheckBox IsChecked="True" Grid.Column="1"  Grid.Row="5" Name="NumPermisCheckBox" Margin="35,0,20,0"/>
-                <TextBlock 
+                    </TextBlock>
+                    <CheckBox IsChecked="True" Grid.Column="1"  Grid.Row="3" Name="NumPermisCheckBox" Margin="35,0,20,0"/>
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
-                       Grid.Column="0" Grid.Row="6"
+                       Grid.Column="0" Grid.Row="4"
         Visibility="{Binding ElementName=NumPermisCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}">
             Numero Permis</TextBlock>
-                <TextBox x:Name="Numero_Permis" Grid.ColumnSpan="2"
-                     FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="6" Margin="20,0,10,0" Height="30" BorderThickness="1" 
+                    <TextBox x:Name="Numero_Permis" Grid.ColumnSpan="2"
+                     FontSize="14" FontFamily="Arial" 
+                         Padding="5"  Grid.Column="2" Grid.Row="4" Margin="20,0,10,0" Height="30" BorderThickness="1" 
                               Text  ="{Binding Num_Permis,Mode=TwoWay}" 
         Visibility="{Binding ElementName=NumPermisCheckBox, Path=IsChecked, Converter={StaticResource BooleanToVisibilityConverter}}" KeyDown="GetOnlyNumbers_KeyDown" MouseLeave="Numero_Permis_MouseLeave"/>
-
-                <!--Lettre de transmission-->
-                <Rectangle Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="7" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                    	Lettre de transmission de la décision du permis de recherche au titulaire
-                </TextBlock>
-                <Button x:Name="Generer_Lettre_Transmission" 
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="7" Content="Générer" Margin="0,10,25,10" 
-                        Click="Generer_Lettre_Transmission_Click" />
-
-                <!-- Bordereau d’envoi DMH -->
-                <Rectangle Grid.Column="0"  Grid.Row="8" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="8" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                  Bordereau d’envoi de la décision du permis de recherche (DMH)
-                </TextBlock>
-                <Button
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="8" Content="Générer" Margin="0,10,25,10" Click="Generer_Bordereau_envoi_DMH_Click" />
-                <!-- Bordereau d’envoi DP -->
-                <Rectangle Grid.Column="0"  Grid.Row="9" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="9" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                  Bordereau d’envoi de la décision du permis de recherche (DP)
-                </TextBlock>
-                <Button
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="9" Content="Générer" Margin="0,10,25,10" Click="Generer_Bordereau_envoi_DP_Click" />
-                <!-- Bordereau d’envoi Conservation -->
-                <Rectangle Grid.Column="0"  Grid.Row="10" Grid.ColumnSpan="6" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <TextBlock Grid.Column="0"  Grid.Row="10" Grid.ColumnSpan="7" FontSize="13"  Margin="25,15,0,0" TextWrapping="Wrap">
-                  Bordereau d’envoi de la décision du permis de recherche (Conservation)
-                </TextBlock>
-                <Button
-                       Grid.Column="5"  Background="#EAA221" Grid.Row="10" Content="Générer" Margin="0,10,25,10" Click="Generer_Bordereau_envoi_Conservation_Click" />
-
-            </Grid>
-            <!-- Programme de Travaux -->
-            <Grid  Height="200">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                </Grid>
+                <!-- Programme de Travaux -->
+                <Grid  Height="200">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
                  Programme de Travaux</TextBlock>
 
-                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
-                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
+                    <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	Programme de travaux
-                </TextBlock>
-                <TextBlock x:Name="RestJourProgramme" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    </TextBlock>
+                    <TextBlock x:Name="RestJourProgramme" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	reste : 29 j
-                </TextBlock>
-                <CheckBox x:Name="ProgrammeTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
-               
-                <TextBlock 
+                    </TextBlock>
+                    <CheckBox x:Name="ProgrammeTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
+
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
             Investisement réaliser</TextBlock>
-                <TextBox x:Name="investisement_realise" Grid.ColumnSpan="2"
+                    <TextBox x:Name="investisement_realise" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
 
-            </Grid>
-            <!-- Déclaration d’ouverture des travaux -->
-            <Grid  Height="260">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-                <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
-                <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
+                </Grid>
+                <!-- Déclaration d’ouverture des travaux -->
+                <Grid  Height="260">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                    <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">
                  Déclaration d’ouverture des travaux</TextBlock>
 
-                <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
-                <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    <Rectangle Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="9" Stroke="Black" StrokeThickness="1" Margin="20,15,20,15"/>
+                    <TextBlock Grid.Column="0"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	Déclaration d’ouverture des travaux
-                </TextBlock>
-                <TextBlock x:Name="RestJourDeclarationTravaux" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
+                    </TextBlock>
+                    <TextBlock x:Name="RestJourDeclarationTravaux" Grid.Column="7"  Grid.Row="1" Grid.ColumnSpan="3" FontSize="13"  Margin="25,27,0,0" TextWrapping="Wrap">
                     	reste : 29 j
-                </TextBlock>
-                <CheckBox Name="DeclarationTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
-                <TextBlock 
+                    </TextBlock>
+                    <CheckBox Name="DeclarationTravauxCheckBox" Grid.Column="8"  Grid.Row="1"  Margin="35,0,20,0"/>
+                    <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="20,5,0,0" Grid.ColumnSpan="2"
                        Grid.Column="0" Grid.Row="2">
             Occupation temporaire</TextBlock>
-                <TextBox x:Name="occupation_temporaire" Grid.ColumnSpan="2"
+                    <TextBox x:Name="occupation_temporaire" Grid.ColumnSpan="2"
                      FontSize="14" FontFamily="Arial" Padding="5"  Grid.Column="2" Grid.Row="2" Margin="0,0,10,0" Height="30" BorderThickness="1"/>
-                <!--Lettre de transmission-->
-                <Rectangle Grid.Column="0"  Grid.Row="3" Grid.ColumnSpan="7" Stroke="Black" StrokeThickness="1" Margin="20,5,20,5"/>
-                <Button x:Name="PremierMiseEnDemeure"
-                       Grid.Column="0" Grid.ColumnSpan="3" 
-                        Background="#EAA221" Grid.Row="3"
-                        Content="Générer Premiere Mise en demeur" 
-                        Margin="50,10,0,10" 
-                        Click="PremierMiseEnDemeure_Click" />
-                <Button x:Name="DeuxiemeMiseEnDemeure"
-                       Grid.Column="3" Grid.ColumnSpan="3" 
-                        Background="#EAA221" Grid.Row="3" 
-                        Content="Générer Mise en demeur"
-                        Margin="50,10,0,10" 
-                        Click="DeuxiemeMiseEnDemeure_Click" />
-                <!---->
-                <Button x:Name="Exporter_excel" 
-                       Grid.Column="7"  Background="#0861AD"  Grid.ColumnSpan="2"  Grid.Row="3" Content="Exporter Excel" Margin="0,10,20,10" Click="Exporter_excel_Click" />
+                </Grid>
+            </StackPanel>
+        </ScrollViewer>
 
-            </Grid>
+        <StackPanel
+             Margin="0 0 10 0"
+             Grid.Row="1"
+             Grid.ColumnSpan="2"
+            Orientation="Horizontal"
+            FlowDirection="RightToLeft"
+            VerticalAlignment="Center">
+            <Button x:Name="NaviagationList"
+                    Style="{StaticResource navagationBtn}"
+                    Template="{StaticResource roundedBtn}"
+                Click="NaviagationList_Click">
+                <fa:ImageAwesome
+                    Icon="List" 
+                    VerticalAlignment="Center" 
+                    Foreground="White"
+                    Width="20" 
+                    HorizontalAlignment="Center" />
+            </Button>
+            <StackPanel x:Name="NavigationList"
+                        Orientation="Horizontal"
+                        VerticalAlignment="Center"
+                        Height="50">
+                <Button
+                    x:Name="GenererRapport"
+                    Style="{StaticResource navagationBtn}"
+                    Template="{StaticResource roundedBtnContent}"
+                    Content="Rapport"
+                    Margin="10 0 0 0"
+                    Click="GenererRapport_Click"/>
+                <Button
+                    x:Name="Renouveller"
+                    Style="{StaticResource navagationBtn}"
+                    Template="{StaticResource roundedBtnContent}"
+                    Content="Renouveller"
+                    Margin="10 0 0 0"
+                    Click="Renouveller_Click"/>
+                <Button
+                    x:Name="ExporterExcel"
+                    Style="{StaticResource navagationBtn}"
+                    Template="{StaticResource roundedBtnContent}"
+                    Content="Exporter Excel"
+                    Margin="10 0 0 0"
+                    Click="Exporter_excel_Click"/>
+            </StackPanel>
         </StackPanel>
-    </ScrollViewer>
+    </Grid>
 </Window>

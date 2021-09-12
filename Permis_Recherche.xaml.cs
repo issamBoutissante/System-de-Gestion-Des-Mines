@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
-using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Threading.Tasks;
@@ -10,7 +9,7 @@ using System.Threading;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 using System.Data;
-using System.Collections.ObjectModel;
+using winform=System.Windows.Forms;
 
 namespace Projet_Mines_Official
 {
@@ -31,6 +30,7 @@ namespace Projet_Mines_Official
             InitializeAutoCompleteCombo();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
+            NavigationList.Height = 0;
         }
         internal static void ShowNewPermis(Home home)
         {
@@ -282,187 +282,6 @@ namespace Projet_Mines_Official
             Chevauchements.Children.Remove((Button)sender);
         }
         #endregion
-        #region Generation Des Rapport
-        private void GenererBLV_PR_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string NomSociete = Nom_Societe.Text;
-            string RegistreCommerce = Registre_Commerce.Text;
-            string NumeroCNSS = Numero_CNSS.Text;
-            string TaxeProf = Taxe_Prof.Text;
-            string NumeroDemande = Numero_Demande.Text;
-            string DomicileDemandeur = Domicile_Demandeur.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bulletin_Versement_PR.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<anne>", DateTime.Now.Year.ToString());
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
-                    DocumentGenerator.FindAndReplace(wordApp, "<registreCommerce>", RegistreCommerce);
-                    DocumentGenerator.FindAndReplace(wordApp, "<cnss>", NumeroCNSS);
-                    DocumentGenerator.FindAndReplace(wordApp, "<taxeProf>", TaxeProf);
-                    DocumentGenerator.FindAndReplace(wordApp, "<numeroDemande>", NumeroDemande);
-                    DocumentGenerator.FindAndReplace(wordApp, "<domicile>", DomicileDemandeur);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-           
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void Generer_Bon_achat_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-
-            string abscisse = Abscisse.Text;
-            string ordonnee = Ordonne.Text;
-            string carte = Carte.Text;
-            string societe = Nom_Societe.Text;
-            string DomicileDemandeur = Domicile_Demandeur.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Bon_achat.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
-                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
-                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void PremierMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void DeuxiemeMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void Generer_Decision_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-            string abscisse = Abscisse.Text;
-            string ordonnee = Ordonne.Text;
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            string carte = Carte.SelectedValue.ToString();
-            string Dis_SN = Dis_n_s.Text;
-            string DisEstO = Dis_e_o.Text;
-            string date_decision = Date_Decision.Text;
-            string date_plus_trois = Date_Decision.SelectedDate.Value.AddYears(3).ToString();
-            DocumentGenerator.GenerateDocument(RapportPath.Decision_PR.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<abscisse>", abscisse);
-                    DocumentGenerator.FindAndReplace(wordApp, "<ordonnee>", ordonnee);
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<carte>", carte);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Dis_SN>", Dis_SN);
-                    DocumentGenerator.FindAndReplace(wordApp, "<DisEstO>", DisEstO);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_decision>", date_decision);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_plus_trois>", date_plus_trois);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-            PermisState.updateEtat(this.Permis, EtatPermis.Decision);
-        }
-        
-        private void Generer_Lettre_Transmission_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            string Num_DR = Numero_Demande.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.lettre_transmission_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_DR>", Num_DR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        #region Bordereau d'envoi
-        private void Generer_Bordereau_Denvoi(string Path)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(Path,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void Generer_Bordereau_envoi_DMH_Click(object sender, RoutedEventArgs e)
-        {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DMH.Value);
-        }
-        private void Generer_Bordereau_envoi_DP_Click(object sender, RoutedEventArgs e)
-        {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DP.Value);
-        }
-        private void Generer_Bordereau_envoi_Conservation_Click(object sender, RoutedEventArgs e)
-        {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_Conservation.Value);
-        }
-        #endregion
-        private void Rejet_demande_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Demande.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Revocation_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        #endregion
         #region validation
         private void GetOnlyNumbers_KeyDown(object sender, KeyEventArgs e)
         {
@@ -619,5 +438,46 @@ namespace Projet_Mines_Official
             }
         }
 
+        private void GenererRapport_Click(object sender, RoutedEventArgs e)
+        {
+            Numero_Demande.Focus();
+            Superficie.Focus();
+            DataBase.context.SaveChanges();
+            Rapport_PR.Show(this.Permis);
+        }
+        bool isNavigationListClosed = true;
+        private void NaviagationList_Click(object sender, RoutedEventArgs e)
+        {
+            if (isNavigationListClosed)
+            {
+                NavigationList.Height = Double.NaN;
+                isNavigationListClosed = false;
+            }
+            else
+            {
+                NavigationList.Height = 0;
+                isNavigationListClosed = true;
+            }
+        }
+        private void Renouveller_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.Permis.Etat_PermisId == EtatPermis.Renouvelle)
+            {
+                MessageBox.Show("deja Rennouvelle", "Message");
+                return;
+            }
+            winform.DialogResult result = winform.MessageBox.Show("Vous veullez renouveller se permis", "Rennouvellement", winform.MessageBoxButtons.YesNo);
+            if (result == winform.DialogResult.Yes)
+            {
+                Permis newPermis = new Permis(this.Permis.Area, this.Permis.Titulaire);
+                newPermis.Ex_PermisId = this.Permis.PermisId;
+                newPermis.Type_PermisId = TypePermis.PRR;
+                this.Permis.Etat_PermisId = EtatPermis.Renouvelle;
+                DataBase.context.Les_Permis.Add(newPermis);
+                DataBase.context.SaveChanges();
+                Permis_Recherche_Rennouvelle.ShowExistingPermis(this.Home, newPermis.PermisId);
+                //InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
+            }
+        }
     }
 }

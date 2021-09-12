@@ -200,6 +200,9 @@
     <Compile Include="Rapport_PR.xaml.cs">
       <DependentUpon>Rapport_PR.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Rapport_PRR.xaml.cs">
+      <DependentUpon>Rapport_PRR.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
@@ -341,6 +344,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Rapport_PR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Rapport_PRR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

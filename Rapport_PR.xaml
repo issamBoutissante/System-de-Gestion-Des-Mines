@@ -3,31 +3,169 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projet_Mines_Official"
+        xmlns:local="clr-namespace:Projet_Mines_Official" xmlns:Fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
-        Title="Rapport_PR" Height="450" Width="800">
-        <StackPanel>
-        <Border Style="{StaticResource RapportContainer}">
-            <DockPanel>
-                <TextBlock
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="ToolWindow"
+        Title="Rapport_PR" Height="400" Width="700">
+   
+        <ScrollViewer
+        VerticalScrollBarVisibility="Auto">
+            <StackPanel>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
                 Text="Bon D'achat"
                 VerticalAlignment="Center"/>
-                <Button Name="BonAchat"
+                        <Button Name="BonAchat"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
                     Click="BonAchat_Click"/>
-            </DockPanel>
-        </Border>
-        <Border Style="{StaticResource RapportContainer}">
-            <DockPanel>
-                <TextBlock
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
                 Text="le bulltain de versement"
                 VerticalAlignment="Center"/>
-                <Button Name="BultainVersement"
+                        <Button Name="BultainVersement"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
                     Click="BultainVersement_Click"/>
-            </DockPanel>
-        </Border>
-    </StackPanel>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de rejet de la demande d'institution du permis de recherche "
+                VerticalAlignment="Center"/>
+                        <Button Name="RegetDemande"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="RegetDemande_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="Decision Permis De Recherche"
+                VerticalAlignment="Center"/>
+                        <Button Name="DicisionPR"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="DicisionPR_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de transmission de la décision du permis de recherche au titulaire "
+                VerticalAlignment="Center"/>
+                        <Button Name="LettreTransmissionTitulaire"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="LettreTransmissionTitulaire_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="Bordereau d'envoi de la décision du permis de recherche (DMH)"
+                VerticalAlignment="Center"/>
+                        <Button Name="BurdereauEnvoiDMH"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="BurdereauEnvoiDMH_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="Bordereau d'envoi de la décision du permis de recherche (DP)"
+                VerticalAlignment="Center"/>
+                        <Button Name="BurdereauEnvoiDP"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="BurdereauEnvoiDP_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="Bordereau d'envoi de la décision du permis de recherche Conservation de la Propriété Foncière du ressort "
+                VerticalAlignment="Center"/>
+                        <Button Name="BurdereauEnvoiConservation"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="BurdereauEnvoiConservation_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de la première mise en demeure "
+                VerticalAlignment="Center"/>
+                        <Button Name="PremiereMiseDemeure"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="PremiereMiseDemeure_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de  la deuxième mise en demeure "
+                VerticalAlignment="Center"/>
+                        <Button Name="DeuxiemeMiseDemeure"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="DeuxiemeMiseDemeure_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Canevas du Programme de travaux à fournir par le titulaire du permis de recherche "
+                VerticalAlignment="Center"/>
+                        <Button Name="ProgrammeTravauxCanvas"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="ProgrammeTravauxCanvas_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de transmission de la décision de révocation suite  à une renonciation "
+                VerticalAlignment="Center"/>
+                        <Button Name="LettreRevocationRenonciation"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="LettreRevocationRenonciation_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Lettre de transmission de la décision de révocation"
+                VerticalAlignment="Center"/>
+                        <Button Name="LettreDecisionRevocation"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="LettreDecisionRevocation_Click"/>
+                    </DockPanel>
+                </Border>
+                <Border Style="{StaticResource RapportContainer}">
+                    <DockPanel>
+                        <TextBlock
+                Text="•	Déclaration d'ouverture des travaux"
+                VerticalAlignment="Center"/>
+                        <Button Name="DeclarationTravaux"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="DeclarationTravaux_Click"/>
+                    </DockPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
 </Window>
