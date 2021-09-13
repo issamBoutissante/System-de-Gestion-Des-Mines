@@ -536,6 +536,13 @@
                     Margin="10 0 0 0"
                     Click="Renouveller_Click"/>
                 <Button
+                    x:Name="Transferer"
+                    Style="{StaticResource navagationBtn}"
+                    Template="{StaticResource roundedBtnContent}"
+                    Content="Transferer Au Licence"
+                    Margin="10 0 0 0"
+                    Click="Transferer_Click"/>
+                <Button
                     x:Name="ExporterExcel"
                     Style="{StaticResource navagationBtn}"
                     Template="{StaticResource roundedBtnContent}"

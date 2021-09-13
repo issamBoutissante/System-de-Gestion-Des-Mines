@@ -461,6 +461,11 @@ namespace Projet_Mines_Official
         }
         private void Renouveller_Click(object sender, RoutedEventArgs e)
         {
+            if (Numero_Permis.Text == "0")
+            {
+                MessageBox.Show("il faut ajouter numero permis avant de renouveller", "Message");
+                return;
+            }
             if (this.Permis.Etat_PermisId == EtatPermis.Renouvelle)
             {
                 MessageBox.Show("deja Rennouvelle", "Message");
@@ -478,6 +483,29 @@ namespace Projet_Mines_Official
                 Permis_Recherche_Rennouvelle.ShowExistingPermis(this.Home, newPermis.PermisId);
                 //InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
             }
+        }
+        private void Transferer_Click(object sender, RoutedEventArgs e)
+        {
+            if (Numero_Permis.Text == "0")
+            {
+                MessageBox.Show("il faut ajouter numero permis avant de renouveller", "Message");
+                return;
+            }
+            if (this.Permis.Etat_PermisId == EtatPermis.EnExploitation)
+            {
+                MessageBox.Show("Deja en exploitation", "Message");
+                return;
+            }
+            this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
+            DataBase.context.SaveChanges();
+
+            Permis newPermis = new Permis(new Area(), new Titulaire());
+            newPermis.Licence_Permis.Add(this.Permis);
+            newPermis.Type_PermisId = TypePermis.LE;
+            DataBase.context.Les_Permis.Add(newPermis);
+            DataBase.context.SaveChanges();
+            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
+            Licence_Exploitation.ShowExistingLicence(this.Home, newPermis.PermisId);
         }
     }
 }

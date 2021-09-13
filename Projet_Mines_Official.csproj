@@ -183,6 +183,9 @@
     <Compile Include="Licence_Exploitation_Renouvelle.xaml.cs">
       <DependentUpon>Licence_Exploitation_Renouvelle.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Licence_Renouvelle_Area.xaml.cs">
+      <DependentUpon>Licence_Renouvelle_Area.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PermisState.cs" />
     <Compile Include="Permis_Recherche_Rennouvelle.xaml.cs">
       <DependentUpon>Permis_Recherche_Rennouvelle.xaml</DependentUpon>
@@ -197,6 +200,12 @@
     <Compile Include="NotificationPage.xaml.cs">
       <DependentUpon>NotificationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Rapport_LE.xaml.cs">
+      <DependentUpon>Rapport_LE.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Rapport_LEE.xaml.cs">
+      <DependentUpon>Rapport_LEE.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Rapport_PR.xaml.cs">
       <DependentUpon>Rapport_PR.xaml</DependentUpon>
     </Compile>
@@ -206,9 +215,6 @@
     <Compile Include="Remplir la base de donne.cs" />
     <Compile Include="saveForINfo.xaml.cs">
       <DependentUpon>saveForINfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Selectionner_Licence_Renouvelle.xaml.cs">
-      <DependentUpon>Selectionner_Licence_Renouvelle.xaml</DependentUpon>
     </Compile>
     <Compile Include="Selectionner_Permis_De_Licence.xaml.cs">
       <DependentUpon>Selectionner_Permis_De_Licence.xaml</DependentUpon>
@@ -308,6 +314,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Licence_Renouvelle_Area.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -340,6 +350,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Rapport_LE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Rapport_LEE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Rapport_PR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -349,10 +367,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="saveForINfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Selectionner_Licence_Renouvelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -364,6 +364,11 @@ namespace Projet_Mines_Official
         }
         private void Transferer_Click(object sender, RoutedEventArgs e)
         {
+            if (Numero_Permis.Text == "0")
+            {
+                MessageBox.Show("il faut ajouter numero permis avant de renouveller", "Message");
+                return;
+            }
             if (this.Permis.Etat_PermisId == EtatPermis.EnExploitation)
             {
                 MessageBox.Show("Deja en exploitation", "Message");

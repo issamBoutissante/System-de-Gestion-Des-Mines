@@ -1,42 +1,42 @@
-﻿<Window x:Class="Projet_Mines_Official.Rapport_PRR"
+﻿<Window x:Class="Projet_Mines_Official.Rapport_LEE"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projet_Mines_Official" xmlns:Fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
-        WindowStyle="ToolWindow"
+    WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
         Height="400" Width="700">
     <StackPanel
                 Grid.RowSpan="2"
                       Grid.ColumnSpan="2">
-            <Border Style="{StaticResource RapportContainer}">
-                <DockPanel>
-                    <TextBlock
-                Text="•	Lettre d'invitation au titulaire pour la réalisation d'enquête (renouvellement du permis de recherche)"
-                VerticalAlignment="Center"/>
-                    <Button Name="InvitationEnqueteRenouvelement"
-                        Content="Générer"
-                        Style="{StaticResource RapportBtn}"
-                    Click="InvitationEnqueteRenouvelement_Click"/>
-                </DockPanel>
-            </Border>
-            <Border Style="{StaticResource RapportContainer}">
-                <DockPanel>
-                    <TextBlock
-                Text="•	Lettre de transmission de la décision de renouvellement du permis de recherche "
-                VerticalAlignment="Center"/>
-                    <Button Name="Lettre_Transmission_Decision"
-                        Content="Générer"
-                        Style="{StaticResource RapportBtn}"
-                    Click="Lettre_Transmission_Decision_Click"/>
-                </DockPanel>
-            </Border>
         <Border Style="{StaticResource RapportContainer}">
             <DockPanel>
                 <TextBlock
-                Text="Bordereau d'envoi de la décision du permis de recherche (DMH)"
+                Text="•	Lettre d'invitation au titulaire pour la réalisation d'enquête (Renouvellement de la licence d'exploitation)"
+                VerticalAlignment="Center"/>
+                <Button Name="InvitationEnqueteRenouvelement"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="InvitationEnqueteRenouvelement_Click"/>
+            </DockPanel>
+        </Border>
+        <Border Style="{StaticResource RapportContainer}">
+            <DockPanel>
+                <TextBlock
+                Text="•	Lettre de transmission de la décision de renouvellement de la licence d'exploitation"
+                VerticalAlignment="Center"/>
+                <Button Name="LettreTransmissionDecisionRenouvelementLE"
+                        Content="Générer"
+                        Style="{StaticResource RapportBtn}"
+                    Click="LettreTransmissionDecisionRenouvelementLE_Click"/>
+            </DockPanel>
+        </Border>
+        <Border Style="{StaticResource RapportContainer}">
+            <DockPanel>
+                <TextBlock
+                Text="•	Bordereau d'envoi de la décision de la licence d'exploitation (DMH)"
                 VerticalAlignment="Center"/>
                 <Button Name="BurdereauEnvoiDMH"
                         Content="Générer"
@@ -47,7 +47,7 @@
         <Border Style="{StaticResource RapportContainer}">
             <DockPanel>
                 <TextBlock
-                Text="Bordereau d'envoi de la décision du permis de recherche (DP)"
+                Text="•	Bordereau d'envoi de la décision de la licence d'exploitation (DP)"
                 VerticalAlignment="Center"/>
                 <Button Name="BurdereauEnvoiDP"
                         Content="Générer"
@@ -58,7 +58,7 @@
         <Border Style="{StaticResource RapportContainer}">
             <DockPanel>
                 <TextBlock
-                Text="Bordereau d'envoi de la décision du permis de recherche Conservation de la Propriété Foncière du ressort "
+                Text="•	Bordereau d'envoi de la décision de la licence d'exploitation à la Conservation "
                 VerticalAlignment="Center"/>
                 <Button Name="BurdereauEnvoiConservation"
                         Content="Générer"
@@ -71,10 +71,10 @@
                 <TextBlock
                 Text="•	Lettre de la première mise en demeure "
                 VerticalAlignment="Center"/>
-                <Button Name="PremiereMiseDemeure"
+                <Button Name="PremierMiseDemeur"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
-                    Click="PremiereMiseDemeure_Click"/>
+                    Click="PremierMiseDemeur_Click"/>
             </DockPanel>
         </Border>
         <Border Style="{StaticResource RapportContainer}">
@@ -82,10 +82,10 @@
                 <TextBlock
                 Text="•	Lettre de  la deuxième mise en demeure "
                 VerticalAlignment="Center"/>
-                <Button Name="DeuxiemeMiseDemeure"
+                <Button Name="DeuxiemeMiseDemeur"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
-                    Click="DeuxiemeMiseDemeure_Click"/>
+                    Click="DeuxiemeMiseDemeur_Click"/>
             </DockPanel>
         </Border>
         <Border Style="{StaticResource RapportContainer}">
@@ -93,10 +93,10 @@
                 <TextBlock
                 Text="•	Lettre de transmission de la décision de révocation suite  à une renonciation "
                 VerticalAlignment="Center"/>
-                <Button Name="LettreRevocationRenonciation"
+                <Button Name="LettreTransmissionRevocationRnonciation"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
-                    Click="LettreRevocationRenonciation_Click"/>
+                    Click="LettreTransmissionRevocationRnonciation_Click"/>
             </DockPanel>
         </Border>
         <Border Style="{StaticResource RapportContainer}">
@@ -104,10 +104,10 @@
                 <TextBlock
                 Text="•	Lettre de transmission de la décision de révocation"
                 VerticalAlignment="Center"/>
-                <Button Name="LettreDecisionRevocation"
+                <Button Name="LettreTransmissionRevocationRevocation"
                         Content="Générer"
                         Style="{StaticResource RapportBtn}"
-                    Click="LettreDecisionRevocation_Click"/>
+                    Click="LettreTransmissionRevocationRevocation_Click"/>
             </DockPanel>
         </Border>
     </StackPanel>

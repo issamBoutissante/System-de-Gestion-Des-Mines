@@ -1,105 +1,139 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
 using Word = Microsoft.Office.Interop.Word;
 
 namespace Projet_Mines_Official
 {
     /// <summary>
-    /// Interaction logic for Rapport_PRR.xaml
+    /// Interaction logic for Rapport_LEE.xaml
     /// </summary>
-    public partial class Rapport_PRR : Window
+    public partial class Rapport_LEE : Window
     {
-       
+        Permis Permis;
+        string abscisse;
+        string ordonnee;
+        string carte;
         string NomSociete;
+        string DomicileDemandeur;
+        string RegistreCommerce;
+        string NumeroCNSS;
+        string TaxeProf;
         string NumeroDemande;
         string Num_PR;
+        string Dis_SN;
+        string DisEstO;
+        string date_decision;
+        string date_plus_trois;
+        string nomDemandeur;
+        string nomCaidat;
+        string nomProvince;
+        string nomCarte;
+        string nomPointPevot;
         DateTime dateDemmande;
-        public Rapport_PRR(Permis permis)
+        string numExPermis;
+        public Rapport_LEE(Permis permis)
         {
             InitializeComponent();
+            this.Permis = permis;
+            abscisse = permis.Area.Abscisse;
+            ordonnee = permis.Area.Ordonnee;
+            carte = permis.Area.Carte.Nom_carte;
             NomSociete = permis.Titulaire.Nom_Societe;
+            DomicileDemandeur = permis.Titulaire.Election_Domicile;
+            RegistreCommerce = permis.Titulaire.Registre_Commerce;
+            NumeroCNSS = permis.Titulaire.Numero_Cnss;
+            TaxeProf = permis.Titulaire.Taxe_Prof;
             NumeroDemande = permis.Num_Demmande.ToString();
             Num_PR = permis.Num_Permis.ToString();
+            Dis_SN = permis.Area.Dis_n_s;
+            DisEstO = permis.Area.Dis_e_o;
+            date_decision = permis.Date_Decision.ToShortDateString();
+            date_plus_trois = permis.Date_Decision.AddYears(3).ToShortDateString();
+            nomDemandeur = permis.Titulaire.Nom_Demandeur;
+            nomCaidat = permis.Area.Commune.Caidat.Nom_Caidat;
+            nomProvince = permis.Area.Commune.Caidat.Province.Nom_Province;
+            nomCarte = permis.Area.Carte.Nom_carte;
+            nomPointPevot = permis.Area.Point_Pivot.Nom_Point_Pevot;
             dateDemmande = permis.Date_Depot;
+            //i will update it later
+            numExPermis = permis.Licence_Permis.ToList().First().Num_Permis.ToString();
         }
         public static void Show(Permis permis)
         {
-            new Rapport_PRR(permis).ShowDialog();
+            new Rapport_LEE(permis).ShowDialog();
         }
         private void InvitationEnqueteRenouvelement_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.Invitatation_Enquete_Rennouvelement.Value,
+            DocumentGenerator.GenerateDocument(RapportPath.Invitation_Enquete_Renouvellement_LE.Value,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<num_ex_pr>", numExPermis);
                     DocumentGenerator.FindAndReplace(wordApp, "<num_dm>", NumeroDemande);
                     DocumentGenerator.FindAndReplace(wordApp, "<date_dm>", $"{dateDemmande.Day} / {dateDemmande.Month} /{dateDemmande.Year}");
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-        private void Lettre_Transmission_Decision_Click(object sender, RoutedEventArgs e)
+        private void LettreTransmissionDecisionRenouvelementLE_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Transmission_Decision_PRR.Value,
+            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Transmission_Decision_Renouvellement_LE.Value,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<num_ex_pr>", numExPermis);
                     DocumentGenerator.FindAndReplace(wordApp, "<date_dm>", $"{dateDemmande.Day} / {dateDemmande.Month} /{dateDemmande.Year}");
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-        private void Close_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-        private void PremiereMiseDemeure_Click(object sender, RoutedEventArgs e)
+        private void PremierMiseDemeur_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
+            DocumentGenerator.GenerateDocument(RapportPath.Premier_Mise_Demeur_LE.Value,
                 (Word.Application wordApp) =>
                 {
                     DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void DeuxiemeMiseDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void LettreRevocationRenonciation_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Revocation_Renonciation.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
                     DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
         }
-        private void LettreDecisionRevocation_Click(object sender, RoutedEventArgs e)
+        private void DeuxiemeMiseDemeur_Click(object sender, RoutedEventArgs e)
         {
             documentsWord dw = new documentsWord();
-            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Revocation_Renonciation.Value,
+            DocumentGenerator.GenerateDocument(RapportPath.Deuxieme_Mise_Demeur_LE.Value,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
                     DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+        private void LettreTransmissionRevocationRnonciation_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Revocation_Renonciation_LE.Value,
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
+                }
+                , dw.documentsContainer, () => { dw.Show(); });
+        }
+        private void LettreTransmissionRevocationRevocation_Click(object sender, RoutedEventArgs e)
+        {
+            documentsWord dw = new documentsWord();
+            DocumentGenerator.GenerateDocument(RapportPath.Lettre_Transmission_Decision_Revocation_LE.Value,
+                (Word.Application wordApp) =>
+                {
+                    DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
                     DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
@@ -110,22 +144,22 @@ namespace Projet_Mines_Official
             DocumentGenerator.GenerateDocument(Path,
                 (Word.Application wordApp) =>
                 {
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", NomSociete);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
+                    DocumentGenerator.FindAndReplace(wordApp, "<nom_societe>", NomSociete);
+                    DocumentGenerator.FindAndReplace(wordApp, "<num_pr>", Num_PR);
                 }
                 , dw.documentsContainer, () => { dw.Show(); });
         }
         private void BurdereauEnvoiDMH_Click(object sender, RoutedEventArgs e)
         {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DMH.Value);
+            Generer_Bordereau_Denvoi(RapportPath.Bordureu_Envoi_DMH_LE.Value);
         }
         private void BurdereauEnvoiDP_Click(object sender, RoutedEventArgs e)
         {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_DP.Value);
+            Generer_Bordereau_Denvoi(RapportPath.Bordureu_Envoi_DP_LE.Value);
         }
         private void BurdereauEnvoiConservation_Click(object sender, RoutedEventArgs e)
         {
-            Generer_Bordereau_Denvoi(RapportPath.Bordereau_envoi_PR_Conservation.Value);
+            Generer_Bordereau_Denvoi(RapportPath.Bordureu_Envoi_Conservation_LE.Value);
         }
     }
 }
