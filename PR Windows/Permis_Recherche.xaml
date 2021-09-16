@@ -109,6 +109,7 @@
                       FontFamily="Arial"
                       FilterMode="Contains"
                       Padding="5" Grid.Column="7"
+                      VerticalContentAlignment="Center"
                       Height="30"
                       Background="White"
                       BorderThickness="0"

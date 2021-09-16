@@ -173,16 +173,7 @@ namespace Projet_Mines_Official
             //Set Binding For
             //Titulaire Information
             Numero_Demande.SetBinding(TextBox.TextProperty, "Num_Demmande");
-            Nom_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Demandeur");
-            Status_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.status_Demandeur");
-            Raison_Social.SetBinding(TextBox.TextProperty,"Titulaire.Raison_Social");
-            Nom_Societe.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Societe");
-            Numero_CNSS.SetBinding(TextBox.TextProperty, "Titulaire.Numero_Cnss");
-            Domicile_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Election_Domicile");
-            Registre_Commerce.SetBinding(TextBox.TextProperty, "Titulaire.Registre_Commerce");
-            Taxe_Prof.SetBinding(TextBox.TextProperty, "Titulaire.Taxe_Prof");
-            Nom_Site.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Site");
-            Effective.SetBinding(TextBox.TextProperty, "Titulaire.Effictif");
+            BindTitulaire();
             //Area Information
             Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
             NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
@@ -202,6 +193,19 @@ namespace Projet_Mines_Official
             double daysPassed = (DateTime.Now.Date - this.Permis.Date_Decision.Date).TotalDays;
             RestJourProgramme.Text = $"Rest : {180-daysPassed}";
             RestJourDeclarationTravaux.Text = $"Rest : {360-daysPassed}";
+        }
+        private void BindTitulaire()
+        {
+            Nom_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Demandeur");
+            Status_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.status_Demandeur");
+            Raison_Social.SetBinding(TextBox.TextProperty, "Titulaire.Raison_Social");
+            Nom_Societe.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Societe");
+            Numero_CNSS.SetBinding(TextBox.TextProperty, "Titulaire.Numero_Cnss");
+            Domicile_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Election_Domicile");
+            Registre_Commerce.SetBinding(TextBox.TextProperty, "Titulaire.Registre_Commerce");
+            Taxe_Prof.SetBinding(TextBox.TextProperty, "Titulaire.Taxe_Prof");
+            Nom_Site.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Site");
+            Effective.SetBinding(TextBox.TextProperty, "Titulaire.Effictif");
         }
         #endregion
         #region update data
@@ -458,17 +462,7 @@ namespace Projet_Mines_Official
             if (Global.context.Titulaires.Any(t => t.Nom_Societe == nomSociete)==false) return;
             Titulaire selectedTitulaire = Global.context.Titulaires.Single(t => t.Nom_Societe == nomSociete);
             this.Permis.Titulaire = selectedTitulaire;
-            InitializeControls();
-            //this.Nom_Demandeur.Text=selectedTitulaire.Nom_Demandeur;
-            //this.Status_Demandeur.Text = selectedTitulaire.status_Demandeur;
-            //this.Raison_Social.Text = selectedTitulaire.Raison_Social;
-            //this.Nom_Societe.Text = selectedTitulaire.Nom_Societe;
-            //this.Numero_CNSS.Text = selectedTitulaire.Numero_Cnss;
-            //this.Domicile_Demandeur.Text = selectedTitulaire.Election_Domicile;
-            //this.Registre_Commerce.Text = selectedTitulaire.Registre_Commerce;
-            //this.Taxe_Prof.Text = selectedTitulaire.Taxe_Prof;
-            //this.Nom_Site.Text = selectedTitulaire.Nom_Site;
-            //this.Effective.Text = selectedTitulaire.Effictif;
+            BindTitulaire();
         }
 
         private void SearchTitulaireBtn_Click(object sender, RoutedEventArgs e)
