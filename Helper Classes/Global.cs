@@ -10,6 +10,7 @@ namespace Projet_Mines_Official
     {
         public static ProjetMinesDBContext context = new ProjetMinesDBContext();
         public static Home Home;
+        public static Utilisateur utilisateur;
         public static void InitializeHome(Home home)
         {
             Home = home;

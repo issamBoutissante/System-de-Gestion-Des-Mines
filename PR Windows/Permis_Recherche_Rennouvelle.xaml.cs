@@ -7,7 +7,6 @@ using System.Windows.Input;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Collections.Generic;
-using ClosedXML.Excel;
 using System.Data;
 
 namespace Projet_Mines_Official
@@ -40,6 +39,8 @@ namespace Projet_Mines_Official
         {
             BindDatePickers();
             BindTextBoxes();
+            RemplirBornes();
+            RemplirChevauchement();
         }
        
         #region Fill data 
@@ -121,10 +122,7 @@ namespace Projet_Mines_Official
             }
             Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
             Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
-            foreach (Permis chev in this.Permis.Chevauchements)
-            {
-                Chevauchements.Children.Add(GetChevauchementElement((int)chev.Num_Permis));
-            }
+            
             Zone.SetBinding(TextBox.TextProperty, "Area.Zone");
             Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
@@ -139,41 +137,14 @@ namespace Projet_Mines_Official
         }
         #endregion
         #region update data
-        private void UpdateChevauchements()
-        {
-            this.Permis.Chevauchements.Clear();
-            ElementsLooper.GetElements(Chevauchements, typeof(Button), (dynamic obj) =>
-            {
-                Button b = (Button)obj;
-                int numero = Convert.ToInt32(b.Content);
-                this.Permis.Chevauchements.Add(Global.context.Les_Permis.Single(p => p.Num_Permis == numero));
-            });
-        }
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             Numero_Demande.Focus();
-            UpdateChevauchements();
             //update Etat Permis
             if (Numero_Permis.Text != "0")
                 PermisState.updateEtat(this.Permis, EtatPermis.Permis);
             Global.context.SaveChanges();
             Global.Home.RemplirDataGrid();
-        }
-        #endregion
-        #region Chevauchemnet area
-        private Button GetChevauchementElement(int NumPermis)
-        {
-            Button btn = new Button()
-            {
-                Content = NumPermis.ToString(),
-                VerticalAlignment = VerticalAlignment.Center,
-                Background = Brushes.White,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
-                Margin = new Thickness(10, 0, 0, 0),
-                Foreground = Brushes.Gray
-            };
-            return btn;
         }
         #endregion
         #region validation
@@ -222,76 +193,7 @@ namespace Projet_Mines_Official
 
         private void Exporter_excel_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                string path = "";
-                var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
-                if (dialog.ShowDialog(this).GetValueOrDefault())
-                {
-                    path = dialog.SelectedPath;
-                }
-                using (IXLWorkbook xL = new XLWorkbook())
-                {
-                    var data = Global.context.Les_Permis.Select(p => new {
-                        numeroPermis = p.Num_Permis.ToString(),
-                        numeroDemmande = p.Num_Demmande.ToString(),
-                        dateDepotDemmande = p.Date_Depot.ToString(),
-                        type = p.Type_Permis.Type.ToString(),
-                        ex_permis = p.Ex_Permis.Num_Permis.ToString(),
-                        //chevauchement = p.Chevauchements.Select(c => c.Num_Permis).ToArray().ToString(),
-                        Superficie = p.Area.Superficie.ToString(),
-                        pointPivot = p.Area.Point_Pivot.Nom_Point_Pevot.ToString(),
-                        Abscisse = p.Area.Abscisse.ToString(),
-                        Ordonne = p.Area.Ordonnee.ToString(),
-                        //DirEastOuest=p.Area.Dir_Est_ouest.ToString(),
-                        //DirNordSud=p.Area.Dir_nord_sud.ToString(),
-                        //DisEastOust=p.Area.Dis_e_o.ToString(),
-                        //DisNorSud=p.Area.Dis_n_s.ToString(),
-                        //Bornes
-                        Zone = p.Area.Zone.ToString(),
-                        RaisonSocial = p.Titulaire.Raison_Social.ToString(),
-                        Titulaire = p.Titulaire.Nom_Societe,
-                        Region = p.Area.Commune.Caidat.Province.Region.Nom_Region.ToString(),
-                        Province = p.Area.Commune.Caidat.Province.Nom_Province.ToString(),
-                        CodeProvince = p.Area.Commune.Caidat.Province.code_Province.ToString(),
-                        Commune = p.Area.Commune.Nom_Commune.ToString(),
-                        Caidat = p.Area.Commune.Caidat.Nom_Caidat.ToString(),
-                        Date_Institision = p.Date_Institition.ToString(),
-                        Carte = p.Area.Carte.Nom_carte.ToString(),
-                        Echeance = p.Echeance.ToString(),
-                        //demmandeRenouvelomentPR
-                        //demmandeDeLE
-                        //demmandeDeRenouvelementLE
-                        //observation
-                        //anneDeLacte
-                        //substanceRechercheOuExploite
-                        NomSite = p.Titulaire.Nom_Site.ToString(),
-                        //CorrespondanceSEP
-                        DateDepart_CRI_CF_DMH_DR = p.Date_Depart_CRI.ToString(),
-                        DateReutor_CRI = p.Date_Retour_CRI.ToString(),
-                        Date_Decision = p.Date_Decision.ToString(),
-                        Date_Enquete = p.Date_Enquete.ToString(),
-                        //Date_Rapport_Enquete
-                        Election_Domicile = p.Titulaire.Election_Domicile.ToString(),
-                        Effective = p.Titulaire.Effictif.ToString(),
-                        Investisement_Realise = p.Investisement_Realise.ToString(),
-                        Investisement_Projete = p.Investisement_Projet.ToString(),
-                        occupation_temporaire = p.Occupation_Temporaire.ToString(),
-                        Inscription_Conservation = p.Inscription_Conservation.ToString()
-                    });
-                    xL.Worksheets.Add(data.CopyToDataTable(), "LesPermis");
-                    var details = xL.AddWorksheet("Style");
-                    xL.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    xL.Style.Font.Bold = true;
-                    details.Columns().AdjustToContents();
-                    details.Rows().AdjustToContents();
-                    details.Columns().Style.Fill.SetBackgroundColor(XLColor.BlueBell);
-                    path += @"\Les Permis Excel.xlsx";
-                    xL.SaveAs(path);
-                    MessageBox.Show("Les Informations ont ete sauvegarder sous format excel", "Message");
-                }
-            }
-            catch {};
+            ExcelGenerator.ExportExcel(this,this.Permis);
         }
 
         private void Numero_Demande_MouseLeave(object sender, MouseEventArgs e)
@@ -368,16 +270,60 @@ namespace Projet_Mines_Official
                 MessageBox.Show("Deja en exploitation", "Message");
                 return;
             }
-            this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
-            Global.context.SaveChanges();
+            MessageBoxResult result = MessageBox.Show("Vous veullez Transferer se permis au licence", "Transferer", MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
+                Global.context.SaveChanges();
 
-            Permis newPermis = new Permis(new Area(), new Titulaire());
-            newPermis.Licence_Permis.Add(this.Permis);
-            newPermis.Type_PermisId = TypePermis.LE;
-            Global.context.Les_Permis.Add(newPermis);
-            Global.context.SaveChanges();
-            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
-            Licence_Exploitation.ShowExistingLicence(newPermis);
+                Permis newPermis = new Permis(new Area(), new Titulaire());
+                newPermis.Licence_Permis.Add(this.Permis);
+                newPermis.Type_PermisId = TypePermis.LE;
+                Global.context.Les_Permis.Add(newPermis);
+                Global.context.SaveChanges();
+                InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
+                Licence_Exploitation.ShowExistingLicence(newPermis);
+            }
         }
+        #region Chevauchement Code
+        private void RemplirChevauchement()
+        {
+            List<Permis> chevauchement = this.Permis.Chevauchements.ToList();
+            chevauchement.Reverse();
+            ChevauchementGrid.ItemsSource = null;
+            ChevauchementGrid.Items.Clear();
+            ChevauchementGrid.ItemsSource = chevauchement;
+            ChevauchementGrid.Items.Refresh();
+        }
+        private void Afficher_Permis_Click(object sender, RoutedEventArgs e)
+        {
+            Permis permis = (Permis)ChevauchementGrid.SelectedItem;
+            switch (permis.Type_PermisId)
+            {
+                case TypePermis.PR:
+                    Permis_Recherche.ShowExistingPermis(permis);
+                    break;
+                case TypePermis.PRR:
+                    Permis_Recherche_Rennouvelle.ShowExistingPermis(permis);
+                    break;
+                case TypePermis.LE:
+                    Licence_Exploitation.ShowExistingLicence(permis);
+                    break;
+                case TypePermis.LER:
+                    Licence_Exploitation_Renouvelle.ShowExistingPermis(permis);
+                    break;
+            }
+        }
+        #endregion
+        #region Bornes Code
+        private void RemplirBornes()
+        {
+            List<Borne> bornes = this.Permis.Area.Bornes.ToList();
+            BornesGrid.ItemsSource = null;
+            BornesGrid.Items.Clear();
+            BornesGrid.ItemsSource = bornes;
+            BornesGrid.Items.Refresh();
+        }
+        #endregion
     }
 }

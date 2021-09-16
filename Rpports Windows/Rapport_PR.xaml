@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         WindowStyle="ToolWindow"
-        Title="Rapport_PR" Height="400" Width="700">
+        Height="400" Width="700">
    
         <ScrollViewer
         VerticalScrollBarVisibility="Auto">

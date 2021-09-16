@@ -36,14 +36,6 @@ namespace Projet_Mines_Official
             Global.context.SaveChanges();
         }
 
-        ////for test
-        //public Licence_Area()
-        //{
-        //    InitializeComponent();
-        //    this.Permis = context.Les_Permis.Where(p => p.Type_PermisId == TypePermis.LE).ToList().First();
-        //    InitializeControls();
-        //    this.Closing += Licence_Area_Closing;
-        //}
         public static void Show(Permis permis)
         {
             new Licence_Renouvelle_Area(permis).ShowDialog();
@@ -54,8 +46,6 @@ namespace Projet_Mines_Official
             BindTextBoxes();
         }
         #region Fill data 
-
-
         private void FillComboboxes()
         {
             Carte.SetBinding(TextBox.TextProperty, "Area.Carte.Nom_carte");
@@ -66,7 +56,6 @@ namespace Projet_Mines_Official
             Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Nom_Caidat");
 
         }
-
         private void BindTextBoxes()
         {
             //Area Information

@@ -2,6 +2,7 @@
 using System.Linq;
 using ClosedXML.Excel;
 using System.Data;
+using System.Collections.Generic;
 
 namespace Projet_Mines_Official
 {
@@ -20,11 +21,16 @@ namespace Projet_Mines_Official
             //    }
             //}
         }
-        internal static void ExportExcel(Window window)
+        internal static void ExportExcel(Window window,Permis permis)
         {
             try
             {
                 string path = "";
+                string chevauchements = "";
+                permis.Chevauchements.ToList().ForEach(p =>
+                {
+                    chevauchements += p.Num_Permis + " ";
+                });
                 var dialog = new Ookii.Dialogs.Wpf.VistaFolderBrowserDialog();
                 if (dialog.ShowDialog(window).GetValueOrDefault())
                 {
@@ -32,21 +38,21 @@ namespace Projet_Mines_Official
                 }
                 using (IXLWorkbook xL = new XLWorkbook())
                 {
-                    var data = Global.context.Les_Permis.Select(p => new {
+                    var data = new List<Permis>().Select(p => new {
                         numeroPermis = p.Num_Permis.ToString(),
                         numeroDemmande = p.Num_Demmande.ToString(),
                         dateDepotDemmande = p.Date_Depot.ToString(),
                         type = p.Type_Permis.Type.ToString(),
                         ex_permis = p.Ex_Permis.Num_Permis.ToString(),
-                        //chevauchement = p.Chevauchements.Select(c => c.Num_Permis).ToArray().ToString(),
+                        chevauchement = chevauchements,
                         Superficie = p.Area.Superficie.ToString(),
                         pointPivot = p.Area.Point_Pivot.Nom_Point_Pevot.ToString(),
                         Abscisse = p.Area.Abscisse.ToString(),
                         Ordonne = p.Area.Ordonnee.ToString(),
-                        //DirEastOuest=p.Area.Dir_Est_ouest.ToString(),
-                        //DirNordSud=p.Area.Dir_nord_sud.ToString(),
-                        //DisEastOust=p.Area.Dis_e_o.ToString(),
-                        //DisNorSud=p.Area.Dis_n_s.ToString(),
+                        DirEastOuest=p.Area.Dir_Est_ouest.ToString(),
+                        DirNordSud=p.Area.Dir_nord_sud.ToString(),
+                        DisEastOust=p.Area.Dis_e_o.ToString(),
+                        DisNorSud=p.Area.Dis_n_s.ToString(),
                         //Bornes
                         Zone = p.Area.Zone.ToString(),
                         RaisonSocial = p.Titulaire.Raison_Social.ToString(),
@@ -86,9 +92,9 @@ namespace Projet_Mines_Official
                     details.Columns().AdjustToContents();
                     details.Rows().AdjustToContents();
                     details.Columns().Style.Fill.SetBackgroundColor(XLColor.BlueBell);
-                    path += @"\Les Permis Excel.xlsx";
+                    path += $@"\{permis.Titulaire.Nom_Societe} Permis Excel.xlsx";
                     xL.SaveAs(path);
-                    MessageBox.Show("Les Informations ont ete sauvegarder sous format excel");
+                    MessageBox.Show("Les Informations ont ete sauvegarder sous format excel","Message");
                 }
             }
             catch { };

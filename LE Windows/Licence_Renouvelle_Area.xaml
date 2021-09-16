@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
+        WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
-        Title="Licence_Renouvelle_Area"  Height="650" Width="1000">
+        Height="650" Width="1000">
     <!-- Les informations d-Area -->
     <Grid >
         <Grid.ColumnDefinitions>

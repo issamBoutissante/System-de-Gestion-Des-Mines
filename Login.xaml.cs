@@ -23,7 +23,10 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
         }
-
+        internal static void ShowWindow()
+        {
+            new Login().Show();
+        }
         private void S_authentifier_Click(object sender, RoutedEventArgs e)
         {
             bool exists = Global.context.Utilisateurs.Any(u => u.NomUtilisateur == NomUtilisateur.Text && u.MotPass == MotPass.Password);
@@ -32,7 +35,10 @@ namespace Projet_Mines_Official
                 ErrorMessage.Text = "Le nom d'utilisateur ou mot de passe incorrect";
                 return;
             }
-            new Home().Show();
+            Global.utilisateur = Global.context.Utilisateurs.Single(u => u.NomUtilisateur == NomUtilisateur.Text && u.MotPass == MotPass.Password);
+            Global.utilisateur.isLogedIn = true;
+            Global.context.SaveChanges();
+            Home.ShowWindow();
             this.Close();
         }
     }

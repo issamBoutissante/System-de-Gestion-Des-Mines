@@ -8,38 +8,73 @@
           WindowStartupLocation="CenterScreen" 
         mc:Ignorable="d"
         Title="" Height="630" Width="1000" Loaded="Window_Loaded">
-    <Window.Resources>
-      
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
-            <RowDefinition Height="30" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
-        <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
-        <fa:ImageAwesome Icon="Bell"  Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
-        <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
+        <Border BorderBrush="#0861AD"
+                BorderThickness="1">
+            <StackPanel Name="NotificationBar"
+                        Width="300">
+                <Border BorderBrush="#0861AD"
+                        BorderThickness="1"
+                        Margin="1"
+                        Padding="5">
+                    <StackPanel>
+                        <TextBlock Text="Nom Societe" 
+                                   FontFamily="Verdana"
+                                   Foreground="#0861AD"
+                                   FontSize="18"/>
+                        <TextBlock Text="Vous aller voir les notification ici"
+                                   Foreground="Gray"
+                                   Margin="0 10 0 10"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Border>
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80"/>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Rectangle Grid.Column="0" Grid.ColumnSpan="9" Fill="#0861AD"/>
+            <Button Name="Notifacation"
+                Grid.Column="0" Grid.Row="0"
+                HorizontalAlignment="Center" Background="#0861AD" 
+                VerticalAlignment="Center"
+                Click="Notifacation_Click">
+                <fa:ImageAwesome Icon="Bell"   Foreground="White" Width="20" HorizontalAlignment="Center" />
+            </Button>
+            <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,25,0,0" Grid.Column="2" Grid.Row="0">
             Royaume du Maroc Ministre de l'Energie, des Mines</TextBlock>
-        <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
-        <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
+            <Image Source="./Images/kingdomLogo.png" Grid.Column="4" Grid.Row="0"  />
+            <TextBlock TextWrapping="Wrap" Grid.ColumnSpan="2" TextAlignment="Center" FontFamily="Arial" FontSize="14" FontWeight="Bold" Foreground="#fff" Margin="0,30,0,0" Grid.Column="5" Grid.Row="0">
             المملكة المغربية وزارة الطاقة و المعادن</TextBlock>
-        <fa:ImageAwesome Icon="SignOut"  Grid.Column="8" Grid.Row="0" VerticalAlignment="Center" Foreground="White" Width="20" HorizontalAlignment="Center" />
-         <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  FontSize="12" FontFamily="Arial"  KeyUp="Search_KeyUp"/>
-        <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
-        <Button
+            <Button Name="LogOut"
+                Background="#0861AD"
+                VerticalAlignment="Center" 
+                Grid.Column="8" Grid.Row="0"
+                HorizontalAlignment="Center"
+                Click="LogOut_Click">
+                <fa:ImageAwesome Icon="SignOut" Foreground="White" Width="20"  />
+            </Button>
+            <TextBox x:Name="Search"  Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Margin="10,5,0,0"  FontSize="12" FontFamily="Arial"  KeyUp="Search_KeyUp"/>
+            <fa:ImageAwesome Icon="Search" Grid.Column="2" Grid.Row="1" Margin="0,5,0,0" Width="20" Height="20"  Foreground="#0861AD"/>
+            <Button
                 x:Name="AjouterPermis"
                 Grid.Column="7"  
                 Grid.Row="2"
@@ -53,124 +88,125 @@
                 FontFamily="Arial"
                 Margin="0 0 20 0"
                 Click="AjouterPermis_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-            <StackPanel Orientation="Horizontal">
-                <fa:ImageAwesome Icon="Plus" 
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel Orientation="Horizontal">
+                    <fa:ImageAwesome Icon="Plus" 
                              Foreground="White" 
                              Width="15"
                              Margin="0 0 5 0"/>
-                <TextBlock Text="Permis" Foreground="White" FontSize="15"/>
-            </StackPanel>
-        </Button>
-        <Button x:Name="NumDemmandeBtn" Content="N° demmande" Grid.Column="0" 
+                    <TextBlock Text="Permis" Foreground="White" FontSize="15"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="NumDemmandeBtn" Content="N° demmande" Grid.Column="0" 
                 Grid.Row="2"  Height="25"  Width="Auto" Background="#0861AD" Foreground="White" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0"
                 Click="ChangeSearchCritire_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Content="Nom Societe" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-        <Button Content="N° Permis" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="7"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-      
-        <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" 
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="Nom Societe" Grid.Column="1" Grid.Row="2"   Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button Content="N° Permis" Grid.Column="2" Grid.Row="2"  Height="25" Background="WhiteSmoke" Foreground="#0861AD" FontWeight="Bold" FontSize="10" FontFamily="Arial" Margin="10,0,0,0" Click="ChangeSearchCritire_Click">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="CornerRadius" Value="7"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <DataGrid Name="DataGridPermis" Grid.Row="3" Grid.ColumnSpan="9" 
                   AutoGenerateColumns="False"
                   CanUserAddRows="False"
                   IsReadOnly="True"
                   SelectionUnit="FullRow"
                   Margin="5"
                   HorizontalScrollBarVisibility="Hidden">
-            <DataGrid.Resources>
-                <Style TargetType="DataGridRow">
-                    <Setter Property="BorderBrush" Value="Gray"/>
-                    <Setter Property="BorderThickness" Value=".5"/>
-                    <Setter Property="Margin" Value="0 5 0 0"/>
-                    <Setter Property="Height" Value="60"/>
-                    <Setter Property="VerticalAlignment" Value="Center"/>
-                </Style>
-            </DataGrid.Resources>
-            <DataGrid.Columns>
-                <DataGridTextColumn Width="*" Header="Numero Demmande" Binding="{Binding Num_Demmande}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type_Permis.Type}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Nom Societe" Binding="{Binding Titulaire.Nom_Societe}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat_Permis.Etat}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <!--more data-->
-                <!--date depot-->
-                <DataGridTextColumn Width="*" Header="Date Depot" Binding="{Binding Date_Depot}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <!--date depot-->
-                <!--Election domicile-->
-                <DataGridTextColumn Width="*" Header="Election Domicile" Binding="{Binding Titulaire.Election_Domicile}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="VerticalAlignment" Value="Center"/>
-                            <Setter Property="HorizontalAlignment" Value="Center"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <!--Election domicile-->
-                <!--more data-->
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <Button x:Name="Afficher" Content="Afficher" Click="Afficher_Click"  Background="#FF9030" Margin="5 0 0 0"></Button>
-                            </StackPanel>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="BorderThickness" Value=".5"/>
+                        <Setter Property="Margin" Value="0 5 0 0"/>
+                        <Setter Property="Height" Value="60"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Numero Demmande" Binding="{Binding Num_Demmande}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Type" Binding="{Binding Type_Permis.Type}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Nom Societe" Binding="{Binding Titulaire.Nom_Societe}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Width="*" Header="Etat" Binding="{Binding Etat_Permis.Etat}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--more data-->
+                    <!--date depot-->
+                    <DataGridTextColumn Width="*" Header="Date Depot" Binding="{Binding Date_Depot}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--date depot-->
+                    <!--Election domicile-->
+                    <DataGridTextColumn Width="*" Header="Election Domicile" Binding="{Binding Titulaire.Election_Domicile}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
+                                <Setter Property="HorizontalAlignment" Value="Center"/>
+                            </Style>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <!--Election domicile-->
+                    <!--more data-->
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button x:Name="Afficher" Content="Afficher" Click="Afficher_Click"  Background="#FF9030" Margin="5 0 0 0"></Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </Grid>
 </Window>

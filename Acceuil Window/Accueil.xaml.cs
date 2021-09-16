@@ -21,6 +21,12 @@ namespace Projet_Mines_Official
     {
         public Accueil()
         {
+            if (Global.context.Utilisateurs.Any(u => u.isLogedIn == true))
+            {
+                Global.utilisateur=Global.context.Utilisateurs.Single(u => u.isLogedIn == true);
+                Home.ShowWindow();
+                this.Close();
+            }
             InitializeComponent();
             this.Loaded += Accueil_Loaded;
         }
@@ -42,7 +48,7 @@ namespace Projet_Mines_Official
 
         private void OpenAuthentifier_Click(object sender, RoutedEventArgs e)
         {
-            new Login().Show();
+            Login.ShowWindow();
             this.Close();
         }
     }

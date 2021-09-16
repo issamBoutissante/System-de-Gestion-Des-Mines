@@ -40,7 +40,7 @@ namespace Projet_Mines_Official
                 Global.context.Regions.AddRange(regions);
         }
         public static void RemplirProvince()
-        {
+      {
             List<Province> provinces = new List<Province>()
             {
                 new Province(){Nom_Province="Marrakech",Region=Global.context.Regions.Single(r=>r.Nom_Region=="Marrakech-Safi")},
@@ -114,7 +114,6 @@ namespace Projet_Mines_Official
             if (Global.context.Point_Pivots.Count() == 0)
                 Global.context.Point_Pivots.AddRange(point_Pivots);
         }
-            //Scafolding
         public static void RemplirElementDossierPR()
         {
             List<Element_Dossier> element_Dossiers = new List<Element_Dossier>()
@@ -136,23 +135,9 @@ namespace Projet_Mines_Official
             if (Global.context.Elements_Dossiers.Count() == 0)
                 Global.context.Elements_Dossiers.AddRange(element_Dossiers);
         }
-        public static void RemplirPermis()
-        {
-            //permis.Permis_ElementDossiers = Global.context.Elements_Dossiers.Where(ed => ed.Type_PermisId == 1).ToList();
-            if (Global.context.Les_Permis.Count() == 0)
-            {
-                for(int i = 0; i <= 10; i++)
-                {
-                    Permis newPermis = new Permis(new Area(), new Titulaire());
-                    Global.context.Les_Permis.Add(newPermis);
-                    Global.context.SaveChanges();
-                }
-                Global.context.Les_Permis.ToList().ForEach(p =>
-                {
-                    InitilializerLesDossierPermis.InitilizerDossiers(p, TypePermis.PR);
-                });
-            }
-        }
+        //public static void RemplirPermis()
+        //{
+        //}
         public static void RemplirLogin()
         {
             List<Utilisateur> utilisateurs = new List<Utilisateur>()
@@ -160,7 +145,6 @@ namespace Projet_Mines_Official
                 new Utilisateur(){NomUtilisateur="chaimae",MotPass="chaimae"},
                 new Utilisateur(){NomUtilisateur="issam",MotPass="issam"},
                 new Utilisateur(){NomUtilisateur="aoujil",MotPass="aoujil"},
-                new Utilisateur(){NomUtilisateur="aginane",MotPass="aginane"},
             };
             if (Global.context.Utilisateurs.Count() == 0)
                 Global.context.Utilisateurs.AddRange(utilisateurs);
@@ -194,8 +178,8 @@ namespace Projet_Mines_Official
             RemplirElementDossierPR();
             Global.context.SaveChanges();
             
-            RemplirPermis();
-            Global.context.SaveChanges();
+            //RemplirPermis();
+            //Global.context.SaveChanges();
 
             RemplirLogin();
             Global.context.SaveChanges();

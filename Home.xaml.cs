@@ -20,6 +20,11 @@ namespace Projet_Mines_Official
             InitializeComponent();
             SelectedButton = NumDemmandeBtn;
             Global.InitializeHome(this);
+            NotificationBar.Width = 0;
+        }
+        public static void ShowWindow()
+        {
+            new Home().Show();
         }
         public void RemplirDataGrid()
         {
@@ -115,7 +120,29 @@ namespace Projet_Mines_Official
 
         private void AjouterPermis_Click(object sender, RoutedEventArgs e)
         {
-            Permis_Recherche.ShowNewPermis();
+            MessageBoxResult result = MessageBox.Show("Vous veullez ajouter nouveau permis de recherche", "Message",MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+                Permis_Recherche.ShowNewPermis();
+        }
+
+        private void LogOut_Click(object sender, RoutedEventArgs e)
+        {
+            Login.ShowWindow();
+            Global.utilisateur.isLogedIn = false;
+            Global.context.SaveChanges();
+            this.Close();
+        }
+
+        private void Notifacation_Click(object sender, RoutedEventArgs e)
+        {
+            if (NotificationBar.Width == 0)
+            {
+                NotificationBar.Width = 300;
+            }
+            else
+            {
+                NotificationBar.Width = 0;
+            }
         }
     }
 }
