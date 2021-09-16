@@ -29,6 +29,7 @@ namespace Projet_Mines_Official
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
             NavigationList.Height = 0;
+            this.Closing += this.Window_Closing;
         }
         internal static void ShowExistingPermis(Permis permis)
         {
