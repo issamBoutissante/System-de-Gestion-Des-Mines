@@ -104,6 +104,21 @@
                         <RowDefinition Height="*" />
                     </Grid.RowDefinitions>
                     <Rectangle Grid.Column="0" Fill="#0861AD" Grid.ColumnSpan="9"/>
+                    <controls:AutoCompleteBox x:Name="SearchTitulaire"
+                      FontSize="14"
+                      FontFamily="Arial"
+                      FilterMode="Contains"
+                      Padding="5" Grid.Column="7"
+                      Height="30"
+                      Background="White"
+                      BorderThickness="0"
+                      SelectionChanged="SearchTitulaire_SelectionChanged"/>
+
+                    <Button Name="SearchTitulaireBtn" Grid.Column="9" 
+                            Background="#0861AD" HorizontalAlignment="Center"
+                            Click="SearchTitulaireBtn_Click">
+                        <fa:ImageAwesome Icon="Search" Foreground="White" />
+                    </Button>
                     <TextBlock Grid.ColumnSpan="3" TextAlignment="Center"
                        FontFamily="Arial" FontSize="16" FontWeight="Bold" Foreground="#fff" Margin="0,15,0,0"
                        Grid.Column="3" Grid.Row="0">

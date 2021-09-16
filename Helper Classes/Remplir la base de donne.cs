@@ -24,7 +24,7 @@ namespace Projet_Mines_Official
                 new Etat_Permis() { Etat="Decision"},
                 new Etat_Permis() { Etat="Permis"},
                 new Etat_Permis() { Etat="Renouvelle"},
-                new Etat_Permis() { Etat="EnExploitation"},
+                new Etat_Permis() { Etat="En Exploitation"},
             };
             if(Global.context.Etats_Permis.Count()==0)
                 Global.context.Etats_Permis.AddRange(etat_Permis);

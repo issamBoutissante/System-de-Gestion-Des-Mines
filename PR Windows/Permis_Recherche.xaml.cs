@@ -25,6 +25,10 @@ namespace Projet_Mines_Official
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
             NavigationList.Height = 0;
+            SearchTitulaire.Visibility=Visibility.Hidden;
+
+            List<string> list_societe = Global.context.Titulaires.Where(t=>string.IsNullOrEmpty(t.Nom_Societe)==false).Select(t=>t.Nom_Societe).ToList();
+            SearchTitulaire.ItemsSource = list_societe;
         }
         internal static void ShowNewPermis()
         {
@@ -447,5 +451,29 @@ namespace Projet_Mines_Official
             RemplirBornes();
         }
         #endregion
+
+        private void SearchTitulaire_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string nomSociete=SearchTitulaire.Text;
+            if (Global.context.Titulaires.Any(t => t.Nom_Societe == nomSociete)==false) return;
+            Titulaire selectedTitulaire = Global.context.Titulaires.Single(t => t.Nom_Societe == nomSociete);
+            this.Permis.Titulaire = selectedTitulaire;
+            InitializeControls();
+            //this.Nom_Demandeur.Text=selectedTitulaire.Nom_Demandeur;
+            //this.Status_Demandeur.Text = selectedTitulaire.status_Demandeur;
+            //this.Raison_Social.Text = selectedTitulaire.Raison_Social;
+            //this.Nom_Societe.Text = selectedTitulaire.Nom_Societe;
+            //this.Numero_CNSS.Text = selectedTitulaire.Numero_Cnss;
+            //this.Domicile_Demandeur.Text = selectedTitulaire.Election_Domicile;
+            //this.Registre_Commerce.Text = selectedTitulaire.Registre_Commerce;
+            //this.Taxe_Prof.Text = selectedTitulaire.Taxe_Prof;
+            //this.Nom_Site.Text = selectedTitulaire.Nom_Site;
+            //this.Effective.Text = selectedTitulaire.Effictif;
+        }
+
+        private void SearchTitulaireBtn_Click(object sender, RoutedEventArgs e)
+        {
+            SearchTitulaire.Visibility=Visibility.Visible;
+        }
     }
 }
