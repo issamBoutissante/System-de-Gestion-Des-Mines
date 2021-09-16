@@ -138,7 +138,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Accueil.xaml.cs">
+    <Compile Include="Acceuil Window\Accueil.xaml.cs">
       <DependentUpon>Accueil.xaml</DependentUpon>
     </Compile>
     <Compile Include="AddBorne.xaml.cs">
@@ -164,75 +164,63 @@
     <Compile Include="Classes\Region.cs" />
     <Compile Include="Classes\Titulaire.cs" />
     <Compile Include="Classes\Type_Permis.cs" />
-    <Compile Include="Database.cs" />
+    <Compile Include="Classes\Global.cs" />
     <Compile Include="Helper Classes\CustomLINQtoDataSetMethods.cs" />
-    <Compile Include="documentsWord.xaml.cs">
+    <Compile Include="Document Windows\documentsWord.xaml.cs">
       <DependentUpon>documentsWord.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ElementsLooper.cs" />
-    <Compile Include="EtatPermis.cs" />
-    <Compile Include="ExcelGenerator.cs" />
-    <Compile Include="InitilializerLesDossierPermis.cs" />
+    <Compile Include="Helper Classes\ElementsLooper.cs" />
+    <Compile Include="Helper Classes\EtatPermis.cs" />
+    <Compile Include="Helper Classes\ExcelGenerator.cs" />
+    <Compile Include="Helper Classes\InitilializerLesDossierPermis.cs" />
     <Compile Include="Helper Classes\ObjectShredder.cs" />
-    <Compile Include="Licence_Area.xaml.cs">
+    <Compile Include="LE Windows\Licence_Area.xaml.cs">
       <DependentUpon>Licence_Area.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Licence_Exploitation.xaml.cs">
+    <Compile Include="LE Windows\Licence_Exploitation.xaml.cs">
       <DependentUpon>Licence_Exploitation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Licence_Exploitation_Renouvelle.xaml.cs">
+    <Compile Include="LE Windows\Licence_Exploitation_Renouvelle.xaml.cs">
       <DependentUpon>Licence_Exploitation_Renouvelle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Licence_Renouvelle_Area.xaml.cs">
+    <Compile Include="LE Windows\Licence_Renouvelle_Area.xaml.cs">
       <DependentUpon>Licence_Renouvelle_Area.xaml</DependentUpon>
     </Compile>
-    <Compile Include="PermisState.cs" />
-    <Compile Include="Permis_Recherche_Rennouvelle.xaml.cs">
+    <Compile Include="Helper Classes\PermisState.cs" />
+    <Compile Include="PR Windows\Permis_Recherche_Rennouvelle.xaml.cs">
       <DependentUpon>Permis_Recherche_Rennouvelle.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Presentation.xaml.cs">
+    <Compile Include="Acceuil Window\Presentation.xaml.cs">
       <DependentUpon>Presentation.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RapportPath.cs" />
-    <Compile Include="loadingDocument.xaml.cs">
+    <Compile Include="Helper Classes\RapportPath.cs" />
+    <Compile Include="Document Windows\loadingDocument.xaml.cs">
       <DependentUpon>loadingDocument.xaml</DependentUpon>
     </Compile>
-    <Compile Include="NotificationPage.xaml.cs">
-      <DependentUpon>NotificationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Rapport_LE.xaml.cs">
+    <Compile Include="Rpports Windows\Rapport_LE.xaml.cs">
       <DependentUpon>Rapport_LE.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Rapport_LEE.xaml.cs">
+    <Compile Include="Rpports Windows\Rapport_LEE.xaml.cs">
       <DependentUpon>Rapport_LEE.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Rapport_PR.xaml.cs">
+    <Compile Include="Rpports Windows\Rapport_PR.xaml.cs">
       <DependentUpon>Rapport_PR.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Rapport_PRR.xaml.cs">
+    <Compile Include="Rpports Windows\Rapport_PRR.xaml.cs">
       <DependentUpon>Rapport_PRR.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Remplir la base de donne.cs" />
-    <Compile Include="saveForINfo.xaml.cs">
-      <DependentUpon>saveForINfo.xaml</DependentUpon>
+    <Compile Include="Recherche_Permis.xaml.cs">
+      <DependentUpon>Recherche_Permis.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Selectionner_Permis_De_Licence.xaml.cs">
-      <DependentUpon>Selectionner_Permis_De_Licence.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="STRATEGIE.xaml.cs">
+    <Compile Include="Helper Classes\Remplir la base de donne.cs" />
+    <Compile Include="Acceuil Window\STRATEGIE.xaml.cs">
       <DependentUpon>STRATEGIE.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TypePermis.cs" />
+    <Compile Include="Helper Classes\TypePermis.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DocumentGenerator.cs" />
-    <Compile Include="ModalError.xaml.cs">
-      <DependentUpon>ModalError.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ModalInfo.xaml.cs">
-      <DependentUpon>ModalInfo.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="ProjetMinesDBContext.cs" />
+    <Compile Include="Helper Classes\DocumentGenerator.cs" />
+    <Compile Include="Helper Classes\ProjetMinesDBContext.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Home.xaml.cs">
@@ -241,7 +229,7 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Permis_Recherche.xaml.cs">
+    <Compile Include="PR Windows\Permis_Recherche.xaml.cs">
       <DependentUpon>Permis_Recherche.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -286,7 +274,7 @@
     <Resource Include="Images\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Accueil.xaml">
+    <Page Include="Acceuil Window\Accueil.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -294,7 +282,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="documentsWord.xaml">
+    <Page Include="Document Windows\documentsWord.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -302,23 +290,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Licence_Area.xaml">
+    <Page Include="LE Windows\Licence_Area.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Licence_Exploitation.xaml">
+    <Page Include="LE Windows\Licence_Exploitation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Licence_Exploitation_Renouvelle.xaml">
+    <Page Include="LE Windows\Licence_Exploitation_Renouvelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Licence_Renouvelle_Area.xaml">
+    <Page Include="LE Windows\Licence_Renouvelle_Area.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="loadingDocument.xaml">
+    <Page Include="Document Windows\loadingDocument.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -326,55 +314,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModalError.xaml">
+    <Page Include="PR Windows\Permis_Recherche.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ModalInfo.xaml">
+    <Page Include="PR Windows\Permis_Recherche_Rennouvelle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="NotificationPage.xaml">
+    <Page Include="Acceuil Window\Presentation.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Permis_Recherche.xaml">
+    <Page Include="Rpports Windows\Rapport_LE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Permis_Recherche_Rennouvelle.xaml">
+    <Page Include="Rpports Windows\Rapport_LEE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Presentation.xaml">
+    <Page Include="Rpports Windows\Rapport_PR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Rapport_LE.xaml">
+    <Page Include="Rpports Windows\Rapport_PRR.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Rapport_LEE.xaml">
-      <SubType>Designer</SubType>
+    <Page Include="Recherche_Permis.xaml">
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Rapport_PR.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Rapport_PRR.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="saveForINfo.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Selectionner_Permis_De_Licence.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="STRATEGIE.xaml">
+    <Page Include="Acceuil Window\STRATEGIE.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

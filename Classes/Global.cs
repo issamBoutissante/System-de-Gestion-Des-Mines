@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace Projet_Mines_Official
 {
-    class DataBase
+    static class Global
     {
         public static ProjetMinesDBContext context = new ProjetMinesDBContext();
+        public static Home Home;
+        public static void InitializeHome(Home home)
+        {
+            Home = home;
+        }
     }
 }

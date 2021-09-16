@@ -24,7 +24,7 @@ namespace Projet_Mines_Official
             {
                 Application.Current.Dispatcher.Invoke(() =>
                 {
-                    ModalError.ShowMsg(exp.Message);
+                    MessageBox.Show(exp.Message,"Error",MessageBoxButton.OK,MessageBoxImage.Error);
                 });
             }
             return null;
@@ -103,7 +103,7 @@ namespace Projet_Mines_Official
                 {
                     Application.Current.Dispatcher.Invoke(() =>
                     {
-                        ModalError.ShowMsg("the file name doesnt exists");
+                        MessageBox.Show("the file name doesnt exists","Message");
                     });
                     return null;
                 }

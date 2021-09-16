@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Projet_Mines_Official"
         mc:Ignorable="d"
+        WindowStyle="ToolWindow"
         WindowStartupLocation="CenterScreen"
-        Title="AddBorne" Height="200" Width="600">
+        Height="200" Width="600"
+        BorderBrush="#0861AD">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>

@@ -19,10 +19,11 @@ namespace Projet_Mines_Official
         {
             InitializeComponent();
             SelectedButton = NumDemmandeBtn;
+            Global.InitializeHome(this);
         }
         public void RemplirDataGrid()
         {
-            List<Permis> Les_Permis=DataBase.context.Les_Permis.ToList();
+            List<Permis> Les_Permis=Global.context.Les_Permis.ToList();
             Les_Permis.Reverse();
             this.DataGridPermis.ItemsSource = null;
             this.DataGridPermis.Items.Clear();
@@ -39,22 +40,22 @@ namespace Projet_Mines_Official
             switch (permis.Type_PermisId)
             {
                 case TypePermis.PR:
-                    Permis_Recherche.ShowExistingPermis(this,permis.PermisId);
+                    Permis_Recherche.ShowExistingPermis(permis);
                     break;
                 case TypePermis.PRR:
-                    Permis_Recherche_Rennouvelle.ShowExistingPermis(this, permis.PermisId);
+                    Permis_Recherche_Rennouvelle.ShowExistingPermis(permis);
                     break;
                 case TypePermis.LE:
-                    Licence_Exploitation.ShowExistingLicence(this, permis.PermisId);
+                    Licence_Exploitation.ShowExistingLicence(permis);
                     break;
                 case TypePermis.LER:
-                    Licence_Exploitation_Renouvelle.ShowExistingPermis(this, permis.PermisId);
+                    Licence_Exploitation_Renouvelle.ShowExistingPermis(permis);
                     break;
             }
         }
         private void SearchPermis(string searchBy)
         {
-            List<Permis> Les_Permis = DataBase.context.Les_Permis.ToList();
+            List<Permis> Les_Permis = Global.context.Les_Permis.ToList();
             switch (searchBy)
             {
                 case "N° demmande":
@@ -114,7 +115,7 @@ namespace Projet_Mines_Official
 
         private void AjouterPermis_Click(object sender, RoutedEventArgs e)
         {
-            Permis_Recherche.ShowNewPermis(this);
+            Permis_Recherche.ShowNewPermis();
         }
     }
 }

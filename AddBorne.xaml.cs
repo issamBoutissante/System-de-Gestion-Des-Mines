@@ -20,35 +20,27 @@ namespace Projet_Mines_Official
     /// </summary>
     public partial class AddBorne : Window
     {
-        int currentPermisId;
-        Licence_Area Licence_Area;
-        public AddBorne(Licence_Area licence_Area,int currentPermisId)
+        Permis Permis;
+        public AddBorne(Permis permis)
         {
             InitializeComponent();
-            this.currentPermisId = currentPermisId;
-            this.Licence_Area = licence_Area;
+            this.Permis = permis;
         }
-        public static void Show(Licence_Area licence_Area,int currentPermisId)
+        public static void Show(Permis permis)
         {
-            new AddBorne(licence_Area,currentPermisId).ShowDialog();
+            new AddBorne(permis).ShowDialog();
         }
         private void Ajouter_Click(object sender, RoutedEventArgs e)
         {
-            Permis currentPermis = DataBase.context.Les_Permis.Where(p => p.PermisId == currentPermisId).Single();
-            string newBorne = $"X : {X_Borne.Text.Trim()} - Y : {Y_Borne.Text.Trim()}";
-            bool isBorneExist = currentPermis.Area.Bornes.Any(b => $"X : {b.Borne_X.Trim()} - Y : {b.Borne_Y.Trim()}" == newBorne);
+            Borne newBorne = new Borne() { Borne_X = X_Borne.Text.Trim(), Borne_Y = Y_Borne.Text.Trim() };
+            bool isBorneExist = this.Permis.Area.Bornes.Any(b => b.Borne_Y==newBorne.Borne_Y && b.Borne_X==newBorne.Borne_X);
             if (isBorneExist)
             {
-                ModalInfo.ShowMsg("Cette Borne est deja exist");
+                MessageBox.Show("Cette Borne est deja exist","Message");
                 return;
             }
-            currentPermis.Area.Bornes.Add(new Borne()
-            {
-                Borne_X = X_Borne.Text.Trim(),
-                Borne_Y = X_Borne.Text.Trim()
-            });
-            DataBase.context.SaveChanges();
-            Licence_Area.RemplirBornes();
+            this.Permis.Area.Bornes.Add(newBorne);
+            Global.context.SaveChanges();
             this.Close();
         }
         #region validation

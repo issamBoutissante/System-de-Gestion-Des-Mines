@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Linq;
-using Word = Microsoft.Office.Interop.Word;
 using System.Windows.Media;
 using System.Windows.Input;
 using System.Threading.Tasks;
@@ -10,64 +9,39 @@ using System.Threading;
 using System.Collections.Generic;
 using ClosedXML.Excel;
 using System.Data;
-using winform=System.Windows.Forms;
 
 namespace Projet_Mines_Official
 {
     /// <summary>
-    /// Interaction logic for Licence_Exploitation.xaml
+    /// Interaction logic for Permis_Recherche_Rennouvelle.xaml
     /// </summary>
-    public partial class Licence_Exploitation : Window
+    public partial class Permis_Recherche_Rennouvelle : Window
     {
+
         public Permis Permis { get; set; }
-        Home home;
         int? CurrentNumeroDemmand;
         int? CurrentNumeroPermis;
-        public Licence_Exploitation(Home home, int PermisId)
+        public Permis_Recherche_Rennouvelle(Permis permis)
         {
             InitializeComponent();
-            this.Height = 630;
-            this.home = home;
-            this.Permis = DataBase.context.Les_Permis.Find(PermisId);
+            this.Permis = permis;
             this.DataContext = this.Permis;
             InitializeControls();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
-            this.Closing += Licence_Exploitation_Closing;
             NavigationList.Height = 0;
         }
-
-        private void Licence_Exploitation_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        internal static void ShowExistingPermis(Permis permis)
         {
-            Numero_Demande.Focus();
-            Numero_CNSS.Focus();
-            //update Etat Permis
-            if (Numero_Permis.Text != "0")
-                PermisState.updateEtat(this.Permis, EtatPermis.Permis);
-            DataBase.context.SaveChanges();
-            this.home.RemplirDataGrid();
-        }
-
-        internal static void ShowExistingLicence(Home home, int permisId)
-        {
-            new Licence_Exploitation(home, permisId).ShowDialog();
+            new Permis_Recherche_Rennouvelle(permis).ShowDialog();
         }
 
         private void InitializeControls()
         {
-            RemplirLicence_PermisGrid();
             BindDatePickers();
             BindTextBoxes();
         }
-        public void RemplirLicence_PermisGrid()
-        {
-            List<Permis> licence_Permis = this.Permis.Licence_Permis.ToList();
-            licence_Permis.Reverse();
-            DataGridLicencePermis.ItemsSource = null;
-            DataGridLicencePermis.Items.Clear();
-            DataGridLicencePermis.ItemsSource = licence_Permis;
-            DataGridLicencePermis.Items.Refresh();
-        }
+       
         #region Fill data 
         private void BindDatePickers()
         {
@@ -76,7 +50,6 @@ namespace Projet_Mines_Official
             Date_Echeance.SetBinding(DatePicker.SelectedDateProperty, "Echeance");
             Date_Institision.SetBinding(DatePicker.SelectedDateProperty, "Date_Institition");
         }
-
         private Border GetElementDossierTemplate(Permis_ElementDossier dataSource)
         {
             TextBlock textBlock = new TextBlock()
@@ -114,6 +87,7 @@ namespace Projet_Mines_Official
         {
             //Set Binding For
             //Titulaire Information
+            NumeroExPermis.SetBinding(TextBox.TextProperty, "Ex_Permis.Num_Permis");
             Numero_Demande.SetBinding(TextBox.TextProperty, "Num_Demmande");
             Nom_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Demandeur");
             Status_Demandeur.SetBinding(TextBox.TextProperty, "Titulaire.status_Demandeur");
@@ -126,10 +100,64 @@ namespace Projet_Mines_Official
             Nom_Site.SetBinding(TextBox.TextProperty, "Titulaire.Nom_Site");
             Effective.SetBinding(TextBox.TextProperty, "Titulaire.Effictif");
             //Area Information
+            Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
             NumPermisCheckBox.SetBinding(CheckBox.IsCheckedProperty, "isDecisionSigne");
-           
+            Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
+            if (this.Permis.Area.Dir_Est_ouest == "e")
+            {
+                Dir_e_o.Text = "Est";
+            }
+            else
+            {
+                Dir_e_o.Text = "Ouest";
+            }
+            if (this.Permis.Area.Dir_nord_sud == "n")
+            {
+                dir_n_s.Text = "Nord";
+            }
+            else
+            {
+                dir_n_s.Text = "Sud";
+            }
+            Dis_n_s.SetBinding(TextBox.TextProperty, "Area.Dis_n_s");
+            Dis_e_o.SetBinding(TextBox.TextProperty, "Area.Dis_e_o");
+            foreach (Permis chev in this.Permis.Chevauchements)
+            {
+                Chevauchements.Children.Add(GetChevauchementElement((int)chev.Num_Permis));
+            }
+            Zone.SetBinding(TextBox.TextProperty, "Area.Zone");
+            Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
+            Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
+            Carte.SetBinding(TextBox.TextProperty, "Area.Carte.Nom_carte");
+            Region.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Region.Nom_Region");
+            Province.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Province.Nom_Province");
+            Point_Pevot.SetBinding(TextBox.TextProperty, "Area.Point_Pivot.Nom_Point_Pevot");
+            Commune.SetBinding(TextBox.TextProperty, "Area.Commune.Nom_Commune");
+            Caidat.SetBinding(TextBox.TextProperty, "Area.Commune.Caidat.Nom_Caidat");
             //suivi decision information
             Numero_Permis.SetBinding(TextBox.TextProperty, "Num_Permis");
+        }
+        #endregion
+        #region update data
+        private void UpdateChevauchements()
+        {
+            this.Permis.Chevauchements.Clear();
+            ElementsLooper.GetElements(Chevauchements, typeof(Button), (dynamic obj) =>
+            {
+                Button b = (Button)obj;
+                int numero = Convert.ToInt32(b.Content);
+                this.Permis.Chevauchements.Add(Global.context.Les_Permis.Single(p => p.Num_Permis == numero));
+            });
+        }
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Numero_Demande.Focus();
+            UpdateChevauchements();
+            //update Etat Permis
+            if (Numero_Permis.Text != "0")
+                PermisState.updateEtat(this.Permis, EtatPermis.Permis);
+            Global.context.SaveChanges();
+            Global.Home.RemplirDataGrid();
         }
         #endregion
         #region Chevauchemnet area
@@ -146,83 +174,6 @@ namespace Projet_Mines_Official
                 Foreground = Brushes.Gray
             };
             return btn;
-        }
-        #endregion
-        #region Generation Des Rapport
-        private void Generer_Decision_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            string date_decision = Date_Decision.Text;
-            string date_plus_trois = Date_Decision.SelectedDate.Value.AddYears(3).ToString();
-            DocumentGenerator.GenerateDocument(RapportPath.Decision_PR.Value,
-                (Word.Application wordApp) =>
-                {
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_decision>", date_decision);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date_plus_trois>", date_plus_trois);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-            PermisState.updateEtat(this.Permis, EtatPermis.Decision);
-        }
-
-
-        private void Invitation_Enquete_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-        private void Rejet_demande_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.Revocation_PR.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-        private void PremierMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.premier_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<Num_PR>", Num_PR);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
-        }
-
-        private void DeuxiemeMiseEnDemeure_Click(object sender, RoutedEventArgs e)
-        {
-            documentsWord dw = new documentsWord();
-
-            string societe = Nom_Societe.Text;
-            string Num_PR = Numero_Permis.Text;
-            DocumentGenerator.GenerateDocument(RapportPath.deuxieme_mise_demeure.Value,
-                (Word.Application wordApp) =>
-                {
-
-                    DocumentGenerator.FindAndReplace(wordApp, "<societe>", societe);
-                    DocumentGenerator.FindAndReplace(wordApp, "<date>", $"{DateTime.Now.Day} / {DateTime.Now.Month} /{DateTime.Now.Year}");
-                }
-
-                , dw.documentsContainer, () => { dw.Show(); });
         }
         #endregion
         #region validation
@@ -281,7 +232,7 @@ namespace Projet_Mines_Official
                 }
                 using (IXLWorkbook xL = new XLWorkbook())
                 {
-                    var data = DataBase.context.Les_Permis.Select(p => new {
+                    var data = Global.context.Les_Permis.Select(p => new {
                         numeroPermis = p.Num_Permis.ToString(),
                         numeroDemmande = p.Num_Demmande.ToString(),
                         dateDepotDemmande = p.Date_Depot.ToString(),
@@ -337,18 +288,15 @@ namespace Projet_Mines_Official
                     details.Columns().Style.Fill.SetBackgroundColor(XLColor.BlueBell);
                     path += @"\Les Permis Excel.xlsx";
                     xL.SaveAs(path);
-                    ModalInfo.ShowMsg("Les Informations ont ete sauvegarder sous format excel");
+                    MessageBox.Show("Les Informations ont ete sauvegarder sous format excel", "Message");
                 }
             }
-            catch (Exception ex)
-            {
-                ModalError.ShowMsg(ex.Message);
-            };
+            catch {};
         }
 
         private void Numero_Demande_MouseLeave(object sender, MouseEventArgs e)
         {
-            List<int?> numerosDemmandes = DataBase.context.Les_Permis.Select(p => p.Num_Demmande).ToList();
+            List<int?> numerosDemmandes = Global.context.Les_Permis.Select(p => p.Num_Demmande).ToList();
             numerosDemmandes.Remove(CurrentNumeroDemmand);
             if (string.IsNullOrEmpty(Numero_Demande.Text))
             {
@@ -358,14 +306,14 @@ namespace Projet_Mines_Official
             int EnteredNumeroDemmand = Convert.ToInt32(Numero_Demande.Text);
             if (numerosDemmandes.Contains(EnteredNumeroDemmand))
             {
-                ModalError.ShowMsg("Ce Numero De Demmande Deja Exist .");
+                MessageBox.Show("Ce Numero De Demmande Deja Exist .","Message");
                 Numero_Demande.Text = CurrentNumeroDemmand.ToString();
             }
         }
 
         private void Numero_Permis_MouseLeave(object sender, MouseEventArgs e)
         {
-            List<int?> numerosPermis = DataBase.context.Les_Permis.Select(p => p.Num_Permis).Distinct().ToList();
+            List<int?> numerosPermis = Global.context.Les_Permis.Select(p => p.Num_Permis).Distinct().ToList();
             numerosPermis.Remove(CurrentNumeroPermis);
             numerosPermis.Remove(0);
             if (string.IsNullOrEmpty(Numero_Permis.Text))
@@ -376,75 +324,23 @@ namespace Projet_Mines_Official
             int EnteredNumeroPermis = Convert.ToInt32(Numero_Permis.Text);
             if (numerosPermis.Contains(EnteredNumeroPermis))
             {
-                ModalError.ShowMsg("Ce Numero De Permis Deja Exist .");
+                MessageBox.Show("Ce Numero De Permis Deja Exist .","Message");
                 Numero_Permis.Text = CurrentNumeroPermis.ToString();
             }
         }
         #region Le Code De PRR
         private void AfficherExPermis_Click(object sender, RoutedEventArgs e)
         {
-            int permisId = DataBase.context.Les_Permis.Where(p => p.Num_Permis == this.Permis.Ex_Permis.Num_Permis).Single().PermisId;
-            Permis_Recherche.ShowExistingPermis(this.home, permisId);
+            int permisId = Global.context.Les_Permis.Where(p => p.Num_Permis == this.Permis.Ex_Permis.Num_Permis).Single().PermisId;
+            Permis_Recherche.ShowExistingPermis(this.Permis);
         }
         #endregion
-
-        private void Afficher_Area_Click(object sender, RoutedEventArgs e)
-        {
-            Permis permis = (Permis)DataGridLicencePermis.SelectedItem;
-            Licence_Area.Show(permis);
-        }
-
-        private void Afficher_Permis_Click(object sender, RoutedEventArgs e)
-        {
-            Permis permis = (Permis)DataGridLicencePermis.SelectedItem;
-            switch (permis.Type_PermisId)
-            {
-                case TypePermis.PR:
-                    Permis_Recherche.ShowExistingPermis(this.home, permis.PermisId);
-                    break;
-                case TypePermis.PRR:
-                    Permis_Recherche_Rennouvelle.ShowExistingPermis(this.home, permis.PermisId);
-                    break;
-            }
-        }
-
-        private void AjouterPermisAuLicence_Click(object sender, RoutedEventArgs e)
-        {
-            Recherche_Permis.ShowWindow();
-            if (Recherche_Permis.PermisResult == null) return;
-            Permis selectedPermis = Recherche_Permis.PermisResult;
-            selectedPermis.Etat_PermisId = EtatPermis.EnExploitation;
-            this.Permis.Licence_Permis.Add(selectedPermis);
-            DataBase.context.SaveChanges();
-            RemplirLicence_PermisGrid();
-        }
-        private void Refrech_Click(object sender, RoutedEventArgs e)
-        {
-            RemplirLicence_PermisGrid();
-        }
-
-        private void Supprimer_Click(object sender, RoutedEventArgs e)
-        {
-            if (this.Permis.Licence_Permis.Count == 1)
-            {
-                ModalError.ShowMsg("tu doit avoir au moins 1 permis dans une licence");
-                return;
-            }
-            winform.DialogResult result= winform.MessageBox.Show("vous voulez supprimer cette permis", "Attention", winform.MessageBoxButtons.YesNo);
-            if (result == winform.DialogResult.Yes)
-            {
-                Permis deletedPermis = (Permis)DataGridLicencePermis.SelectedItem;
-                this.Permis.Licence_Permis.Remove(deletedPermis);
-                DataBase.context.SaveChanges();
-                RemplirLicence_PermisGrid();
-            }
-        }
         private void GenererRapport_Click(object sender, RoutedEventArgs e)
         {
             Numero_Demande.Focus();
-            Nom_Demandeur.Focus();
-            DataBase.context.SaveChanges();
-            Rapport_LE.Show(this.Permis);
+            Superficie.Focus();
+            Global.context.SaveChanges();
+            Rapport_PRR.Show(this.Permis);
         }
         bool isNavigationListClosed = true;
         private void NaviagationList_Click(object sender, RoutedEventArgs e)
@@ -460,22 +356,28 @@ namespace Projet_Mines_Official
                 isNavigationListClosed = true;
             }
         }
-        private void Renouveller_Click(object sender, RoutedEventArgs e)
+        private void Transferer_Click(object sender, RoutedEventArgs e)
         {
             if (Numero_Permis.Text == "0")
             {
                 MessageBox.Show("il faut ajouter numero permis avant de renouveller", "Message");
                 return;
             }
-            Permis newPermis = new Permis(this.Permis.Area, this.Permis.Titulaire);
-            DataBase.context.Les_Permis.Add(newPermis);
-            this.Permis.Licence_Permis.ToList().ForEach(p => newPermis.Licence_Permis.Add(p));
-            //newPermis.Licence_Permis = this.Permis.Licence_Permis;
-            newPermis.Ex_PermisId = this.Permis.PermisId;
-            newPermis.Type_PermisId = TypePermis.LER;
-            this.Permis.Etat_PermisId = EtatPermis.Renouvelle;
-            DataBase.context.SaveChanges();
-            Licence_Exploitation_Renouvelle.ShowExistingPermis(this.home, newPermis.PermisId);
+            if (this.Permis.Etat_PermisId == EtatPermis.EnExploitation)
+            {
+                MessageBox.Show("Deja en exploitation", "Message");
+                return;
+            }
+            this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
+            Global.context.SaveChanges();
+
+            Permis newPermis = new Permis(new Area(), new Titulaire());
+            newPermis.Licence_Permis.Add(this.Permis);
+            newPermis.Type_PermisId = TypePermis.LE;
+            Global.context.Les_Permis.Add(newPermis);
+            Global.context.SaveChanges();
+            InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
+            Licence_Exploitation.ShowExistingLicence(newPermis);
         }
     }
 }

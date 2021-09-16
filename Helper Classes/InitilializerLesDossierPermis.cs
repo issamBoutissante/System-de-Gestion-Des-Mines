@@ -12,15 +12,15 @@ namespace Projet_Mines_Official
         public static void InitilizerDossiers(Permis permis,int type)
         {
             int typePermis = type;
-            DataBase.context.Elements_Dossiers.Where(ed=>ed.Type_PermisId==typePermis).ToList().ForEach(E =>
+            Global.context.Elements_Dossiers.Where(ed=>ed.Type_PermisId==typePermis).ToList().ForEach(E =>
             {
-                DataBase.context.Permis_ElementDossiers.Add(new Permis_ElementDossier()
+                Global.context.Permis_ElementDossiers.Add(new Permis_ElementDossier()
                 {
                     PermisId = permis.PermisId,
                     Element_DossierId = E.Element_DossierId,
                 });
             });
-            DataBase.context.SaveChanges();
+            Global.context.SaveChanges();
         }
     }
 }

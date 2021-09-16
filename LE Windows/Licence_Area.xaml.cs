@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using winForms = System.Windows.Forms;
+using winForms=System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -17,15 +17,15 @@ using System.Windows.Shapes;
 namespace Projet_Mines_Official
 {
     /// <summary>
-    /// Interaction logic for Licence_Renouvelle_Area.xaml
+    /// Interaction logic for Licence_Area.xaml
     /// </summary>
-    public partial class Licence_Renouvelle_Area : Window
+    public partial class Licence_Area : Window
     {
         Permis Permis;
-        public Licence_Renouvelle_Area(Permis permis)
+        public Licence_Area(Permis permis)
         {
             InitializeComponent();
-            this.Permis = DataBase.context.Les_Permis.Find(permis.PermisId);
+            this.Permis = Global.context.Les_Permis.Find(permis.PermisId);
             this.DataContext = this.Permis;
             InitializeControls();
             this.Closing += Licence_Area_Closing;
@@ -33,20 +33,11 @@ namespace Projet_Mines_Official
 
         private void Licence_Area_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            DataBase.context.SaveChanges();
+            Global.context.SaveChanges();
         }
-
-        ////for test
-        //public Licence_Area()
-        //{
-        //    InitializeComponent();
-        //    this.Permis = context.Les_Permis.Where(p => p.Type_PermisId == TypePermis.LE).ToList().First();
-        //    InitializeControls();
-        //    this.Closing += Licence_Area_Closing;
-        //}
         public static void Show(Permis permis)
         {
-            new Licence_Renouvelle_Area(permis).ShowDialog();
+            new Licence_Area(permis).ShowDialog();
         }
         private void InitializeControls()
         {
@@ -54,7 +45,7 @@ namespace Projet_Mines_Official
             BindTextBoxes();
         }
         #region Fill data 
-
+     
 
         private void FillComboboxes()
         {
@@ -73,10 +64,7 @@ namespace Projet_Mines_Official
             Inscription_Conservation.SetBinding(CheckBox.IsCheckedProperty, "Inscription_Conservation");
             Superficie.SetBinding(TextBox.TextProperty, "Area.Superficie");
             //Fill Chevauchements GroubBox
-            foreach (Permis chev in this.Permis.Chevauchements)
-            {
-                Chevauchements.Children.Add(GetChevauchementElement((int)chev.Num_Permis));
-            }
+            RemplirChevauchement();
             //Fill Bornes GroubBox
             RemplirBornes();
 
@@ -84,60 +72,6 @@ namespace Projet_Mines_Official
             Abscisse.SetBinding(TextBox.TextProperty, "Area.Abscisse");
             Ordonne.SetBinding(TextBox.TextProperty, "Area.Ordonnee");
             //suivi decision information
-        }
-        public void RemplirBornes()
-        {
-            Bornes.Children.Clear();
-            foreach (Borne b in this.Permis.Area.Bornes)
-            {
-                Bornes.Children.Add(GetBorne(b));
-            }
-        }
-        #endregion
-        #region Fill Chevauchement 
-        private Button GetChevauchementElement(int NumPermis)
-        {
-            Button btn = new Button()
-            {
-                Content = NumPermis.ToString(),
-                VerticalAlignment = VerticalAlignment.Center,
-                Background = Brushes.White,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
-                Margin = new Thickness(10, 0, 0, 0),
-                Foreground = Brushes.Gray
-            };
-            return btn;
-        }
-        #endregion
-        #region Add Borne 
-        private Button GetBorne(Borne borne)
-        {
-            Button btn = new Button()
-            {
-                Content = $"X : {borne.Borne_X} - Y : {borne.Borne_Y}",
-                VerticalAlignment = VerticalAlignment.Center,
-                Background = Brushes.White,
-                BorderBrush = Brushes.Black,
-                BorderThickness = new Thickness(1),
-                Margin = new Thickness(10, 0, 0, 0),
-                Foreground = Brushes.Gray
-            };
-            btn.Click += Btn_Click;
-            return btn;
-        }
-
-        private void Btn_Click(object sender, RoutedEventArgs e)
-        {
-            winForms.DialogResult result = winForms.MessageBox.Show("vous voulez supprimer cette borne", "Attention", winForms.MessageBoxButtons.YesNo);
-            if (result == winForms.DialogResult.Yes)
-            {
-                Button selectedButton = (Button)sender;
-                Borne selectedBorne = this.Permis.Area.Bornes.Where(b => $"X : {b.Borne_X} - Y : {b.Borne_Y}" == selectedButton.Content.ToString()).First();
-                this.Permis.Area.Bornes.Remove(selectedBorne);
-                DataBase.context.SaveChanges();
-                Bornes.Children.Remove(selectedButton);
-            }
         }
         #endregion
         #region validation
@@ -181,6 +115,74 @@ namespace Projet_Mines_Official
                 });
                 e.Handled = true;
             }
+        }
+        #endregion
+
+        #region Chevauchement Code
+        private void RemplirChevauchement()
+        {
+            List<Permis> chevauchement = this.Permis.Chevauchements.ToList();
+            chevauchement.Reverse();
+            ChevauchementGrid.ItemsSource = null;
+            ChevauchementGrid.Items.Clear();
+            ChevauchementGrid.ItemsSource = chevauchement;
+            ChevauchementGrid.Items.Refresh();
+        }
+        private void AddChevauchement_Click(object sender, RoutedEventArgs e)
+        {
+            List<Permis> list_permis = Global.context.Les_Permis.Where(p => p.Etat_PermisId == EtatPermis.Permis).ToList();
+            Recherche_Permis.ShowWindow(list_permis);
+            Permis selectedPermis = Recherche_Permis.PermisResult;
+            if (selectedPermis == null) return;
+            if (this.Permis.Chevauchements.Any(p => p.PermisId == selectedPermis.PermisId))
+            {
+                MessageBox.Show("Ce chevauchement est deja exists", "Message");
+                return;
+            }
+            this.Permis.Chevauchements.Add(selectedPermis);
+            Global.context.SaveChanges();
+            RemplirChevauchement();
+        }
+        private void Afficher_Permis_Click(object sender, RoutedEventArgs e)
+        {
+            Permis permis = (Permis)ChevauchementGrid.SelectedItem;
+            switch (permis.Type_PermisId)
+            {
+                case TypePermis.PR:
+                    Permis_Recherche.ShowExistingPermis(permis);
+                    break;
+                case TypePermis.PRR:
+                    Permis_Recherche_Rennouvelle.ShowExistingPermis(permis);
+                    break;
+                case TypePermis.LE:
+                    Licence_Exploitation.ShowExistingLicence(permis);
+                    break;
+                case TypePermis.LER:
+                    Licence_Exploitation_Renouvelle.ShowExistingPermis(permis);
+                    break;
+            }
+        }
+        #endregion
+        #region Bornes Code
+        private void RemplirBornes()
+        {
+            List<Borne> bornes = this.Permis.Area.Bornes.ToList();
+            BornesGrid.ItemsSource = null;
+            BornesGrid.Items.Clear();
+            BornesGrid.ItemsSource = bornes;
+            BornesGrid.Items.Refresh();
+        }
+        private void AddBorne_Click(object sender, RoutedEventArgs e)
+        {
+            AddBorne.Show(this.Permis);
+            RemplirBornes();
+        }
+        private void SupprimerBorne_Click(object sender, RoutedEventArgs e)
+        {
+            Borne borne = (Borne)BornesGrid.SelectedItem;
+            this.Permis.Area.Bornes.Remove(borne);
+            Global.context.SaveChanges();
+            RemplirBornes();
         }
         #endregion
     }

@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Projet_Mines_Official"
+        xmlns:local="clr-namespace:Projet_Mines_Official" xmlns:fa="http://schemas.fontawesome.io/icons/"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="Licence_Renouvelle_Area"  Height="650" Width="1000">
@@ -25,7 +25,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
@@ -53,57 +53,102 @@
                 Superficie</TextBlock>
         <TextBox x:Name="Superficie" Grid.ColumnSpan="2"
                  IsReadOnly="True"
-                    FontSize="14" FontFamily="Arial" Padding="5"   Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Black" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
-
+                    FontSize="14" FontFamily="Arial" Padding="5"  
+                 Grid.Column="2" Grid.Row="2" Height="30" BorderBrush="Gray" BorderThickness="1" KeyDown="GetOnlyNumbers_KeyDown"/>
 
         <!-- Chevauchement-->
-        <GroupBox  Grid.ColumnSpan="4" Grid.RowSpan="2"  Grid.Column="0" Grid.Row="3"  Margin="10,5,0,0">
-            <GroupBox.Header  >
-                <TextBlock  FontFamily="Arial" FontSize="14"  Foreground="White"> Chevauchement</TextBlock>
-            </GroupBox.Header>
-            <StackPanel Orientation="Horizontal" Height="Auto" Width="Auto">
-                <StackPanel x:Name="Chevauchements" Orientation="Horizontal">
-                    <StackPanel.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="BorderBrush" Value="Gray"/>
-                            <Setter Property="BorderThickness" Value=".5"/>
-                            <Setter Property="CornerRadius" Value="10"/>
-                            <Setter Property="Height" Value="30"/>
-                            <Setter Property="Padding" Value="5"/>
-                        </Style>
-                    </StackPanel.Resources>
-                </StackPanel>
-            </StackPanel>
-        </GroupBox>
-        <!--Les Bornes-->
-        <GroupBox Grid.ColumnSpan="4" 
-                  Grid.RowSpan="4"  
-                  Grid.Column="5"
-                  Grid.Row="2"
-                  Margin="0,5,10,0">
-            <GroupBox.Header  >
-                <TextBlock 
-                    FontFamily="Arial" 
-                    FontSize="14"  
-                    Foreground="White"
-                    Text="Bornes"/>
-            </GroupBox.Header>
-            <ScrollViewer>
-                    <StackPanel x:Name="Bornes"
-                        Orientation="Vertical">
-                        <StackPanel.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="BorderBrush" Value="Gray"/>
-                                <Setter Property="BorderThickness" Value=".5"/>
-                                <Setter Property="CornerRadius" Value="10"/>
-                                <Setter Property="Height" Value="30"/>
-                                <Setter Property="Padding" Value="5"/>
+        <Border             Grid.Row="3"
+                            Grid.RowSpan="2"
+                            Grid.ColumnSpan="4"
+                            BorderThickness="1"
+                            BorderBrush="#0861AD"
+                            Margin="10 10 0 10">
+            <DataGrid Name="ChevauchementGrid" 
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              SelectionUnit="FullRow"
+                              HorizontalScrollBarVisibility="Hidden">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <Setter Property="BorderBrush" Value="Gray"/>
+                        <Setter Property="BorderThickness" Value=".5"/>
+                        <Setter Property="Margin" Value="0 5 0 0"/>
+                        <Setter Property="Height" Value="60"/>
+                        <Setter Property="VerticalAlignment" Value="Center"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="*" Header="Numer Permis" Binding="{Binding Num_Permis}">
+                        <DataGridTextColumn.ElementStyle>
+                            <Style TargetType="TextBlock">
+                                <Setter Property="VerticalAlignment" Value="Center"/>
                                 <Setter Property="HorizontalAlignment" Value="Center"/>
                             </Style>
-                        </StackPanel.Resources>
-                    </StackPanel>
-                </ScrollViewer>
-        </GroupBox>
+                        </DataGridTextColumn.ElementStyle>
+                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="4*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <!--Afficher Permis-->
+                                    <Button x:Name="Afficher_Permis" 
+                                                    Content="Afficher Permis" 
+                                                    Click="Afficher_Permis_Click"  
+                                                    Background="#FF9030" 
+                                                    Margin="5 0 0 0"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Border>
+        <!-- Bornes-->
+            <Border
+                            Grid.ColumnSpan="4"
+                            Grid.Column="5"
+                            Grid.Row="3"
+                            Grid.RowSpan="2"
+                            Margin="0 10 10 10"
+                            BorderThickness="1"
+                            BorderBrush="#0861AD">
+                <DataGrid Name="BornesGrid" 
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="False"
+                              IsReadOnly="True"
+                              SelectionUnit="FullRow"
+                              HorizontalScrollBarVisibility="Hidden">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <Setter Property="BorderBrush" Value="Gray"/>
+                            <Setter Property="BorderThickness" Value=".5"/>
+                            <Setter Property="Margin" Value="0 5 0 0"/>
+                            <Setter Property="Height" Value="60"/>
+                            <Setter Property="VerticalAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="*" Header="Borne X" Binding="{Binding Borne_X}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                        <DataGridTextColumn Width="*" Header="Borne Y" Binding="{Binding Borne_Y}">
+                            <DataGridTextColumn.ElementStyle>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="VerticalAlignment" Value="Center"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataGridTextColumn.ElementStyle>
+                        </DataGridTextColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <!---->
         <!--line 3-->
         <TextBlock 
                        FontFamily="Arial" FontSize="14"  Height="30"  Margin="10,5,0,0" Grid.ColumnSpan="2"

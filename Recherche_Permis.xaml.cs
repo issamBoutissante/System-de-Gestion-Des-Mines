@@ -14,30 +14,27 @@ namespace Projet_Mines_Official
         Button SelectedButton;
         string searchByText;
         public static Permis PermisResult;
-        public Recherche_Permis()
+        List<Permis> List_Permis;
+        public Recherche_Permis(List<Permis> list_permis)
         {
             InitializeComponent();
+            this.List_Permis = list_permis;
             SelectedButton = NumDemmandeBtn;
+            RemplirDataGrid();
         }
-        public static void ShowWindow()
+        public static void ShowWindow(List<Permis> list_permis)
         {
-            new Recherche_Permis().ShowDialog();
+            new Recherche_Permis(list_permis).ShowDialog();
         }
         public void RemplirDataGrid()
         {
-            List<Permis> Les_Permis = DataBase.context.Les_Permis.ToList();
+            List<Permis> Les_Permis = this.List_Permis;
             Les_Permis.Reverse();
-            this.DataGridPermis.ItemsSource = null;
-            this.DataGridPermis.Items.Clear();
             this.DataGridPermis.ItemsSource = Les_Permis;
-        }
-        private void Window_Loaded(object sender, RoutedEventArgs e)
-        {
-            RemplirDataGrid();
         }
         private void SearchPermis(string searchBy)
         {
-            List<Permis> Les_Permis = DataBase.context.Les_Permis.ToList();
+            List<Permis> Les_Permis = Global.context.Les_Permis.ToList();
             switch (searchBy)
             {
                 case "N° demmande":
@@ -95,6 +92,7 @@ namespace Projet_Mines_Official
         private void Selectionner_Click(object sender, RoutedEventArgs e)
         {
             PermisResult = (Permis)DataGridPermis.SelectedItem;
+            this.Close();
         }
     }
 }
