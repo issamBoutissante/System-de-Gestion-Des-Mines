@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:Projet_Mines_Official"
            xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Login"  Height="500" Width="350" 
-         ResizeMode="NoResize" 
+        Height="500" Width="350" 
+        ResizeMode="NoResize" 
         WindowStartupLocation="CenterScreen" 
-        WindowStyle="None" 
+        WindowStyle="ToolWindow" 
         FontFamily="Segoe UI Emoji">
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top">

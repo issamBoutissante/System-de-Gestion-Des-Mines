@@ -30,7 +30,10 @@ namespace Projet_Mines_Official
             InitializeComponent();
             this.Loaded += Accueil_Loaded;
         }
-
+        internal static void ShowWindow()
+        {
+            new Accueil().Show();
+        }
         private void Accueil_Loaded(object sender, RoutedEventArgs e)
         {
             Remplir_la_base_de_donne.Remplir();

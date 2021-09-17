@@ -25,14 +25,10 @@ namespace Projet_Mines_Official
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
             NavigationList.Height = 0;
-            SearchTitulaire.Visibility=Visibility.Hidden;
-
-            List<string> list_societe = Global.context.Titulaires.Where(t=>string.IsNullOrEmpty(t.Nom_Societe)==false).Select(t=>t.Nom_Societe).ToList();
-            SearchTitulaire.ItemsSource = list_societe;
         }
-        internal static void ShowNewPermis()
+        internal static void ShowNewPermis(Titulaire titulaire=null)
         {
-            Permis newPermis = new Permis(new Area(), new Titulaire());
+            Permis newPermis = new Permis(new Area(), titulaire ?? new Titulaire());
             newPermis.Etat_PermisId = EtatPermis.Demmande;
             Global.context.Les_Permis.Add(newPermis);
             Global.context.SaveChanges();
@@ -347,6 +343,7 @@ namespace Projet_Mines_Official
                 Global.context.Les_Permis.Add(newPermis);
                 Global.context.SaveChanges();
                 Permis_Recherche_Rennouvelle.ShowExistingPermis(newPermis);
+                this.Close();
                 //InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.PR);
             }
         }
@@ -379,6 +376,7 @@ namespace Projet_Mines_Official
                 Global.context.SaveChanges();
                 InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
                 Licence_Exploitation.ShowExistingLicence(newPermis);
+                this.Close();
             }
         }
         #region Chevauchement Code
@@ -456,18 +454,6 @@ namespace Projet_Mines_Official
         }
         #endregion
 
-        private void SearchTitulaire_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string nomSociete=SearchTitulaire.Text;
-            if (Global.context.Titulaires.Any(t => t.Nom_Societe == nomSociete)==false) return;
-            Titulaire selectedTitulaire = Global.context.Titulaires.Single(t => t.Nom_Societe == nomSociete);
-            this.Permis.Titulaire = selectedTitulaire;
-            BindTitulaire();
-        }
-
-        private void SearchTitulaireBtn_Click(object sender, RoutedEventArgs e)
-        {
-            SearchTitulaire.Visibility=Visibility.Visible;
-        }
+      
     }
 }

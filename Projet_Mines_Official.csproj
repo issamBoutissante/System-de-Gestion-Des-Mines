@@ -28,7 +28,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>4</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -217,6 +217,9 @@
       <DependentUpon>STRATEGIE.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helper Classes\TypePermis.cs" />
+    <Compile Include="SearchTitulaire.xaml.cs">
+      <DependentUpon>SearchTitulaire.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper Classes\DocumentGenerator.cs" />
@@ -347,6 +350,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Acceuil Window\STRATEGIE.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchTitulaire.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

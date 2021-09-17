@@ -282,8 +282,9 @@ namespace Projet_Mines_Official
                 newPermis.Type_PermisId = TypePermis.LE;
                 Global.context.Les_Permis.Add(newPermis);
                 Global.context.SaveChanges();
-                InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
+                //InitilializerLesDossierPermis.InitilizerDossiers(newPermis, TypePermis.LE);
                 Licence_Exploitation.ShowExistingLicence(newPermis);
+                this.Close();
             }
         }
         #region Chevauchement Code

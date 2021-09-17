@@ -122,12 +122,14 @@ namespace Projet_Mines_Official
         {
             MessageBoxResult result = MessageBox.Show("Vous veullez ajouter nouveau permis de recherche", "Message",MessageBoxButton.YesNo);
             if (result == MessageBoxResult.Yes)
-                Permis_Recherche.ShowNewPermis();
+                SearchTitulaire.ShowWindow();
         }
 
         private void LogOut_Click(object sender, RoutedEventArgs e)
         {
-            Login.ShowWindow();
+            MessageBoxResult result=MessageBox.Show("Vous veullez deconnecte", "Deconnnection",MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.No) return;
+            Accueil.ShowWindow();
             Global.utilisateur.isLogedIn = false;
             Global.context.SaveChanges();
             this.Close();
