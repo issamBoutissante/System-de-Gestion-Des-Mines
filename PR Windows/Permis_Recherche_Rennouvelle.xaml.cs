@@ -25,12 +25,13 @@ namespace Projet_Mines_Official
             InitializeComponent();
             this.Permis = permis;
             this.DataContext = this.Permis;
-            InitializeControls();
             this.CurrentNumeroDemmand = this.Permis.Num_Demmande;
             this.CurrentNumeroPermis = this.Permis.Num_Permis;
+            InitializeControls();
             NavigationList.Height = 0;
             this.Closing += this.Window_Closing;
         }
+
         internal static void ShowExistingPermis(Permis permis)
         {
             new Permis_Recherche_Rennouvelle(permis).ShowDialog();
@@ -277,7 +278,7 @@ namespace Projet_Mines_Official
                 this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
                 Global.context.SaveChanges();
 
-                Permis newPermis = new Permis(new Area(), new Titulaire());
+                Permis newPermis = new Permis(new Area(), this.Permis.Titulaire);
                 newPermis.Licence_Permis.Add(this.Permis);
                 newPermis.Type_PermisId = TypePermis.LE;
                 Global.context.Les_Permis.Add(newPermis);

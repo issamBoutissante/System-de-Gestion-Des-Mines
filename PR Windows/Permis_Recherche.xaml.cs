@@ -370,7 +370,7 @@ namespace Projet_Mines_Official
             {
                 this.Permis.Etat_PermisId = EtatPermis.EnExploitation;
                 Global.context.SaveChanges();
-                Permis newPermis = new Permis(new Area(), new Titulaire());
+                Permis newPermis = new Permis(new Area(), this.Permis.Titulaire);
                 newPermis.Licence_Permis.Add(this.Permis);
                 newPermis.Type_PermisId = TypePermis.LE;
                 Global.context.Les_Permis.Add(newPermis);
