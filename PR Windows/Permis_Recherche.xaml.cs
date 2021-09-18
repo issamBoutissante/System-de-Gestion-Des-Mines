@@ -340,6 +340,7 @@ namespace Projet_Mines_Official
                 newPermis.Ex_PermisId = this.Permis.PermisId;
                 newPermis.Type_PermisId = TypePermis.PRR;
                 this.Permis.Etat_PermisId = EtatPermis.Renouvelle;
+                this.Permis.Chevauchements.ToList().ForEach(c=>newPermis.Chevauchements.Add(c));
                 Global.context.Les_Permis.Add(newPermis);
                 Global.context.SaveChanges();
                 Permis_Recherche_Rennouvelle.ShowExistingPermis(newPermis);
